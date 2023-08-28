@@ -41,7 +41,7 @@ void guessGame(void) {
 
       // define and init a random number 
       int answer = 1 + rand() % 1000;
-
+      //
       //tell the user stuff
       printf("I have a number between %d and %d.\n", MIN, MAX);
 
