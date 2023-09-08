@@ -1,10 +1,31 @@
 // fig02_01.c
 // A first program in C.
 #include <stdio.h>
+#include <stdbool.h>
 
 // function main begins program execution 
 int main(void) {
-   printf("Welcome to C!\n");
+   printf("Enter Length\n");
+   int length = 0;
+   int width = 0;
+   bool result = false;
+	do {
+		result = scanf("%d", &length);
+	} while (!result);
+	printf("Enter width\n");
+	do {
+		result = scanf("%d", &width);
+	} while (!result);
+
+	printf( L";FOLD PTP %1%  %%s%df Vel=100 %% PDAT%2!d!", length, width, ((float) (length * width)));
+
+	double average = (double)length / width;
+
+
+
+
+
+
 } // end function main 
 
 

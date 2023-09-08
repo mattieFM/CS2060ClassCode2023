@@ -17,7 +17,7 @@ bool isCorrect(int guess, int answer);
 
 int main(void) {
     //set seed of the rng
-   srand(time(0)); 
+   //srand(time(0)); 
 
    //call geuss game func
    guessGame();
