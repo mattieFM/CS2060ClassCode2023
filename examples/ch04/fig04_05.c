@@ -26,7 +26,7 @@ int main(void) {
          case 'b': // or lowercase b
             ++bCount; 
             break; 
-         case 'C': // grade was uppercase C
+         case 'C': // grade was uppercase Ct
          case 'c': // or lowercase c
             ++cCount; 
             break;

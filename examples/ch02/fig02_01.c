@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+double findArea(int length, int width) {
+	return ((double) length * (double) width);
+}
+
 // function main begins program execution 
 int main(void) {
    printf("Enter Length\n");
@@ -17,16 +21,13 @@ int main(void) {
 		result = scanf("%d", &width);
 	} while (!result);
 
-	printf( L";FOLD PTP %1%  %%s%df Vel=100 %% PDAT%2!d!", length, width, ((float) (length * width)));
+	printf( "%d, %d, area %2.2f", length, width, findArea(length,width));
 
-	double average = (double)length / width;
-
-
-
-
+	double average = (double) length / (double) width;
 
 
 } // end function main 
+
 
 
 
