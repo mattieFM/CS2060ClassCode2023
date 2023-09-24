@@ -1,6 +1,7 @@
 // fig03_06.c
 // Analysis of examination results.
 #include <stdio.h>
+#include <stdbool.h>
 
 // function main begins program execution 
 int main(void) {
@@ -12,9 +13,8 @@ int main(void) {
    // process 10 students using counter-controlled loop 
    while (student <= 10) {
       // prompt user for input and obtain value from user 
-      printf("%s", "Enter result (1=pass,2=fail): ");
-      int result = 0; // one exam result 
-      scanf("%d", &result);
+      
+       int result = getVal(1, 2, "Please Enter 1 or 2 {1=pases,2]fail");
 
       // if result 1, increment passes 
       if (result == 1) {     
@@ -36,6 +36,23 @@ int main(void) {
       puts("Bonus to instructor!");
    } // end if 
 } // end function main 
+
+int getVal(int min,int max, char prompt[]) {
+    bool validResult = false;
+    bool validData = false;
+    int result = 0;
+    while (!validData || !validResult) {
+        puts(prompt);
+        validData = scanf("%d", &result);
+        if (result >= min && result <= max) {
+            validResult = true;
+        }
+        while (getchar() != '\n');
+    }
+
+
+    return result;
+}
 
 
 /**************************************************************************
