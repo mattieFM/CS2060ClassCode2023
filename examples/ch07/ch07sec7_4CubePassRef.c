@@ -38,7 +38,7 @@ int cubePass1 (int number)
 	return cube;
 } 
 
-int cubePass2 (int * numberPtr) 
+int cubePass2 (int numberPtr) 
 {
 	int cube = 0;
 	puts ("\nIn cubePass2");

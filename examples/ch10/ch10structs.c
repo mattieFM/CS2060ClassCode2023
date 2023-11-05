@@ -10,12 +10,117 @@
 
 // Defining a structure
 // Update to use typedef
-struct  employee {
+typedef struct  employee {
 	char firstName[NAME_SIZE];
 	char lastName[NAME_SIZE];
 	unsigned int age;
 	double hourlySalary;
-};
+} Employee ;
+
+
+
+#include <stdbool.h>
+#define STRING_SIZE 80
+
+typedef struct location {
+	/* @description the human readable adress of this location*/
+	char adress[STRING_SIZE]; //(80 size as told for all strings)
+
+	/* @description the latitude of this location*/
+	int lat;
+
+	/*@description the logitude of this location*/
+	int lon;
+} Location;
+
+typedef struct  property {
+	//--Property Info-
+	/*@description the name of this propery*/
+	char propertyName[STRING_SIZE]; //(80 size as told for all strings)
+	/* @description the location of this property*/
+	Location location;
+
+	//--Discounts--
+
+	//-ranges-
+	/* @description the number of days when the first discount period should start */
+	int range1Start;
+	/* @description the number of days that the first discount period should end and the second should start*/
+	int range2Start;
+	/* @description the number of days till the second discount period should end and the final should start*/
+	int rangeFinalStart;	
+
+	//-discount values-
+	/* @description the base discount for range 1. This value is multiplied by the range */
+	int baseDiscount;
+
+	/* @description how much should the discount be multiplied each range? @default 2*/
+	//int discountScaler; told that we are not using this in class 
+
+
+
+
+
+
+} Property;
+
+/// <summary>
+/// get all the need info for a property via command line
+/// </summary>
+/// <param name="p"> a pointer to the output property</param>
+/// <returns>whether the setup succeeded or failed</returns>
+bool setupProperty(Property *p) {
+	
+	getRangeInfo("1", &(p->range1Start));
+	getRangeInfo("2", &(p->range2Start));
+	getRangeInfo("final", &(p->rangeFinalStart));
+
+	printf("%s","base discount : ");
+	scanf("%d", &(p->baseDiscount));
+	puts("");
+
+	printf("%s", "adress: ");
+	fgets(p->location.adress, STRING_SIZE, stdin);
+	puts("");
+
+}
+
+void displayProperty(Property* p) {
+	char* formatter =
+		"Discount 1 starts at night: %d\n"
+		"Discount 2 starts at night: %d\n"
+		"Discount 3 starts at night: %d\n"
+		"Base Discount is: %d\n"
+
+		"address is: %s\n"
+		;
+	printf(
+		formatter,
+		p->range1Start,
+		p->range2Start,
+		p->rangeFinalStart,
+		p->baseDiscount,
+		p->location
+	);
+}
+
+/// <summary>
+/// get info from the user about a discount range
+/// </summary>
+/// <param name="rangeTitle">the title of this range</param>
+/// <param name="p">pointer to output var</param>
+void getRangeInfo(char *rangeTitle, int* out) {
+	printf("on what night does discount range %d start:", x);
+	scanf("%d", out);
+	puts("");
+}
+
+
+int x = 1;
+Employee employee = {"Mattie", "fuller", 19, 22}
+employee.name
+passByReference(&employee)
+
 
 void enterEmployees(struct employee* employeeArr, int maxEmployees);
 void passStructByValue(struct employee aEmployee);
@@ -174,15 +279,20 @@ void passStructByValue(struct employee employeeTest)
 
 void passStructByReference(struct employee* employeeTestPtr)
 {
+	Employee realEmp = *employeeTestPtr;
 	puts("In function call - change values in the structure");
 
-	strncpy(employeeTestPtr->firstName, "Dynamic", NAME_SIZE);
-	employeeTestPtr->hourlySalary = 100.00;
+	strncpy(realEmp.firstName, "Dynamic", NAME_SIZE);
+	realEmp.hourlySalary = 100.00;
 
-	printf("Employee's first name = %s\n", employeeTestPtr->firstName);
-	printf("Employee's hourly salary = %3.2f\n\n", employeeTestPtr->hourlySalary);
+	printf("%s","First Name: ");
+	fgets(realEmp.firstName, NAME_SIZE, stdin);
+	printf("\nEmployee's first name = %s\n", realEmp.firstName);
+
+	printf("%s", "Hourly Salery: ");
+	scanf("%lf", &(realEmp.hourlySalary));
+	printf("\nEmployee's hourly salary = %3.2f\n\n", realEmp.hourlySalary);
+	
 }
-
-
 
 

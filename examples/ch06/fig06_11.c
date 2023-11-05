@@ -11,6 +11,16 @@ void modifyElement(int e);
 int main(void) {
    int a[SIZE] = {0, 1, 2, 3, 4}; // initialize array a
 
+   //print adder name
+   printf("val of a: %p\n", a);
+   // print indexes arr
+
+   for (size_t i = 0; i < SIZE; ++i) {
+       printf("index I :%d value =%d\n",i, a[i]);
+       printf("index I :%d adress =%p\n", i, &a[i]);
+   }
+
+
    puts("Effects of passing entire array by reference:\n\nThe "
       "values of the original array are:");
 
@@ -38,6 +48,14 @@ int main(void) {
    // output value of a[3]
    printf("The value of a[3] is %d\n", a[3]);
 } 
+
+
+void printArr(int const a[], size_t size) {
+    for (size_t i = 0; i < SIZE; ++i) {
+        printf("index I :%d value =%d\n", i, a[i]);
+        printf("index I :%d adress =%p\n", i, &a[i]);
+    }
+}
 
 // in function modifyArray, "b" points to the original array "a" in memory
 void modifyArray(int b[], size_t size) {                              
