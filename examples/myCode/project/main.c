@@ -29,8 +29,10 @@ Security Standard: SEI CERT C Standard
 #include <stdbool.h>
 #include <string.h>
 
-#define numberOfPriceRanges 3
 
+#define numberOfPriceRanges 3
+#define reviewCols 5
+#define reviewRows 10
 
 /*---------------------------
 Structs
@@ -78,6 +80,10 @@ typedef struct  property {
   double totalNights;
 
 
+  //TODO: refactor to 2d linked list
+  char * reviews [reviewRows][reviewCols];
+
+
 
 } Property;
 
@@ -122,6 +128,14 @@ typedef struct adminWindow {
 
   /** @brief the window to login to the admin menu*/
   LoginWindow loginWindow;
+
+  //the inputs fileds of the admin menu
+  GtkEntry * propertyNameInput;
+  GtkEntry * baseDiscountInput;
+  GtkLabel * totalMoneyLabel;
+  GtkLabel * totalNightsLabel;
+
+
 } AdminWindow;
 
 
@@ -153,6 +167,11 @@ typedef struct app {
 /*-------------------------------------------------------------
  Prototypes
  ------------------------------------------------------------*/
+
+
+/// @brief update all entrys on the admin app page
+/// @param mainApp the main app struct
+static void updateAdminInputs(App * mainApp);
 
 /**
  Brief:
@@ -264,6 +283,41 @@ bool intArrContains(int const ARR[], int val, size_t length);
 */
 void displayRentalPropertyInfo(int min, int max, double basePrice, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length);
 
+
+/**
+ * brief: initialize the login window "object-like" but do not spawn it into the current scene
+ * @param mainWindow a GtkWidget pointer to initialize the mainWindow body onto
+ * @param app the main gtk app.
+*/
+static void loginWindowInit(GtkApplication* app, App * mainApp);
+
+/**
+ * Brief: make a button with a callback when it is clicked
+ * @param label the string to display on this button
+ * @param cb, the function pointer to the function to call on this clicked. this function must take a gtk widget and the data pointer
+*/
+static GtkWidget * makeBtnWithCb(char* label, void (*cb) (GtkWidget *widget, gpointer data));
+
+/**
+ * Brief: the class of our tab headers widget that handles switching between tabs within the app
+*/
+static GtkWidget * TabHeaders(void);
+
+/// @brief this is called when the input box for nights changes its value. to show a preview of the pice
+/// @param widget the widget this was called from IE: the entry
+/// @param app the pointer to our app struct
+static void onChange(GtkWidget *widget, App * app);
+
+/// @brief create a display that looks like Header: text
+/// @param headerText the header text
+/// @param displayText the display text
+/// @return the widget
+static GtkWidget * makeHtmlStyleLabelWithLabel(char * headerText, char * displayText);
+
+/// @brief the method that will be called to process a charge when the user clicks the pay button
+/// @param widget the input button this was called from
+/// @param app the pointer to our main app struct
+static void onCharge(GtkWidget *widget, App * app);
 
 /*-------------------------------------------------------------
  Function Declarations
@@ -480,11 +534,6 @@ void displayCost(int nights, double cost) {
 GtkWidget * windows[NumTabs] = {};
 char * names[NumTabs] =  {"Main", "Analytics", "Login"};
 
-/**
- * Brief: make a button with a callback when it is clicked
- * @param label the string to display on this button
- * @param cb, the function pointer to the function to call on this clicked. this function must take a gtk widget and the data pointer
-*/
 static GtkWidget * makeBtnWithCb(char* label, void (*cb) (GtkWidget *widget, gpointer data)){
   GtkWidget * btn = gtk_button_new_with_label (label);
   g_signal_connect (btn, "clicked", G_CALLBACK (cb), btn);
@@ -509,9 +558,6 @@ static void switchWin(GtkWidget *widget, gpointer data){
   
 }
 
-/**
- * Brief: the class of our tab headers widget that handles switching between tabs within the app
-*/
 static GtkWidget * TabHeaders(){
   GtkWidget *grid = gtk_grid_new ();
  
@@ -540,10 +586,8 @@ static GtkWidget * makeHtmlStyleEntryWithLabel(char * displayText){
 
   return widget;
 }
-/// @brief create a display that looks like Header: text
-/// @param headerText the header text
-/// @param displayText the display text
-/// @return the widget
+
+
 static GtkWidget * makeHtmlStyleLabelWithLabel(char * headerText, char * displayText){
     GtkWidget * widget = gtk_grid_new ();
     GtkWidget *entry = gtk_entry_new();
@@ -555,6 +599,35 @@ static GtkWidget * makeHtmlStyleLabelWithLabel(char * headerText, char * display
 
   
 
+  return widget;
+}
+
+/// @brief render a 2d array of strings as labels in a grid
+/// @param array 2d string array
+/// @param rows the rows in the array
+/// @param cols the cols in the array
+/// @return the widget
+static GtkWidget * makeGridOfLabelsFrom2dStringArr(int rows, int cols, char* array[rows][cols]){ //note this only works C99+ we can use a macro to do this if we need C98- support
+    GtkWidget * widget = gtk_grid_new ();
+
+
+    
+    for (size_t x = 0; x < rows; x++)
+    {
+      for (size_t y = 0; y < cols; y++)
+      {
+        const char * string = array[x][y];
+        //if first char of string is not string terminator
+        if(*string != '\0'){
+          char newString[STRING_SIZE+20] = " | ";
+          strcat(newString, string);
+          GtkWidget *label = gtk_label_new_with_mnemonic (newString);
+          gtk_grid_attach (GTK_GRID (widget), label, y, x, 1, 1);
+        }
+        
+      }
+      
+    }
   return widget;
 }
 
@@ -575,10 +648,6 @@ static GtkWidget * windowBase(GtkApplication* app){
   return win;
 }
 
-
-/// @brief this is called when the input box for nights changes its value. to show a preview of the pice
-/// @param widget the widget this was called from IE: the entry
-/// @param app the pointer to our app struct
 static void onChange(GtkWidget *widget, App * app){
     Property data = app->property;
     CustomerWindow mainWin = app->customerWindow;
@@ -594,17 +663,14 @@ static void onChange(GtkWidget *widget, App * app){
     gtk_label_set_text (GTK_LABEL (mainWin.priceRendererWindow), header);
   }
 
-/// @brief the method that will be called to process a charge when the user clicks the pay button
-/// @param widget the input button this was called from
-/// @param app the pointer to our main app struct
 static void onCharge(GtkWidget *widget, App * app){
-    Property data = app->property;
+    const Property data = app->property;
     CustomerWindow mainWin = app->customerWindow;
     int nightsStayed = atoi(gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(mainWin.inputEntry))));
     printf("Paying For %d nights\n", nightsStayed);
     double cost = calculateCost(nightsStayed, data.baseDiscount, data.dayRanges, data.discounts, numberOfPriceRanges);
-    data.totalMoney += cost;
-    data.totalNights += nightsStayed;
+    app->property.totalMoney += cost;
+    app->property.totalNights += nightsStayed;
 
     char intStr[STRING_SIZE];
     char header[STRING_SIZE] = "Cost: $";
@@ -615,20 +681,15 @@ static void onCharge(GtkWidget *widget, App * app){
    
     gtk_label_set_text (GTK_LABEL (mainWin.priceRendererWindow), header);
 
+    //update our fields
+    updateAdminInputs(app);
+
   }
 
-
-/**
- * brief: initialize the main window "object-like" but do not spawn it into the current scene
- * @param mainWindow a GtkWidget pointer to initialize the mainWindow body onto
- * @param app the main gtk app.
-*/
-static void mainWindowInit(GtkApplication* app, App * mainApp){
-  // -Constants Declarations-
-  Property property;
-  property.baseDiscount = 50;
-  strcpy( property.propertyName, "AIR UCCS");
-
+/// @brief setup a property with default values
+static void setupProperty(Property * property){
+  const char * REVIEW_HEADERS[reviewCols] = {"Happiness", "Cleanliness", "Saftey", "Location", "Amenities"};
+  const char * NAME = "AIR UCCS";
   int unsigned const MIN_RENTAL_NIGHTS = 1;
   unsigned int const MAX_RENTAL_NIGHTS = 14;
   unsigned int const INTERVAL_1_NIGHTS = 3;
@@ -636,16 +697,47 @@ static void mainWindowInit(GtkApplication* app, App * mainApp){
   double const RENTAL_RATE = 400;
   double const DISCOUNT = 50;
 
+
+  property->baseDiscount = DISCOUNT;
+  strcpy( property->propertyName, NAME);
   //define our config arrays
   int tempRages[numberOfPriceRanges] = {0, INTERVAL_1_NIGHTS, INTERVAL_2_NIGHTS };
-  memcpy(&property.dayRanges, &tempRages, sizeof(tempRages));
+  memcpy(&property->dayRanges, &tempRages, sizeof(tempRages));
   int tempDiscs[numberOfPriceRanges] = {0, DISCOUNT, DISCOUNT*2};
-  memcpy(&property.discounts, &tempDiscs, sizeof(tempDiscs));
+  memcpy(&property->discounts, &tempDiscs, sizeof(tempDiscs));
   // -Constants Ends-
 
   //these vars will track total rev/nights
-  property.totalMoney = 0;
-  property.totalNights  = 0;
+  property->totalMoney = 0;
+  property->totalNights  = 0;
+
+  //setup headers
+  for (size_t i = 0; i < reviewCols; i++)
+  {
+    property->reviews[0][i] = REVIEW_HEADERS[i];
+  }
+  //fill the rest with ' '
+  for (size_t i = 1; i < reviewRows; i++)
+  {
+    for (size_t j = 0; j < reviewCols; j++)
+    {
+      //init string var as null terminator
+      char * string = "\0"; 
+      property->reviews[i][j] = string;
+    }
+  }
+}
+
+/**
+ * brief: initialize the main window "object-like" but do not spawn it into the current scene
+ * @param mainWindow a GtkWidget pointer to initialize the mainWindow body onto
+ * @param app the main gtk app.
+*/
+static void mainWindowInit(GtkApplication* app, App * mainApp){
+
+  //setup our property
+  Property property;
+  setupProperty(&property);
 
   mainApp->property = property;
   mainApp->customerWindow.priceRendererWindow = gtk_label_new_with_mnemonic ("type a num for an estimate");
@@ -669,9 +761,13 @@ static void mainWindowInit(GtkApplication* app, App * mainApp){
 
  
   GtkWidget *grid = gtk_window_get_child(GTK_WINDOW (mainApp->customerWindow.window));
+
+  GtkWidget *table = makeGridOfLabelsFrom2dStringArr(reviewRows, reviewCols, mainApp->property.reviews);
+
   gtk_grid_attach (GTK_GRID (grid), input, 0, 1, 1, 2);
   gtk_grid_attach (GTK_GRID (grid), btn, 0, 3, 1, 1);
   gtk_grid_attach (GTK_GRID (grid), mainApp->customerWindow.priceRendererWindow, 0, 4, 1, 1);
+  gtk_grid_attach (GTK_GRID (grid), table, 4, 0, 5, 5);
   
 }
 
@@ -705,11 +801,6 @@ static void onLogin(GtkWidget *widget, App * app){
 
 }
 
-/**
- * brief: initialize the login window "object-like" but do not spawn it into the current scene
- * @param mainWindow a GtkWidget pointer to initialize the mainWindow body onto
- * @param app the main gtk app.
-*/
 static void loginWindowInit(GtkApplication* app, App * mainApp){
   mainApp->adminWindow.loginWindow.window = windowBase (app);
 
@@ -742,6 +833,41 @@ static void loginWindowInit(GtkApplication* app, App * mainApp){
   gtk_grid_attach (GTK_GRID (grid), btn, 0, 5, 1, 1);
 }
 
+static void updateAdminInputs(App * mainApp){
+  //setup default values for our inputs
+  //TODO: refactor to use loop and update on payment
+  
+  //total nights/money display
+  char tempString[STRING_SIZE] = "";
+  itoa(mainApp->property.totalMoney, tempString, 10);
+  gtk_label_set_text(GTK_LABEL(mainApp->adminWindow.totalMoneyLabel), tempString);
+
+  itoa(mainApp->property.totalNights, tempString, 10);
+  gtk_label_set_text(GTK_LABEL(mainApp->adminWindow.totalNightsLabel), tempString);
+
+
+  //setup placeholders for current values for config fields
+
+  //property name
+  GtkEntryBuffer * propNameBuffer = gtk_entry_buffer_new(mainApp->property.propertyName, STRING_SIZE);
+  gtk_entry_set_buffer (GTK_ENTRY(mainApp->adminWindow.propertyNameInput), propNameBuffer);
+
+  //base discount
+  itoa(mainApp->property.baseDiscount, tempString, 10);
+  GtkEntryBuffer * basediscountBuffer = gtk_entry_buffer_new(tempString, STRING_SIZE);
+  gtk_entry_set_buffer (GTK_ENTRY(mainApp->adminWindow.baseDiscountInput), basediscountBuffer);
+
+  //TODO: write json.stringify esque thing for our arrays
+  // GtkEntryBuffer * dayRangesBuffer = gtk_entry_buffer_new(mainApp->property.propertyName, STRING_SIZE);
+  // gtk_entry_set_buffer (GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (dayRanges), 1,0)), dayRangesBuffer);
+
+  // GtkEntryBuffer * discountsBuffer = gtk_entry_buffer_new(mainApp->property.propertyName, STRING_SIZE);
+  // gtk_entry_set_buffer (GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (discounts), 1,0)), discountsBuffer);
+
+
+
+}
+
 
 /**
  * brief: initialize the main window "object-like" but do not spawn it into the current scene
@@ -755,34 +881,23 @@ static void adminWindowInit(GtkApplication* app, App * mainApp){
 
   //set up admin inputs
   GtkWidget * propName = makeHtmlStyleEntryWithLabel("Property Name");
-  GtkWidget * username = makeHtmlStyleEntryWithLabel("Base Discount");
+  GtkWidget * baseDiscount = makeHtmlStyleEntryWithLabel("Base Discount");
   GtkWidget * dayRanges = makeHtmlStyleEntryWithLabel("Day Ranges");
   GtkWidget * discounts = makeHtmlStyleEntryWithLabel("Discounts");
 
-  //setup default values for our inputs
-  //TODO: refactor to use loop and update on payment
-  char tempString[STRING_SIZE] = "";
-  itoa(mainApp->property.totalMoney, tempString, 10);
-  GtkEntryBuffer * propNameBuffer = gtk_entry_buffer_new(mainApp->property.propertyName, STRING_SIZE);
-  gtk_entry_set_buffer (GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (propName), 1,0)), propNameBuffer);
-
-  GtkEntryBuffer * usernameBuffer = gtk_entry_buffer_new(tempString, STRING_SIZE);
-  gtk_entry_set_buffer (GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (username), 1,0)), usernameBuffer);
-
-  //TODO: write json.stringify esque thing for our arrays
-  // GtkEntryBuffer * dayRangesBuffer = gtk_entry_buffer_new(mainApp->property.propertyName, STRING_SIZE);
-  // gtk_entry_set_buffer (GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (dayRanges), 1,0)), dayRangesBuffer);
-
-  // GtkEntryBuffer * discountsBuffer = gtk_entry_buffer_new(mainApp->property.propertyName, STRING_SIZE);
-  // gtk_entry_set_buffer (GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (discounts), 1,0)), discountsBuffer);
-
-
   //setup money displays
- 
+  char tempString[STRING_SIZE] = "";
   itoa(mainApp->property.totalMoney, tempString, 10);
   GtkWidget * totalMoneyDisplay = makeHtmlStyleLabelWithLabel("Gross Revenue: ", tempString);
   itoa(mainApp->property.totalNights, tempString, 10);
   GtkWidget * totalNightsDisplay = makeHtmlStyleLabelWithLabel("Nights Stayed: ", tempString);
+
+  //set up our references
+  mainApp->adminWindow.propertyNameInput = GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (propName), 1,0));
+  mainApp->adminWindow.baseDiscountInput = GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (baseDiscount), 1,0));
+  mainApp->adminWindow.totalMoneyLabel = GTK_LABEL(gtk_grid_get_child_at(GTK_GRID (totalMoneyDisplay), 1,0));
+  mainApp->adminWindow.totalNightsLabel = GTK_LABEL(gtk_grid_get_child_at(GTK_GRID (totalNightsDisplay), 1,0));
+  
 
   //setup grid
   GtkWidget *grid = gtk_grid_new ();
@@ -796,12 +911,15 @@ static void adminWindowInit(GtkApplication* app, App * mainApp){
 
   //attach our inputs
   gtk_grid_attach (GTK_GRID (grid), propName, 0, 2, 2, 1);
-  gtk_grid_attach (GTK_GRID (grid), username, 0, 3, 2, 1);
+  gtk_grid_attach (GTK_GRID (grid), baseDiscount, 0, 3, 2, 1);
   gtk_grid_attach (GTK_GRID (grid), dayRanges, 0, 4, 2, 1);
   gtk_grid_attach (GTK_GRID (grid), discounts, 0, 5, 2, 1);
 
   //setup login window
   loginWindowInit(app, mainApp);
+
+  //update our fields
+  updateAdminInputs(mainApp);
 }
 
 static void
