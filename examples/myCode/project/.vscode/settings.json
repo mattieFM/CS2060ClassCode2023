@@ -5,5 +5,8 @@
         "esque",
         "gpointer",
         "UCCS"
-    ]
+    ],
+    "files.associations": {
+        "type_traits": "c"
+    }
 }

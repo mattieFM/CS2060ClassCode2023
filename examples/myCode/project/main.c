@@ -82,18 +82,73 @@ typedef struct  property {
 } Property;
 
 
-typedef struct mainWindowRenderer {
-  /** the property*/
-  Property property;
-  /** the main window*/
-  GtkWidget * mainWindow;
-  /** the admin Window*/
-  GtkWidget * adminWindow;
+#define INHERIT_BASE_WIN \
+  GtkWidget* window;
+
+
+/// @brief the login window of the app
+typedef struct logInWindow {
+  //"inherit" from our base win macro
+  INHERIT_BASE_WIN
+
+  //both of these are temp for testing guis
+  GtkEntry * passwordField;
+  GtkEntry * usernameField;
+
+
+  /** @brief how many times has the user attempted a login so fare*/
+  int attempts;
+
+  /** @brief max times the user can try to login --needs refactor to config.json eventually*/
+  int maxLoginAttempts;
+
+  /** TEMP a string password just for testing guis */
+  char * password;
+
+
+} LoginWindow;
+
+/// @brief the config window of the app
+typedef struct configWindow {
+  //"inherit" from our base win macro
+  INHERIT_BASE_WIN
+} ConfigWindow;
+
+
+/// @brief the admin window of the app
+typedef struct adminWindow {
+  //"inherit" from our base win macro
+  INHERIT_BASE_WIN
+
+  /** @brief the window to login to the admin menu*/
+  LoginWindow loginWindow;
+} AdminWindow;
+
+
+/// @brief the customer window of the app
+typedef struct customerWindow {
+  //"inherit" from our base win macro
+  INHERIT_BASE_WIN
   /** the label widget to store price within*/
   GtkWidget * priceRendererWindow;
   /** the entry widget for the input of number of night*/
   GtkWidget * inputEntry;
-} MainWindowRenderer;
+} CustomerWindow;
+
+/// @brief the main struct containing all app info that we need
+typedef struct app {
+  //"inherit" from our base win macro
+  INHERIT_BASE_WIN
+
+  /** the property*/
+  Property property;
+  /** the main window*/
+  CustomerWindow customerWindow;
+  /** the admin Window*/
+  AdminWindow adminWindow;
+  /**the config window*/
+  ConfigWindow configWindow;
+} App;
 
 /*-------------------------------------------------------------
  Prototypes
@@ -423,7 +478,7 @@ void displayCost(int nights, double cost) {
 
 
 GtkWidget * windows[NumTabs] = {};
-char * names[NumTabs] =  {"Main", "Config", "Admin"};
+char * names[NumTabs] =  {"Main", "Analytics", "Login"};
 
 /**
  * Brief: make a button with a callback when it is clicked
@@ -439,7 +494,7 @@ static GtkWidget * makeBtnWithCb(char* label, void (*cb) (GtkWidget *widget, gpo
 
 static void switchWin(GtkWidget *widget, gpointer data){
   GtkRoot *root = gtk_widget_get_root (GTK_WIDGET (widget));
-  const char * windowName = gtk_button_get_label(widget);
+  const char * windowName = gtk_button_get_label(GTK_BUTTON(widget));
 
   GtkWindow *window = GTK_WINDOW (root);
   
@@ -470,12 +525,32 @@ static GtkWidget * TabHeaders(){
 }
 
 
+/// @brief create a display that looks like Header: input field
+/// @param displayText the header text
+/// @return the widget
 static GtkWidget * makeHtmlStyleEntryWithLabel(char * displayText){
     GtkWidget * widget = gtk_grid_new ();
     GtkWidget *entry = gtk_entry_new();
     GtkWidget *label = gtk_label_new_with_mnemonic (displayText);
 
     gtk_grid_attach (GTK_GRID (widget), entry, 1, 0, 1, 1);
+    gtk_grid_attach (GTK_GRID (widget), label, 0, 0, 1, 1);
+
+  
+
+  return widget;
+}
+/// @brief create a display that looks like Header: text
+/// @param headerText the header text
+/// @param displayText the display text
+/// @return the widget
+static GtkWidget * makeHtmlStyleLabelWithLabel(char * headerText, char * displayText){
+    GtkWidget * widget = gtk_grid_new ();
+    GtkWidget *entry = gtk_entry_new();
+    GtkWidget *label = gtk_label_new_with_mnemonic (headerText);
+    GtkWidget *label2 = gtk_label_new_with_mnemonic (displayText);
+
+    gtk_grid_attach (GTK_GRID (widget), label2, 1, 0, 1, 1);
     gtk_grid_attach (GTK_GRID (widget), label, 0, 0, 1, 1);
 
   
@@ -501,10 +576,13 @@ static GtkWidget * windowBase(GtkApplication* app){
 }
 
 
-
-static void onChange(GtkWidget *widget, MainWindowRenderer * mainWin){
-    Property data = mainWin->property;
-    int nightsStayed = atoi(gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(mainWin->inputEntry))));
+/// @brief this is called when the input box for nights changes its value. to show a preview of the pice
+/// @param widget the widget this was called from IE: the entry
+/// @param app the pointer to our app struct
+static void onChange(GtkWidget *widget, App * app){
+    Property data = app->property;
+    CustomerWindow mainWin = app->customerWindow;
+    int nightsStayed = atoi(gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(mainWin.inputEntry))));
     printf("Calculating For %d nights\n", nightsStayed);
     double cost = calculateCost(nightsStayed, data.baseDiscount, data.dayRanges, data.discounts, numberOfPriceRanges);
     char intStr[STRING_SIZE];
@@ -513,12 +591,16 @@ static void onChange(GtkWidget *widget, MainWindowRenderer * mainWin){
     sprintf(intStr, "%.2f", cost);
     strcat(header, intStr);
    
-    gtk_label_set_text (GTK_LABEL (mainWin->priceRendererWindow), header);
+    gtk_label_set_text (GTK_LABEL (mainWin.priceRendererWindow), header);
   }
 
-static void onCharge(GtkWidget *widget, MainWindowRenderer * mainWin){
-    Property data = mainWin->property;
-    int nightsStayed = atoi(gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(mainWin->inputEntry))));
+/// @brief the method that will be called to process a charge when the user clicks the pay button
+/// @param widget the input button this was called from
+/// @param app the pointer to our main app struct
+static void onCharge(GtkWidget *widget, App * app){
+    Property data = app->property;
+    CustomerWindow mainWin = app->customerWindow;
+    int nightsStayed = atoi(gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(mainWin.inputEntry))));
     printf("Paying For %d nights\n", nightsStayed);
     double cost = calculateCost(nightsStayed, data.baseDiscount, data.dayRanges, data.discounts, numberOfPriceRanges);
     data.totalMoney += cost;
@@ -531,7 +613,7 @@ static void onCharge(GtkWidget *widget, MainWindowRenderer * mainWin){
     strcat(header, intStr);
     strcat(header, "\nThank You <3");
    
-    gtk_label_set_text (GTK_LABEL (mainWin->priceRendererWindow), header);
+    gtk_label_set_text (GTK_LABEL (mainWin.priceRendererWindow), header);
 
   }
 
@@ -541,7 +623,7 @@ static void onCharge(GtkWidget *widget, MainWindowRenderer * mainWin){
  * @param mainWindow a GtkWidget pointer to initialize the mainWindow body onto
  * @param app the main gtk app.
 */
-static void mainWindowInit(GtkApplication* app, MainWindowRenderer * mainWinRen){
+static void mainWindowInit(GtkApplication* app, App * mainApp){
   // -Constants Declarations-
   Property property;
   property.baseDiscount = 50;
@@ -565,32 +647,99 @@ static void mainWindowInit(GtkApplication* app, MainWindowRenderer * mainWinRen)
   property.totalMoney = 0;
   property.totalNights  = 0;
 
-  mainWinRen->property = property;
-  mainWinRen->priceRendererWindow = gtk_label_new_with_mnemonic ("type a num for an estimate");
+  mainApp->property = property;
+  mainApp->customerWindow.priceRendererWindow = gtk_label_new_with_mnemonic ("type a num for an estimate");
 
   
   
   //init window
-  mainWinRen->mainWindow = windowBase (app);
+  mainApp->customerWindow.window = windowBase (app);
 
   //setup name and size
-  gtk_window_set_title (GTK_WINDOW (mainWinRen->mainWindow), "Air UCCS");
-  gtk_window_set_default_size (GTK_WINDOW (mainWinRen->mainWindow), 500, 500);
+  gtk_window_set_title (GTK_WINDOW (mainApp->customerWindow.window), "Air UCCS");
+  gtk_window_set_default_size (GTK_WINDOW (mainApp->customerWindow.window), 500, 500);
 
   //set up nights input
   GtkWidget * input = makeHtmlStyleEntryWithLabel("nights");
   GtkWidget * btn = gtk_button_new_with_label ("Pay");
-  mainWinRen->inputEntry = gtk_grid_get_child_at(GTK_GRID (input), 1,0);
+  mainApp->customerWindow.inputEntry = gtk_grid_get_child_at(GTK_GRID (input), 1,0);
   
-  g_signal_connect (btn, "clicked", G_CALLBACK (onCharge), mainWinRen);
-  g_signal_connect (mainWinRen->inputEntry, "changed", G_CALLBACK (onChange), mainWinRen);
+  g_signal_connect (btn, "clicked", G_CALLBACK (onCharge), mainApp);
+  g_signal_connect (mainApp->customerWindow.inputEntry, "changed", G_CALLBACK (onChange), mainApp);
 
  
-  GtkWidget *grid = gtk_window_get_child(GTK_WINDOW (mainWinRen->mainWindow));
+  GtkWidget *grid = gtk_window_get_child(GTK_WINDOW (mainApp->customerWindow.window));
   gtk_grid_attach (GTK_GRID (grid), input, 0, 1, 1, 2);
   gtk_grid_attach (GTK_GRID (grid), btn, 0, 3, 1, 1);
-  gtk_grid_attach (GTK_GRID (grid), mainWinRen->priceRendererWindow, 0, 4, 1, 1);
+  gtk_grid_attach (GTK_GRID (grid), mainApp->customerWindow.priceRendererWindow, 0, 4, 1, 1);
   
+}
+
+/// @brief the method called when the login button is pressed
+/// @param widget the login button
+/// @param app pointer to mainapp struct
+static void onLogin(GtkWidget *widget, App * app){
+  printf("attempts: %d\n",app->adminWindow.loginWindow.attempts);
+  app->adminWindow.loginWindow.attempts++;
+  if(app->adminWindow.loginWindow.attempts < app->adminWindow.loginWindow.maxLoginAttempts){
+    //if the user can make any more attempts to login
+    const char * passwordIn = gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(app->adminWindow.loginWindow.passwordField)));
+
+    if(strcmp(passwordIn, app->adminWindow.loginWindow.password) == 0){
+      //password correct
+      //reset attempts and show window
+      app->adminWindow.loginWindow.attempts = 0;
+      gtk_window_present(GTK_WINDOW(app->adminWindow.window));
+    } else{
+      //password wrong
+      //TODO: implmenet alert/popup/msgbox and display err
+    }
+    
+  } else {
+    //close the window if they cannot make any more attempts
+    app->adminWindow.loginWindow.attempts = 0;
+    //TODO: make this close the window in a way that it can be reopened, for now just hide
+    gtk_widget_set_visible(GTK_WIDGET(app->adminWindow.loginWindow.window), false);
+  }
+  
+
+}
+
+/**
+ * brief: initialize the login window "object-like" but do not spawn it into the current scene
+ * @param mainWindow a GtkWidget pointer to initialize the mainWindow body onto
+ * @param app the main gtk app.
+*/
+static void loginWindowInit(GtkApplication* app, App * mainApp){
+  mainApp->adminWindow.loginWindow.window = windowBase (app);
+
+  //setup temp login vars
+  mainApp->adminWindow.loginWindow.attempts = 0;
+  mainApp->adminWindow.loginWindow.maxLoginAttempts = 3;
+  mainApp->adminWindow.loginWindow.password = "password";
+
+  //setup name and size
+  gtk_window_set_title (GTK_WINDOW (mainApp->adminWindow.loginWindow.window), "Air UCCS - Login");
+  gtk_window_set_default_size (GTK_WINDOW (mainApp->adminWindow.loginWindow.window), 500, 500);
+
+  //set up nights input
+  GtkWidget * pass = makeHtmlStyleEntryWithLabel("Password (eventually key pair)");
+  GtkWidget * username = makeHtmlStyleEntryWithLabel("UserName (eventually key pair)");
+  GtkWidget * btn = gtk_button_new_with_label ("Login");
+
+  //set up our references to the widgets
+  mainApp->adminWindow.loginWindow.passwordField = GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (pass), 1,0));
+  mainApp->adminWindow.loginWindow.usernameField = GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (username), 1,0));
+ 
+  GtkWidget *grid = gtk_window_get_child(GTK_WINDOW (mainApp->adminWindow.loginWindow.window));
+
+  //set up the on click callback
+  g_signal_connect (btn, "clicked", G_CALLBACK (onLogin), mainApp);
+
+  //add all our widgets to the window
+  gtk_grid_attach (GTK_GRID (grid), pass, 0, 1, 1, 2);
+  gtk_grid_attach (GTK_GRID (grid), username, 0, 3, 1, 2);
+  gtk_grid_attach (GTK_GRID (grid), btn, 0, 5, 1, 1);
 }
 
 
@@ -599,28 +748,60 @@ static void mainWindowInit(GtkApplication* app, MainWindowRenderer * mainWinRen)
  * @param mainWindow a GtkWidget pointer to initialize the mainWindow body onto
  * @param app the main gtk app.
 */
-static GtkWindow adminWindowInit(GtkApplication* app, MainWindowRenderer * mainWinRen){
+static void adminWindowInit(GtkApplication* app, App * mainApp){
+  mainApp->adminWindow.window = windowBase (app);
 
-  mainWinRen->adminWindow = windowBase (app);
 
-  //setup name and size
-  gtk_window_set_title (GTK_WINDOW (mainWinRen->adminWindow), "Air UCCS - Admin");
-  gtk_window_set_default_size (GTK_WINDOW (mainWinRen->adminWindow), 500, 500);
 
-  //set up nights input
-  GtkWidget * pass = makeHtmlStyleEntryWithLabel("Password (eventually key pair)");
-  GtkWidget * username = makeHtmlStyleEntryWithLabel("UserName (eventually key pair)");
-  GtkWidget * btn = gtk_button_new_with_label ("Login");
-  
-  g_signal_connect (btn, "clicked", G_CALLBACK (onCharge), mainWinRen);
-  g_signal_connect (mainWinRen->inputEntry, "changed", G_CALLBACK (onChange), mainWinRen);
+  //set up admin inputs
+  GtkWidget * propName = makeHtmlStyleEntryWithLabel("Property Name");
+  GtkWidget * username = makeHtmlStyleEntryWithLabel("Base Discount");
+  GtkWidget * dayRanges = makeHtmlStyleEntryWithLabel("Day Ranges");
+  GtkWidget * discounts = makeHtmlStyleEntryWithLabel("Discounts");
 
+  //setup default values for our inputs
+  //TODO: refactor to use loop and update on payment
+  char tempString[STRING_SIZE] = "";
+  itoa(mainApp->property.totalMoney, tempString, 10);
+  GtkEntryBuffer * propNameBuffer = gtk_entry_buffer_new(mainApp->property.propertyName, STRING_SIZE);
+  gtk_entry_set_buffer (GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (propName), 1,0)), propNameBuffer);
+
+  GtkEntryBuffer * usernameBuffer = gtk_entry_buffer_new(tempString, STRING_SIZE);
+  gtk_entry_set_buffer (GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (username), 1,0)), usernameBuffer);
+
+  //TODO: write json.stringify esque thing for our arrays
+  // GtkEntryBuffer * dayRangesBuffer = gtk_entry_buffer_new(mainApp->property.propertyName, STRING_SIZE);
+  // gtk_entry_set_buffer (GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (dayRanges), 1,0)), dayRangesBuffer);
+
+  // GtkEntryBuffer * discountsBuffer = gtk_entry_buffer_new(mainApp->property.propertyName, STRING_SIZE);
+  // gtk_entry_set_buffer (GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (discounts), 1,0)), discountsBuffer);
+
+
+  //setup money displays
  
-  GtkWidget *grid = gtk_window_get_child(GTK_WINDOW (mainWinRen->adminWindow));
-  gtk_grid_attach (GTK_GRID (grid), pass, 0, 1, 1, 2);
-  gtk_grid_attach (GTK_GRID (grid), username, 0, 3, 1, 2);
-  gtk_grid_attach (GTK_GRID (grid), btn, 0, 5, 1, 1);
-  gtk_grid_attach (GTK_GRID (grid), mainWinRen->priceRendererWindow, 0, 4, 1, 1);
+  itoa(mainApp->property.totalMoney, tempString, 10);
+  GtkWidget * totalMoneyDisplay = makeHtmlStyleLabelWithLabel("Gross Revenue: ", tempString);
+  itoa(mainApp->property.totalNights, tempString, 10);
+  GtkWidget * totalNightsDisplay = makeHtmlStyleLabelWithLabel("Nights Stayed: ", tempString);
+
+  //setup grid
+  GtkWidget *grid = gtk_grid_new ();
+  gtk_window_set_child (GTK_WINDOW (mainApp->adminWindow.window), grid);
+
+  //attach our widgets
+
+  //attach our displays
+  gtk_grid_attach (GTK_GRID (grid), totalMoneyDisplay, 0, 0, 2, 1);
+  gtk_grid_attach (GTK_GRID (grid), totalNightsDisplay, 0, 1, 2, 1);
+
+  //attach our inputs
+  gtk_grid_attach (GTK_GRID (grid), propName, 0, 2, 2, 1);
+  gtk_grid_attach (GTK_GRID (grid), username, 0, 3, 2, 1);
+  gtk_grid_attach (GTK_GRID (grid), dayRanges, 0, 4, 2, 1);
+  gtk_grid_attach (GTK_GRID (grid), discounts, 0, 5, 2, 1);
+
+  //setup login window
+  loginWindowInit(app, mainApp);
 }
 
 static void
@@ -628,15 +809,15 @@ activate (GtkApplication* app, gpointer user_data)
 {
   //this needs to be on the heap because of how gtk call backs work, there is no other way to do this as far as I can tell
   //I didn't want to use the heap before we covered it, but this is the only solution I can think off (I spent 2 hours on this I might be dumb, but If I am I genially do not know any other way.)
-  MainWindowRenderer * mainWinRen = malloc(sizeof(MainWindowRenderer));
-  mainWindowInit(app, mainWinRen);
-  adminWindowInit(app, mainWinRen);
-  GtkWidget *mainWindow = mainWinRen->mainWindow;
-  GtkWidget *admin = mainWinRen->adminWindow;
+  App * mainApp = malloc(sizeof(App));
+  mainWindowInit(app, mainApp);
+  adminWindowInit(app, mainApp);
+  GtkWidget *mainWindow = mainApp->customerWindow.window;
+  GtkWidget *admin = mainApp->adminWindow.window;
   
   windows[0] = mainWindow;
-  windows[1] = admin;
-  windows[2] = mainWindow;
+  windows[1] = mainApp->adminWindow.loginWindow.window;
+  windows[2] = mainApp->configWindow.window;
   gtk_window_present (GTK_WINDOW (mainWindow));
 
 
