@@ -29,16 +29,46 @@ Security Standard: SEI CERT C Standard
 #include <stdbool.h>
 #include <string.h>
 
+//Preprocessor constants
+#define NUMBER_OF_PRICE_RANGES 3
+#define NUMBER_OF_REVIEW_CATS 5
+#define NUMBER_OF_REVIEW_CATS 5
+#define STRING_SIZE 80
+#define BASE_DISCOUNT 50
 
-#define numberOfPriceRanges 3
-#define reviewCols 5
-#define reviewRows 10
+//boolean
+#define ADD_MOCK_REVIEWS 1
+#define MAX_REVIEW 5
+#define MIN_REVIEW 1
+
+//setup a generic linked list macro
+#define DEFINE_LL_OF_TYPE_ARR_WITH_SIZE(TYPE, size, typeName, structName) \
+typedef struct structName {\
+  struct structName * next;\
+  TYPE data[size];\
+} typeName;
+
+//global defualts for struct inits
+const char DEFAULT_REVIEW_HEADERS[NUMBER_OF_REVIEW_CATS][STRING_SIZE] = {"Happiness", "Cleanliness", "Saftey", "Location", "Amenities"};
+const char DEFAULT_NAME[STRING_SIZE] = "AIR UCCS";
+int unsigned const DEFAULT_MIN_RENTAL_NIGHTS = 1;
+unsigned int const DEFAULT_MAX_RENTAL_NIGHTS = 14;
+unsigned int const DEFAULT_INTERVAL_1_NIGHTS = 3;
+unsigned int const DEFAULT_INTERVAL_2_NIGHTS = 6;
+double const DEFAULT_RENTAL_RATE = 400;
+double const DEFAULT_DISCOUNT = 50;
+const int DEFAULT_DAY_RANGES[NUMBER_OF_PRICE_RANGES] = {0, DEFAULT_INTERVAL_1_NIGHTS, DEFAULT_INTERVAL_2_NIGHTS };
+const int DEFAULT_DISCOUNTS[NUMBER_OF_PRICE_RANGES] = {0, DEFAULT_DISCOUNT, DEFAULT_DISCOUNT*2};
+
 
 /*---------------------------
 Structs
 -----------------------------*/
-#define STRING_SIZE 80
+//use macro to setup linked list with type of int array
+DEFINE_LL_OF_TYPE_ARR_WITH_SIZE(int, NUMBER_OF_REVIEW_CATS, ReviewNode, reviewNode);
 
+/// @brief the location of the property
+/// @initalizer: initLocation
 typedef struct location {
 	/* @description the human readable address of this location*/
 	char address[STRING_SIZE]; //(80 size as told for all strings)
@@ -50,6 +80,15 @@ typedef struct location {
 	int lon;
 } Location;
 
+void initLocation(Location * loc, char address[STRING_SIZE], int lat, int lon){
+  //copy adress
+  strcpy(loc->address, address);
+  loc->lat = lat;
+  loc->lon = lon;
+}
+
+/// @brief A struct representing a property
+/// @initalizer: initProperty
 typedef struct  property {
 	//--Property Info-
 	/*@description the name of this property */
@@ -61,32 +100,56 @@ typedef struct  property {
 
 	//-ranges-
 	/* @description the number of days when the first discount period should start */
-	int dayRanges[numberOfPriceRanges];
+	int dayRanges[NUMBER_OF_PRICE_RANGES];
 
   /** @description the discounts for each range*/
-  double discounts[numberOfPriceRanges];
+  double discounts[NUMBER_OF_PRICE_RANGES];
 
 	//-discount values-
 	/* @description the base discount for range 1. This value is multiplied by the range */
 	double baseDiscount;
-
-	/* @description how much should the discount be multiplied each range? @default 2*/
-	//int discountScaler; told that we are not using this in class 
-
 
   /** @description how much money has this property made durring this runtime*/
   double totalMoney;
   /** @description how many nights has this property booked durring this runtime*/
   double totalNights;
 
+  /// @brief the head of the review's linked list
+  ReviewNode * reviewsHead;
 
-  //TODO: refactor to 2d linked list
-  char * reviews [reviewRows][reviewCols];
-
-
-
+  /// @brief an array of the headers of the review categories
+  char headers[NUMBER_OF_REVIEW_CATS][STRING_SIZE] ;
 } Property;
 
+void initProperty(Property * property){
+  property->baseDiscount = BASE_DISCOUNT;
+  memcpy(&property->dayRanges, &DEFAULT_DAY_RANGES, sizeof(DEFAULT_DAY_RANGES));
+  memcpy(&property->discounts, &DEFAULT_DISCOUNTS, sizeof(DEFAULT_DISCOUNTS));
+  memcpy(&property->headers, &DEFAULT_REVIEW_HEADERS, sizeof(DEFAULT_REVIEW_HEADERS));
+  property->totalMoney = 0;
+  property->totalNights = 0;
+  ReviewNode * nodePtr = malloc(sizeof(ReviewNode));
+  nodePtr->next = NULL;
+  nodePtr->data[0] = NULL;
+  property->reviewsHead = nodePtr;
+}
+
+
+void cleanUpReviews(Property * propertyPtr){
+  while(propertyPtr->reviewsHead->next != NULL){
+    ReviewNode * currentPtr = propertyPtr->reviewsHead;
+
+    //traverse to one away from end of ll
+    while(currentPtr->next->next != NULL){
+      currentPtr = currentPtr->next;
+    }
+    
+    //free the memory of the next node
+    free(currentPtr->next);
+    currentPtr->next = NULL;
+  }
+  
+}
 
 #define INHERIT_BASE_WIN \
   GtkWidget* window;
@@ -138,6 +201,19 @@ typedef struct adminWindow {
 
 } AdminWindow;
 
+/// @brief the review Window of the app
+typedef struct reviewWindow {
+  //"inherit" from our base win macro
+  INHERIT_BASE_WIN
+
+  //the inputs fileds for the review
+  GtkEntry * inputs[NUMBER_OF_REVIEW_CATS];
+
+  //the submit btn
+  GtkButton * submitBtn;
+
+} ReviewWindow;
+
 
 /// @brief the customer window of the app
 typedef struct customerWindow {
@@ -147,12 +223,19 @@ typedef struct customerWindow {
   GtkWidget * priceRendererWindow;
   /** the entry widget for the input of number of night*/
   GtkWidget * inputEntry;
+  /**the review table*/
+  GtkWidget * reviewTable;
+  /**the review table*/
+  GtkWidget * grid;
 } CustomerWindow;
 
 /// @brief the main struct containing all app info that we need
 typedef struct app {
   //"inherit" from our base win macro
   INHERIT_BASE_WIN
+
+  // a reference to our main gtk app
+  GtkApplication* app;
 
   /** the property*/
   Property property;
@@ -162,12 +245,33 @@ typedef struct app {
   AdminWindow adminWindow;
   /**the config window*/
   ConfigWindow configWindow;
+  /** the review window*/
+  ReviewWindow reviewWindow;
 } App;
 
 /*-------------------------------------------------------------
  Prototypes
  ------------------------------------------------------------*/
 
+/// @brief free all memory held by review ll
+/// @param propertyPtr the property
+void cleanUpReviews(Property * propertyPtr);
+
+/// @brief Add a review to the linked list of reviews
+/// @param property the property to add the review to
+/// @param review the review to add
+void addReview(App * mainApp, const int review[NUMBER_OF_REVIEW_CATS]);
+
+/// @brief Initalzize a property with default values
+/// @param property the property struct to initalize
+void initProperty(Property * property);
+
+/// @brief Initalize a location structure
+/// @param loc the location struct to init
+/// @param address the adress in the form of a string of the location
+/// @param lat the latitude of the location
+/// @param lon the longitude of the location
+void initLocation(Location * loc, char address[STRING_SIZE], int lat, int lon);
 
 /// @brief update all entrys on the admin app page
 /// @param mainApp the main app struct
@@ -291,6 +395,11 @@ void displayRentalPropertyInfo(int min, int max, double basePrice, int const DIS
 */
 static void loginWindowInit(GtkApplication* app, App * mainApp);
 
+/// @brief setup the review window
+/// @param app the app
+/// @param mainApp the main app 
+static void reviewWindowInit(GtkApplication* app, App * mainApp);
+
 /**
  * Brief: make a button with a callback when it is clicked
  * @param label the string to display on this button
@@ -303,10 +412,18 @@ static GtkWidget * makeBtnWithCb(char* label, void (*cb) (GtkWidget *widget, gpo
 */
 static GtkWidget * TabHeaders(void);
 
+/// @brief update the customer window display of reviews
+static void mainWindowUpdateReviews(App * mainApp);
+
 /// @brief this is called when the input box for nights changes its value. to show a preview of the pice
 /// @param widget the widget this was called from IE: the entry
 /// @param app the pointer to our app struct
 static void onChange(GtkWidget *widget, App * app);
+
+/// @brief this is called when the input box for any entry is edited, it ensures the value is within the min/max value
+/// @param widget the widget this was called from IE: the entry
+/// @param app the pointer to our app struct
+static void onChangeValidateRangeOfReview(GtkWidget *widget, App * app);
 
 /// @brief create a display that looks like Header: text
 /// @param headerText the header text
@@ -319,10 +436,48 @@ static GtkWidget * makeHtmlStyleLabelWithLabel(char * headerText, char * display
 /// @param app the pointer to our main app struct
 static void onCharge(GtkWidget *widget, App * app);
 
+/// @brief render a 2d array of strings as labels in a grid
+/// @param array 2d string array
+/// @param rows the rows in the array
+/// @param cols the cols in the array
+/// @return the widget
+static GtkWidget * makeGridOfLabelsFromHeadersAndLinkedList(char headers[NUMBER_OF_REVIEW_CATS][STRING_SIZE], ReviewNode * head);
+
 /*-------------------------------------------------------------
  Function Declarations
  ------------------------------------------------------------*/
 
+
+void addReview(App * mainApp, const int review[NUMBER_OF_REVIEW_CATS]){
+  Property * propertyPtr = &mainApp->property;
+  ReviewNode * currentPtr = propertyPtr->reviewsHead;
+
+  //traverse to end of ll
+  while(currentPtr->next != NULL){
+    currentPtr = currentPtr->next;
+  }
+
+  //current node is now the end of the linked list
+  ReviewNode * nodePtr = malloc(sizeof(ReviewNode));
+  nodePtr->next = NULL;
+  for (size_t i = 0; i < NUMBER_OF_REVIEW_CATS; i++)
+  {
+    printf("val: %d\n", review[i]);
+    nodePtr->data[i] = review[i];
+  }
+
+  if(propertyPtr->reviewsHead->data[0] != NULL){
+    //if the last node is not the head
+    currentPtr->next = nodePtr;
+    printf("here");
+  } else {
+    free(propertyPtr->reviewsHead);
+    propertyPtr->reviewsHead = nodePtr;
+  }
+
+  mainWindowUpdateReviews(mainApp);
+  
+}
 
 /**
 @brief the main function for the program that will handle initialization/entry.
@@ -602,32 +757,43 @@ static GtkWidget * makeHtmlStyleLabelWithLabel(char * headerText, char * display
   return widget;
 }
 
-/// @brief render a 2d array of strings as labels in a grid
-/// @param array 2d string array
-/// @param rows the rows in the array
-/// @param cols the cols in the array
-/// @return the widget
-static GtkWidget * makeGridOfLabelsFrom2dStringArr(int rows, int cols, char* array[rows][cols]){ //note this only works C99+ we can use a macro to do this if we need C98- support
+static GtkWidget * makeGridOfLabelsFromHeadersAndLinkedList(char headers[NUMBER_OF_REVIEW_CATS][STRING_SIZE], ReviewNode * head){ //note this only works C99+ we can use a macro to do this if we need C98- support
     GtkWidget * widget = gtk_grid_new ();
 
 
-    
-    for (size_t x = 0; x < rows; x++)
-    {
-      for (size_t y = 0; y < cols; y++)
-      {
-        const char * string = array[x][y];
-        //if first char of string is not string terminator
-        if(*string != '\0'){
-          char newString[STRING_SIZE+20] = " | ";
-          strcat(newString, string);
-          GtkWidget *label = gtk_label_new_with_mnemonic (newString);
-          gtk_grid_attach (GTK_GRID (widget), label, y, x, 1, 1);
-        }
-        
-      }
-      
+    int y = 0;
+
+    //add headers
+    for(size_t x = 0; x < NUMBER_OF_REVIEW_CATS; x++){
+      const char * string = headers[x];
+      char newString[STRING_SIZE+20] = " | ";
+      strcat(newString, string);
+      GtkWidget *label = gtk_label_new_with_mnemonic (newString);
+      gtk_grid_attach (GTK_GRID (widget), label, x, y, 1, 1);
     }
+
+    y++;
+    //traverse linked list adding each review
+    ReviewNode * current = head;
+    if(head->data[0] != NULL){
+      do {
+        //add row
+        for(size_t x = 0; x < NUMBER_OF_REVIEW_CATS; x++){
+          char string[STRING_SIZE];
+          itoa(current->data[x], string, 10);
+          GtkWidget *label = gtk_label_new_with_mnemonic (string);
+          gtk_grid_attach (GTK_GRID (widget), label, x, y, 1, 1);
+        }
+
+        //increment row
+        y++;
+
+        //traverse ll
+        current = current->next;
+      } while (current != NULL);
+    }
+    
+    
   return widget;
 }
 
@@ -653,7 +819,7 @@ static void onChange(GtkWidget *widget, App * app){
     CustomerWindow mainWin = app->customerWindow;
     int nightsStayed = atoi(gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(mainWin.inputEntry))));
     printf("Calculating For %d nights\n", nightsStayed);
-    double cost = calculateCost(nightsStayed, data.baseDiscount, data.dayRanges, data.discounts, numberOfPriceRanges);
+    double cost = calculateCost(nightsStayed, data.baseDiscount, data.dayRanges, data.discounts, NUMBER_OF_PRICE_RANGES);
     char intStr[STRING_SIZE];
     char header[STRING_SIZE] = "Cost: $";
     printf("Estimate: %.2f\n", cost);
@@ -668,7 +834,7 @@ static void onCharge(GtkWidget *widget, App * app){
     CustomerWindow mainWin = app->customerWindow;
     int nightsStayed = atoi(gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(mainWin.inputEntry))));
     printf("Paying For %d nights\n", nightsStayed);
-    double cost = calculateCost(nightsStayed, data.baseDiscount, data.dayRanges, data.discounts, numberOfPriceRanges);
+    double cost = calculateCost(nightsStayed, data.baseDiscount, data.dayRanges, data.discounts, NUMBER_OF_PRICE_RANGES);
     app->property.totalMoney += cost;
     app->property.totalNights += nightsStayed;
 
@@ -678,6 +844,9 @@ static void onCharge(GtkWidget *widget, App * app){
     sprintf(intStr, "%.2f", cost);
     strcat(header, intStr);
     strcat(header, "\nThank You <3");
+
+    //open review window
+    gtk_window_present(GTK_WINDOW(app->reviewWindow.window));
    
     gtk_label_set_text (GTK_LABEL (mainWin.priceRendererWindow), header);
 
@@ -686,45 +855,11 @@ static void onCharge(GtkWidget *widget, App * app){
 
   }
 
-/// @brief setup a property with default values
-static void setupProperty(Property * property){
-  const char * REVIEW_HEADERS[reviewCols] = {"Happiness", "Cleanliness", "Saftey", "Location", "Amenities"};
-  const char * NAME = "AIR UCCS";
-  int unsigned const MIN_RENTAL_NIGHTS = 1;
-  unsigned int const MAX_RENTAL_NIGHTS = 14;
-  unsigned int const INTERVAL_1_NIGHTS = 3;
-  unsigned int const INTERVAL_2_NIGHTS = 6;
-  double const RENTAL_RATE = 400;
-  double const DISCOUNT = 50;
-
-
-  property->baseDiscount = DISCOUNT;
-  strcpy( property->propertyName, NAME);
-  //define our config arrays
-  int tempRages[numberOfPriceRanges] = {0, INTERVAL_1_NIGHTS, INTERVAL_2_NIGHTS };
-  memcpy(&property->dayRanges, &tempRages, sizeof(tempRages));
-  int tempDiscs[numberOfPriceRanges] = {0, DISCOUNT, DISCOUNT*2};
-  memcpy(&property->discounts, &tempDiscs, sizeof(tempDiscs));
-  // -Constants Ends-
-
-  //these vars will track total rev/nights
-  property->totalMoney = 0;
-  property->totalNights  = 0;
-
-  //setup headers
-  for (size_t i = 0; i < reviewCols; i++)
-  {
-    property->reviews[0][i] = REVIEW_HEADERS[i];
-  }
-  //fill the rest with ' '
-  for (size_t i = 1; i < reviewRows; i++)
-  {
-    for (size_t j = 0; j < reviewCols; j++)
-    {
-      //init string var as null terminator
-      char * string = "\0"; 
-      property->reviews[i][j] = string;
-    }
+static void mainWindowUpdateReviews(App * mainApp){
+  if(GTK_IS_GRID(mainApp->customerWindow.grid)){
+    gtk_grid_remove(GTK_GRID(mainApp->customerWindow.grid), GTK_WIDGET(mainApp->customerWindow.reviewTable));
+    mainApp->customerWindow.reviewTable = GTK_WIDGET(makeGridOfLabelsFromHeadersAndLinkedList(mainApp->property.headers, mainApp->property.reviewsHead));
+    gtk_grid_attach (GTK_GRID (mainApp->customerWindow.grid), mainApp->customerWindow.reviewTable, 4, 0, 5, 5);
   }
 }
 
@@ -737,11 +872,33 @@ static void mainWindowInit(GtkApplication* app, App * mainApp){
 
   //setup our property
   Property property;
-  setupProperty(&property);
+  initProperty(&property);
 
   mainApp->property = property;
   mainApp->customerWindow.priceRendererWindow = gtk_label_new_with_mnemonic ("type a num for an estimate");
 
+
+  //this is here for easy testing and generation of reviews
+  //I geuss it should probably be a macro that is only included in the compile time code if its enabled so that there is no bloat in the prod code.
+  if(ADD_MOCK_REVIEWS){
+    int arr[NUMBER_OF_REVIEW_CATS] = {1,5,3,2,1};
+    void quickRandomize (){
+      for (int i = 0; i < NUMBER_OF_REVIEW_CATS; i++)
+      {
+        arr[i] = (rand() % (MAX_REVIEW - 1 + 1)) + 1;
+      }
+    }
+    addReview(mainApp, arr);
+    quickRandomize();
+    addReview(mainApp, arr);
+    quickRandomize();
+    addReview(mainApp, arr);
+    quickRandomize();
+    addReview(mainApp, arr);
+    quickRandomize();
+    addReview(mainApp, arr);
+  }
+ 
   
   
   //init window
@@ -760,15 +917,16 @@ static void mainWindowInit(GtkApplication* app, App * mainApp){
   g_signal_connect (mainApp->customerWindow.inputEntry, "changed", G_CALLBACK (onChange), mainApp);
 
  
-  GtkWidget *grid = gtk_window_get_child(GTK_WINDOW (mainApp->customerWindow.window));
+  mainApp->customerWindow.grid = gtk_window_get_child(GTK_WINDOW (mainApp->customerWindow.window));;
+  mainApp->customerWindow.reviewTable = makeGridOfLabelsFromHeadersAndLinkedList(mainApp->property.headers, mainApp->property.reviewsHead);
 
-  GtkWidget *table = makeGridOfLabelsFrom2dStringArr(reviewRows, reviewCols, mainApp->property.reviews);
-
-  gtk_grid_attach (GTK_GRID (grid), input, 0, 1, 1, 2);
-  gtk_grid_attach (GTK_GRID (grid), btn, 0, 3, 1, 1);
-  gtk_grid_attach (GTK_GRID (grid), mainApp->customerWindow.priceRendererWindow, 0, 4, 1, 1);
-  gtk_grid_attach (GTK_GRID (grid), table, 4, 0, 5, 5);
+  gtk_grid_attach (GTK_GRID (mainApp->customerWindow.grid), input, 0, 1, 1, 2);
+  gtk_grid_attach (GTK_GRID (mainApp->customerWindow.grid), btn, 0, 3, 1, 1);
+  gtk_grid_attach (GTK_GRID (mainApp->customerWindow.grid), mainApp->customerWindow.priceRendererWindow, 0, 4, 1, 1);
+  gtk_grid_attach (GTK_GRID (mainApp->customerWindow.grid), mainApp->customerWindow.reviewTable, 4, 0, 5, 5);
   
+  //hook onto the on close function of gtk to cleanup our linked list on close
+  g_signal_connect(app, "delete-event", G_CALLBACK(cleanUpReviews), NULL);
 }
 
 /// @brief the method called when the login button is pressed
@@ -799,6 +957,99 @@ static void onLogin(GtkWidget *widget, App * app){
   }
   
 
+}
+
+static void onClick (GtkWidget *widget, App * mainApp){
+  int review[NUMBER_OF_REVIEW_CATS] = {0,0,0,0,0};
+  for (size_t i = 0; i < NUMBER_OF_REVIEW_CATS; i++)
+  {
+    const char * str = gtk_entry_buffer_get_text(gtk_entry_get_buffer(GTK_ENTRY(mainApp->reviewWindow.inputs[i])));
+    char * end;
+    int x = (int) strtol(str, &end, 10);
+
+    if(end != NULL){
+      if(*end == '\0'){
+        review[i] = x;
+      } else {
+        review[i] = -1;
+      }
+    }else {
+      review[i] = -1;
+    }
+    
+  }
+  
+  addReview(mainApp, review);
+  //TODO: make this close the window in a way that it can be reopened, for now just hide
+  gtk_widget_set_visible(GTK_WIDGET(mainApp->reviewWindow.window), false);
+}
+
+static void onChangeValidateRangeOfReview(GtkWidget *widget, App * app){
+  GtkEntry * entry = GTK_ENTRY(widget);
+  const char * str = gtk_entry_buffer_get_text(gtk_entry_get_buffer(entry));
+  char * end;
+  int x = (int) strtol(str, &end, 10);
+
+  if(end != NULL){
+    if(*end == '\0'){
+      //valid int input
+      bool shouldUpdate = false;
+      if(x > MAX_REVIEW){
+        x = MAX_REVIEW;
+        shouldUpdate = true;
+      } else if (x < MIN_REVIEW){
+        x = MIN_REVIEW;
+        shouldUpdate = true;
+      }
+
+      //reset the input to the adjusted value
+      if(shouldUpdate){
+        //make sure we can update it properly
+        if(GTK_ACCESSIBLE(widget)){
+          char newStr[STRING_SIZE] = "test";
+          itoa(x, newStr, 10);
+          GtkEntryBuffer * newBuffer = gtk_entry_buffer_new(newStr, STRING_SIZE);
+          gtk_entry_set_buffer (entry, newBuffer);
+        }
+        
+      }
+    }
+  }
+
+  
+  
+}
+
+static void reviewWindowInit(GtkApplication* app, App * mainApp){
+  //init window
+  mainApp->reviewWindow.window = windowBase (app);
+
+  //setup grid
+  GtkWidget *grid = gtk_grid_new ();
+  gtk_window_set_child (GTK_WINDOW (mainApp->reviewWindow.window), grid);
+
+  GtkWidget * label = gtk_label_new_with_mnemonic("Please enter your review of the property");
+  gtk_grid_attach (GTK_GRID (grid), label, 0, 0, 1, 1);
+  //make fields for reviews
+  for (size_t i = 0; i < NUMBER_OF_REVIEW_CATS; i++)
+  {
+    
+    char * header = mainApp->property.headers[i];
+    GtkWidget * entryAndLabel = makeHtmlStyleEntryWithLabel(header);
+    
+    //get just the entry for our array
+    mainApp->reviewWindow.inputs[i] = GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID (entryAndLabel), 1,0));
+    //attach validation cb
+    g_signal_connect (mainApp->reviewWindow.inputs[i], "changed", G_CALLBACK (onChangeValidateRangeOfReview), mainApp);
+
+    gtk_grid_attach (GTK_GRID (grid), entryAndLabel, 0, i+1, 1, 1);
+  }
+
+  mainApp->reviewWindow.submitBtn = GTK_BUTTON(gtk_button_new_with_label ("SubmitReview"));
+  //set up the on click callback
+  g_signal_connect (mainApp->reviewWindow.submitBtn, "clicked", G_CALLBACK (onClick), mainApp);
+
+  gtk_grid_attach (GTK_GRID (grid), GTK_WIDGET(mainApp->reviewWindow.submitBtn), 0, NUMBER_OF_REVIEW_CATS+1, 1, 1);
 }
 
 static void loginWindowInit(GtkApplication* app, App * mainApp){
@@ -928,8 +1179,11 @@ activate (GtkApplication* app, gpointer user_data)
   //this needs to be on the heap because of how gtk call backs work, there is no other way to do this as far as I can tell
   //I didn't want to use the heap before we covered it, but this is the only solution I can think off (I spent 2 hours on this I might be dumb, but If I am I genially do not know any other way.)
   App * mainApp = malloc(sizeof(App));
+
+  mainApp->app = app;
   mainWindowInit(app, mainApp);
   adminWindowInit(app, mainApp);
+  reviewWindowInit(app, mainApp);
   GtkWidget *mainWindow = mainApp->customerWindow.window;
   GtkWidget *admin = mainApp->adminWindow.window;
   
@@ -939,6 +1193,11 @@ activate (GtkApplication* app, gpointer user_data)
   gtk_window_present (GTK_WINDOW (mainWindow));
 
 
+  void freeMem(){
+    free(mainApp);
+  }
+  //hook into the on delete of our app to clean up memory
+  g_signal_connect(app, "delete-event", G_CALLBACK(freeMem), NULL);
 
   
 }
@@ -953,7 +1212,80 @@ main (int    argc,
   app = gtk_application_new ("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
   g_signal_connect (app, "activate", G_CALLBACK (activate), NULL);
   status = g_application_run (G_APPLICATION (app), argc, argv);
+
+  //app clean up
   g_object_unref (app);
 
   return status;
+}
+
+
+//I know this is javascript comment syntax but its pretty and is my preset. 
+//**========================================================================
+ /* ?                                RSA KEY GEN section
+ * @author         Mattie --me:  
+ * @email          mmfulelr22@gmail.com:  
+ * @repo           https://github.com/mattieFM/CS2060ClassCode2023:  
+ * @createdOn      idk:  
+ * @description    RSA key generation for pub/priv key pair cypto:  
+ *========================================================================**/
+
+/**
+ * First To walk anyone reading through the general methodology, recall that RSA is an algorithm for generating complex keys
+ * for pub/priv key crypto
+ * 
+ * It asserts that it is very hard to find large integer common denominators of primes
+ * it consists of 4 steps
+ * 
+ * 1: choose two arbitraty large primes, denoted as p and q. I will use these names below as it is what they are called within the algorithm and is rather standard 
+ *  -These should be chosen at random, I will be using a probabalistic aproach to find primes as we only need to find 2 we can basically guess and assume we will be right within x 
+ *   where x is usually less than 2000 guesses which is computationally insignificant for this scale
+ * 2: we then compute n = p times q --> n=pq.
+ * 3: then it gets harder. We now compute Carmichaels totient function of n (denoted as λ(n))
+ *    Its a lot of math that will be explained in the functions below for it
+ * 4: choose an integer e such taht 2 < e < λ(n) and gcd(e, λ(n)) = 1; that is, e and λ(n) are coprime
+ * 5: determine d as d == e^-1 that is d is the modular multiplicitive invers of e modulo λ(n)
+ * 
+ * 
+ * thus the public key becomes modulus n and the exponent e
+ * and the private key consists of exponent d, p, q and λ(n), which are used to compute d
+ * 
+ * in short
+ * d is the private key
+ * %n^e is the public key
+*/
+
+
+/**======================
+ *    Declarations
+ *========================**/
+
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h> 
+#include <math.h> 
+
+//the number of bits of our prime numbers
+#define BIT_LEVEL 8
+
+/**======================
+ *    Prototypes
+ *========================**/
+/// @brief generate a random integer of n bits
+unsigned long long nBitRandom(int numberOfBits);
+
+
+/**======================
+ *    Functions
+ *========================**/
+
+unsigned long long nBitRandom(int numberOfBits){
+  srand(time(0));
+  //this is relatively basic math. 
+  
+  //since binary max of n bits is 2^n -1 for unsigned numbs we can make an easy max
+  unsigned long long maximum = (unsigned long long) powl(2, numberOfBits) - 1;
+  //then we want the smallest n bit number which is similarly to above just 2^n-1 + 1
+  unsigned long long minimum = (unsigned long long) powl(2, numberOfBits - 1) + 1;
+  return minimum + (rand() % ( maximum - minimum + 1 ) );
 }
