@@ -6,3 +6,8 @@ for linux https://www.gtk.org/docs/installations/linux/ go to here and follow in
 You can compile with this command if you want to.:
 gcc $( pkg-config --cflags gtk4 ) -o example-0 main.c $( pkg-config --libs gtk4 )
 
+!!WARNING only minimize the windows of the app, once one is closed it will crash if reopened due to some weirdness with gtk  that I didn't have time to look into
+
+The RSA key gen is so very close to functional, the public key is correct and works, but the private key's exponent is consistantly off by around 10 which is a lot since its an exponent, but 
+I cannot figure out how to fix my math to get it working. Its something with the mod inverse function that I cannot figure out how to fix.
+
