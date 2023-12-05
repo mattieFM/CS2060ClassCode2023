@@ -1,0 +1,215 @@
+\doxysection{key\+Gen.\+c File Reference}
+\hypertarget{key_gen_8c}{}\label{key_gen_8c}\index{keyGen.c@{keyGen.c}}
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{key_gen_8c_a826ece061102e9edb8bd1d2167fbc710}{BIT\+\_\+\+LEVEL}}~8
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int64\+\_\+t \mbox{\hyperlink{key_gen_8c_aecb3b10f315423f9de2e0c640a6f2d0d}{n\+Bit\+Random}} (int number\+Of\+Bits)
+\begin{DoxyCompactList}\small\item\em generate a random integer of n bits \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{key_gen_8c_ac91f9172b8051a1bde670848303d5d9b}{is\+Prime}} (int64\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em check if a number is prime \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{key_gen_8c_a3e0f477fa66432159bcbae34c260d7e6}{is\+Co\+Prime}} (int64\+\_\+t a, int64\+\_\+t b)
+\begin{DoxyCompactList}\small\item\em check if 2 numbers are co prime with eachother \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{key_gen_8c_a0c0228a5e832c9d0499165c091fad58b}{get\+Rand\+Prime}} ()
+\begin{DoxyCompactList}\small\item\em get a random prime number \end{DoxyCompactList}\item 
+\mbox{\hyperlink{key_gen_8c_ab04146f8a570dc92f787b2282e765ed3}{RSAKey\+Gen}} (int64\+\_\+t \texorpdfstring{$\ast$}{*}outN, int64\+\_\+t \texorpdfstring{$\ast$}{*}outD, int64\+\_\+t \texorpdfstring{$\ast$}{*}outE)
+\begin{DoxyCompactList}\small\item\em generate a private and a public key \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{key_gen_8c_a998536f24ed663f5bf570155d4fa8c12}{encrypt}} (char c, int64\+\_\+t n, int64\+\_\+t e)
+\begin{DoxyCompactList}\small\item\em encrypt a char with the public key \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{key_gen_8c_af7375ab0bf45fd807afe156684650e77}{decrypt}} (char c, int64\+\_\+t n, int64\+\_\+t d)
+\item 
+int64\+\_\+t \mbox{\hyperlink{key_gen_8c_aa58bed47ea7118092ea9b44fd73b6599}{rand\+Between}} (int64\+\_\+t min, int64\+\_\+t max)
+\begin{DoxyCompactList}\small\item\em get a rand between min and max \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{key_gen_8c_aa63f1211c949c32d009a7e53ee192bbc}{\+\_\+extended\+\_\+euclid}} (int a, int b, int \texorpdfstring{$\ast$}{*}x, int \texorpdfstring{$\ast$}{*}y)
+\begin{DoxyCompactList}\small\item\em Finds the multiplicative inverses of the two numbers. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{key_gen_8c_ad23df605b76582c10025af5432ac36d2}{\+\_\+mod\+\_\+inv}} (int a, int m)
+\begin{DoxyCompactList}\small\item\em Returns the multiplicative inverse of a under base m. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{key_gen_8c_a576a5085a2eaef327c962e0f4004693c}{mod\+Exponent}} (int64\+\_\+t a, int64\+\_\+t b, int64\+\_\+t m)
+\item 
+void \mbox{\hyperlink{key_gen_8c_acdef7a1fd863a6d3770c1268cb06add3}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{key_gen_8c_a826ece061102e9edb8bd1d2167fbc710}\label{key_gen_8c_a826ece061102e9edb8bd1d2167fbc710} 
+\index{keyGen.c@{keyGen.c}!BIT\_LEVEL@{BIT\_LEVEL}}
+\index{BIT\_LEVEL@{BIT\_LEVEL}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{BIT\_LEVEL}{BIT\_LEVEL}}
+{\footnotesize\ttfamily \#define BIT\+\_\+\+LEVEL~8}
+
+First To walk anyone reading through the general methodology, recall that RSA is an algorithm for generating complex keys for pub/priv key crypto
+
+It asserts that it is very hard to find large integer common denominators of primes it consists of 4 steps
+
+1\+: choose two arbitraty large primes, denoted as p and q. I will use these names below as it is what they are called within the algorithm and is rather standard -\/These should be chosen at random, I will be using a probabalistic aproach to find primes as we only need to find 2 we can basically guess and assume we will be right within x where x is usually less than 2000 guesses which is computationally insignificant for this scale 2\+: we then compute n = p times q -\/-\/\texorpdfstring{$>$}{>} n=pq. 3\+: then it gets harder. We now compute Carmichaels totient function of n (denoted as λ(n)) Its a lot of math that will be explained in the functions below for it 4\+: choose an integer e such taht 2 \texorpdfstring{$<$}{<} e \texorpdfstring{$<$}{<} λ(n) and gcd(e, λ(n)) = 1; that is, e and λ(n) are coprime 5\+: determine d as d == e\texorpdfstring{$^\wedge$}{\string^}-\/1 that is d is the modular multiplicitive invers of e modulo λ(n)
+
+thus the public key becomes modulus n and the exponent e and the private key consists of exponent d, p, q and λ(n), which are used to compute d
+
+in short d is the private key n\texorpdfstring{$^\wedge$}{\string^}e is the public key ====================== \hypertarget{key_gen_8c_autotoc_md0}{}\doxysubsection{\texorpdfstring{Declarations}{Declarations}}\label{key_gen_8c_autotoc_md0}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{key_gen_8c_aa63f1211c949c32d009a7e53ee192bbc}\label{key_gen_8c_aa63f1211c949c32d009a7e53ee192bbc} 
+\index{keyGen.c@{keyGen.c}!\_extended\_euclid@{\_extended\_euclid}}
+\index{\_extended\_euclid@{\_extended\_euclid}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{\_extended\_euclid()}{\_extended\_euclid()}}
+{\footnotesize\ttfamily void \+\_\+extended\+\_\+euclid (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{b,  }\item[{int \texorpdfstring{$\ast$}{*}}]{x,  }\item[{int \texorpdfstring{$\ast$}{*}}]{y }\end{DoxyParamCaption})}
+
+
+
+Finds the multiplicative inverses of the two numbers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \\
+\hline
+{\em b} & \\
+\hline
+{\em x} & \\
+\hline
+{\em y} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{key_gen_8c_ad23df605b76582c10025af5432ac36d2}\label{key_gen_8c_ad23df605b76582c10025af5432ac36d2} 
+\index{keyGen.c@{keyGen.c}!\_mod\_inv@{\_mod\_inv}}
+\index{\_mod\_inv@{\_mod\_inv}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{\_mod\_inv()}{\_mod\_inv()}}
+{\footnotesize\ttfamily int \+\_\+mod\+\_\+inv (\begin{DoxyParamCaption}\item[{int}]{a,  }\item[{int}]{m }\end{DoxyParamCaption})}
+
+
+
+Returns the multiplicative inverse of a under base m. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & \\
+\hline
+{\em m} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int 
+\end{DoxyReturn}
+\Hypertarget{key_gen_8c_af7375ab0bf45fd807afe156684650e77}\label{key_gen_8c_af7375ab0bf45fd807afe156684650e77} 
+\index{keyGen.c@{keyGen.c}!decrypt@{decrypt}}
+\index{decrypt@{decrypt}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{decrypt()}{decrypt()}}
+{\footnotesize\ttfamily char decrypt (\begin{DoxyParamCaption}\item[{char}]{c,  }\item[{int64\+\_\+t}]{n,  }\item[{int64\+\_\+t}]{d }\end{DoxyParamCaption})}
+
+\Hypertarget{key_gen_8c_a998536f24ed663f5bf570155d4fa8c12}\label{key_gen_8c_a998536f24ed663f5bf570155d4fa8c12} 
+\index{keyGen.c@{keyGen.c}!encrypt@{encrypt}}
+\index{encrypt@{encrypt}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{encrypt()}{encrypt()}}
+{\footnotesize\ttfamily int64\+\_\+t encrypt (\begin{DoxyParamCaption}\item[{char}]{c,  }\item[{int64\+\_\+t}]{n,  }\item[{int64\+\_\+t}]{e }\end{DoxyParamCaption})}
+
+
+
+encrypt a char with the public key 
+
+\Hypertarget{key_gen_8c_a0c0228a5e832c9d0499165c091fad58b}\label{key_gen_8c_a0c0228a5e832c9d0499165c091fad58b} 
+\index{keyGen.c@{keyGen.c}!getRandPrime@{getRandPrime}}
+\index{getRandPrime@{getRandPrime}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{getRandPrime()}{getRandPrime()}}
+{\footnotesize\ttfamily int64\+\_\+t get\+Rand\+Prime (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get a random prime number 
+
+\Hypertarget{key_gen_8c_a3e0f477fa66432159bcbae34c260d7e6}\label{key_gen_8c_a3e0f477fa66432159bcbae34c260d7e6} 
+\index{keyGen.c@{keyGen.c}!isCoPrime@{isCoPrime}}
+\index{isCoPrime@{isCoPrime}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{isCoPrime()}{isCoPrime()}}
+{\footnotesize\ttfamily bool is\+Co\+Prime (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{a,  }\item[{int64\+\_\+t}]{b }\end{DoxyParamCaption})}
+
+
+
+check if 2 numbers are co prime with eachother 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & number1 \\
+\hline
+{\em b} & number2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+whether they are co\+Prime or not 
+\end{DoxyReturn}
+\Hypertarget{key_gen_8c_ac91f9172b8051a1bde670848303d5d9b}\label{key_gen_8c_ac91f9172b8051a1bde670848303d5d9b} 
+\index{keyGen.c@{keyGen.c}!isPrime@{isPrime}}
+\index{isPrime@{isPrime}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{isPrime()}{isPrime()}}
+{\footnotesize\ttfamily bool is\+Prime (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+check if a number is prime 
+
+\Hypertarget{key_gen_8c_acdef7a1fd863a6d3770c1268cb06add3}\label{key_gen_8c_acdef7a1fd863a6d3770c1268cb06add3} 
+\index{keyGen.c@{keyGen.c}!main@{main}}
+\index{main@{main}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily void main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{key_gen_8c_a576a5085a2eaef327c962e0f4004693c}\label{key_gen_8c_a576a5085a2eaef327c962e0f4004693c} 
+\index{keyGen.c@{keyGen.c}!modExponent@{modExponent}}
+\index{modExponent@{modExponent}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{modExponent()}{modExponent()}}
+{\footnotesize\ttfamily int64\+\_\+t mod\+Exponent (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{a,  }\item[{int64\+\_\+t}]{b,  }\item[{int64\+\_\+t}]{m }\end{DoxyParamCaption})}
+
+\Hypertarget{key_gen_8c_aecb3b10f315423f9de2e0c640a6f2d0d}\label{key_gen_8c_aecb3b10f315423f9de2e0c640a6f2d0d} 
+\index{keyGen.c@{keyGen.c}!nBitRandom@{nBitRandom}}
+\index{nBitRandom@{nBitRandom}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{nBitRandom()}{nBitRandom()}}
+{\footnotesize\ttfamily unsigned long long n\+Bit\+Random (\begin{DoxyParamCaption}\item[{int}]{number\+Of\+Bits }\end{DoxyParamCaption})}
+
+
+
+generate a random integer of n bits 
+
+====================== \hypertarget{key_gen_8c_autotoc_md1}{}\doxysubsection{\texorpdfstring{Prototypes}{Prototypes}}\label{key_gen_8c_autotoc_md1}
+====================== \hypertarget{key_gen_8c_autotoc_md2}{}\doxysubsection{\texorpdfstring{Functions}{Functions}}\label{key_gen_8c_autotoc_md2}
+====================== \hypertarget{key_gen_8c_autotoc_md3}{}\doxysubsection{\texorpdfstring{Prime Calc (working)}{Prime Calc (working)}}\label{key_gen_8c_autotoc_md3}
+====================== \hypertarget{main_8c_autotoc_md6}{}\doxysubsection{\texorpdfstring{Functions}{Functions}}\label{main_8c_autotoc_md6}
+\Hypertarget{key_gen_8c_aa58bed47ea7118092ea9b44fd73b6599}\label{key_gen_8c_aa58bed47ea7118092ea9b44fd73b6599} 
+\index{keyGen.c@{keyGen.c}!randBetween@{randBetween}}
+\index{randBetween@{randBetween}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{randBetween()}{randBetween()}}
+{\footnotesize\ttfamily int64\+\_\+t rand\+Between (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{min,  }\item[{int64\+\_\+t}]{max }\end{DoxyParamCaption})}
+
+
+
+get a rand between min and max 
+
+
+\begin{DoxyParams}{Parameters}
+{\em min} & \\
+\hline
+{\em max} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+~\newline
+ 
+\end{DoxyReturn}
+\Hypertarget{key_gen_8c_ab04146f8a570dc92f787b2282e765ed3}\label{key_gen_8c_ab04146f8a570dc92f787b2282e765ed3} 
+\index{keyGen.c@{keyGen.c}!RSAKeyGen@{RSAKeyGen}}
+\index{RSAKeyGen@{RSAKeyGen}!keyGen.c@{keyGen.c}}
+\doxysubsubsection{\texorpdfstring{RSAKeyGen()}{RSAKeyGen()}}
+{\footnotesize\ttfamily RSAKey\+Gen (\begin{DoxyParamCaption}\item[{int64\+\_\+t \texorpdfstring{$\ast$}{*}}]{outN,  }\item[{int64\+\_\+t \texorpdfstring{$\ast$}{*}}]{outD,  }\item[{int64\+\_\+t \texorpdfstring{$\ast$}{*}}]{outE }\end{DoxyParamCaption})}
+
+
+
+generate a private and a public key 
+

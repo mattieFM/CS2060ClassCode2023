@@ -1,0 +1,73 @@
+.TH "property" 3 "Version 1" "AirUCCS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+property \- A struct representing a property @initalizer: initProperty\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "char \fBpropertyName\fP [\fBSTRING_SIZE\fP]"
+.br
+.ti -1c
+.RI "\fBLocation\fP \fBlocation\fP"
+.br
+.ti -1c
+.RI "int \fBdayRanges\fP [\fBNUMBER_OF_PRICE_RANGES\fP]"
+.br
+.ti -1c
+.RI "double \fBdiscounts\fP [\fBNUMBER_OF_PRICE_RANGES\fP]"
+.br
+.ti -1c
+.RI "double \fBbaseDiscount\fP"
+.br
+.ti -1c
+.RI "double \fBtotalMoney\fP"
+.br
+.ti -1c
+.RI "double \fBtotalNights\fP"
+.br
+.ti -1c
+.RI "ReviewNode * \fBreviewsHead\fP"
+.br
+.RI "the head of the review's linked list "
+.ti -1c
+.RI "char \fBheaders\fP [\fBNUMBER_OF_REVIEW_CATS\fP][\fBSTRING_SIZE\fP]"
+.br
+.RI "an array of the headers of the review categories "
+.in -1c
+.SH "Detailed Description"
+.PP 
+A struct representing a property @initalizer: initProperty\&. 
+.SH "Field Documentation"
+.PP 
+.SS "double baseDiscount"
+
+.SS "int dayRanges[\fBNUMBER_OF_PRICE_RANGES\fP]"
+
+.SS "double discounts[\fBNUMBER_OF_PRICE_RANGES\fP]"
+@description the discounts for each range 
+.SS "char headers[\fBNUMBER_OF_REVIEW_CATS\fP][\fBSTRING_SIZE\fP]"
+
+.PP
+an array of the headers of the review categories 
+.SS "\fBLocation\fP \fBlocation\fP"
+
+.SS "char propertyName[\fBSTRING_SIZE\fP]"
+
+.SS "ReviewNode* reviewsHead"
+
+.PP
+the head of the review's linked list 
+.SS "double totalMoney"
+@description how much money has this property made durring this runtime 
+.SS "double totalNights"
+@description how many nights has this property booked durring this runtime 
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AirUCCS from the source code\&.

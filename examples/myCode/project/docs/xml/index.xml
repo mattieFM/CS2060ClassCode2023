@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.9.8" xml:lang="en-US">
+  <compound refid="structadmin_window" kind="struct"><name>adminWindow</name>
+    <member refid="structadmin_window_1a17bd992ca7285badbf62743c458fa6e3" kind="variable"><name>loginWindow</name></member>
+    <member refid="structadmin_window_1a79be35aa00a0bd518bc1af2a6a9dd0c2" kind="variable"><name>propertyNameInput</name></member>
+    <member refid="structadmin_window_1a78e87efdfeb1fff6dcb647ba9d23885a" kind="variable"><name>baseDiscountInput</name></member>
+    <member refid="structadmin_window_1a6d1e4cfe5c5be4049dc596c0ed576505" kind="variable"><name>totalMoneyLabel</name></member>
+    <member refid="structadmin_window_1a77cd1e65da7acfdbee11df3504874034" kind="variable"><name>totalNightsLabel</name></member>
+  </compound>
+  <compound refid="structapp" kind="struct"><name>app</name>
+    <member refid="structapp_1a9dc2227404041523ad87d36ade941f70" kind="variable"><name>app</name></member>
+    <member refid="structapp_1aec7fb0c3fce21190f990490e3f8f684f" kind="variable"><name>property</name></member>
+    <member refid="structapp_1acf4b482159a9b9d03391e4c2b205232e" kind="variable"><name>customerWindow</name></member>
+    <member refid="structapp_1aca5d38e13a701c2d1aafdb51e563d9d1" kind="variable"><name>adminWindow</name></member>
+    <member refid="structapp_1aa458ec780a071b6c509efc202e029bf4" kind="variable"><name>configWindow</name></member>
+    <member refid="structapp_1a718284dd7baf63f7c7f54bc705c9dacb" kind="variable"><name>reviewWindow</name></member>
+  </compound>
+  <compound refid="structconfig_window" kind="struct"><name>configWindow</name>
+  </compound>
+  <compound refid="structcustomer_window" kind="struct"><name>customerWindow</name>
+    <member refid="structcustomer_window_1a794d03e6de4509b6d710079af21479fe" kind="variable"><name>priceRendererWindow</name></member>
+    <member refid="structcustomer_window_1a3e3af5fe6bee487683e343bb777b8293" kind="variable"><name>inputEntry</name></member>
+    <member refid="structcustomer_window_1a2e8db791568891a34d0bb2147e9218d2" kind="variable"><name>reviewTable</name></member>
+    <member refid="structcustomer_window_1a9e32cf5ab494c238e3a5a8de90872fb4" kind="variable"><name>grid</name></member>
+  </compound>
+  <compound refid="structlocation" kind="struct"><name>location</name>
+    <member refid="structlocation_1a5d8c42e48a8672b45cf5e69b1cd58639" kind="variable"><name>address</name></member>
+    <member refid="structlocation_1ad0c6d3a40d6093204d169a1928ec7fa5" kind="variable"><name>lat</name></member>
+    <member refid="structlocation_1ada0aef770ee20058d486028df44cf5d0" kind="variable"><name>lon</name></member>
+  </compound>
+  <compound refid="structlog_in_window" kind="struct"><name>logInWindow</name>
+    <member refid="structlog_in_window_1a7ffe728874b6e9722a628acbf978a224" kind="variable"><name>passwordField</name></member>
+    <member refid="structlog_in_window_1a43a4588fa53f66599d2e81f055dd7ef7" kind="variable"><name>usernameField</name></member>
+    <member refid="structlog_in_window_1a8e1de2175d8aeda26c2b0725b91632a8" kind="variable"><name>attempts</name></member>
+    <member refid="structlog_in_window_1a0bd9e40aa54582b6eaac4ee0c51f0f7f" kind="variable"><name>maxLoginAttempts</name></member>
+    <member refid="structlog_in_window_1a59460a3ff2c12443d1022e5cc0fba85c" kind="variable"><name>password</name></member>
+  </compound>
+  <compound refid="structproperty" kind="struct"><name>property</name>
+    <member refid="structproperty_1a191b09831ce959fea615beb6f2b609d3" kind="variable"><name>propertyName</name></member>
+    <member refid="structproperty_1a260defa82d536dcea2aa22452b862110" kind="variable"><name>location</name></member>
+    <member refid="structproperty_1ac25840037114824712a266b5827a4f37" kind="variable"><name>dayRanges</name></member>
+    <member refid="structproperty_1a78cfc4adb15fb15e26a8bee390778e7a" kind="variable"><name>discounts</name></member>
+    <member refid="structproperty_1a7b621736f2a57bb77067f9ef4d8798c2" kind="variable"><name>baseDiscount</name></member>
+    <member refid="structproperty_1a36c611bac2391f464098144cfdfd95d0" kind="variable"><name>totalMoney</name></member>
+    <member refid="structproperty_1a85d4797ede393d7546c32bf2e3f18196" kind="variable"><name>totalNights</name></member>
+    <member refid="structproperty_1ac53d8f9542287aabb0ac5b5dc94db274" kind="variable"><name>reviewsHead</name></member>
+    <member refid="structproperty_1af08531d2b1e2a3c0dff557786a09341d" kind="variable"><name>headers</name></member>
+  </compound>
+  <compound refid="structreview_window" kind="struct"><name>reviewWindow</name>
+    <member refid="structreview_window_1a9a3f2e5a8dd7d12f937d7f9842202957" kind="variable"><name>inputs</name></member>
+    <member refid="structreview_window_1ab7183ac989e82ad331573935544fa1ed" kind="variable"><name>submitBtn</name></member>
+  </compound>
+  <compound refid="key_gen_8c" kind="file"><name>keyGen.c</name>
+    <member refid="key_gen_8c_1a826ece061102e9edb8bd1d2167fbc710" kind="define"><name>BIT_LEVEL</name></member>
+    <member refid="key_gen_8c_1aecb3b10f315423f9de2e0c640a6f2d0d" kind="function"><name>nBitRandom</name></member>
+    <member refid="key_gen_8c_1ac91f9172b8051a1bde670848303d5d9b" kind="function"><name>isPrime</name></member>
+    <member refid="key_gen_8c_1a3e0f477fa66432159bcbae34c260d7e6" kind="function"><name>isCoPrime</name></member>
+    <member refid="key_gen_8c_1a0c0228a5e832c9d0499165c091fad58b" kind="function"><name>getRandPrime</name></member>
+    <member refid="key_gen_8c_1ab04146f8a570dc92f787b2282e765ed3" kind="function"><name>RSAKeyGen</name></member>
+    <member refid="key_gen_8c_1a998536f24ed663f5bf570155d4fa8c12" kind="function"><name>encrypt</name></member>
+    <member refid="key_gen_8c_1af7375ab0bf45fd807afe156684650e77" kind="function"><name>decrypt</name></member>
+    <member refid="key_gen_8c_1aa58bed47ea7118092ea9b44fd73b6599" kind="function"><name>randBetween</name></member>
+    <member refid="key_gen_8c_1aa63f1211c949c32d009a7e53ee192bbc" kind="function"><name>_extended_euclid</name></member>
+    <member refid="key_gen_8c_1ad23df605b76582c10025af5432ac36d2" kind="function"><name>_mod_inv</name></member>
+    <member refid="key_gen_8c_1a576a5085a2eaef327c962e0f4004693c" kind="function"><name>modExponent</name></member>
+    <member refid="key_gen_8c_1acdef7a1fd863a6d3770c1268cb06add3" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="main_8c" kind="file"><name>main.c</name>
+    <member refid="main_8c_1a71147341558d2823036988bfc0e6575d" kind="define"><name>NUMBER_OF_PRICE_RANGES</name></member>
+    <member refid="main_8c_1afe66cf1c04080a4cba6fc79833c5d249" kind="define"><name>NUMBER_OF_REVIEW_CATS</name></member>
+    <member refid="main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7" kind="define"><name>STRING_SIZE</name></member>
+    <member refid="main_8c_1a74abd28f848a5dc45616674ac761f00d" kind="define"><name>BASE_DISCOUNT</name></member>
+    <member refid="main_8c_1a45f2278bc729f1796e44d1d1a2a79568" kind="define"><name>ADD_MOCK_REVIEWS</name></member>
+    <member refid="main_8c_1a2cac2faee136330ef8ab53af2312f4ec" kind="define"><name>MAX_REVIEW</name></member>
+    <member refid="main_8c_1a190d1357e6d0ee51f3b008700ed84b08" kind="define"><name>MIN_REVIEW</name></member>
+    <member refid="main_8c_1a72242c2e53086385d9d5dd3aadcdfa5b" kind="define"><name>DEFINE_LL_OF_TYPE_ARR_WITH_SIZE</name></member>
+    <member refid="main_8c_1aa95cc25626aaea9a264528de81ad3c09" kind="define"><name>INHERIT_BASE_WIN</name></member>
+    <member refid="main_8c_1a0599f56005d18d1574abdb5b746e69cc" kind="define"><name>NumTabs</name></member>
+    <member refid="main_8c_1a826ece061102e9edb8bd1d2167fbc710" kind="define"><name>BIT_LEVEL</name></member>
+    <member refid="main_8c_1a5f2225f46c54d4268143a3e9586f67a4" kind="typedef"><name>Location</name></member>
+    <member refid="main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87" kind="typedef"><name>Property</name></member>
+    <member refid="main_8c_1a8e1170805a53ee8c3845cb6e425aa233" kind="typedef"><name>LoginWindow</name></member>
+    <member refid="main_8c_1aed36cff1d64d95e664ec581815c2814b" kind="typedef"><name>ConfigWindow</name></member>
+    <member refid="main_8c_1a5a63edfd294f78985feeb3fc83f194bd" kind="typedef"><name>AdminWindow</name></member>
+    <member refid="main_8c_1aedaaa3f425adc8ef27426e9ecbf63d29" kind="typedef"><name>ReviewWindow</name></member>
+    <member refid="main_8c_1a0667ea4347c9b9d6c5692361185eab3a" kind="typedef"><name>CustomerWindow</name></member>
+    <member refid="main_8c_1a7afb31fe444397deb0375c093030682d" kind="typedef"><name>App</name></member>
+    <member refid="main_8c_1a44287a1e2179ad86ebd481121eafb1f3" kind="variable"><name>DEFAULT_REVIEW_HEADERS</name></member>
+    <member refid="main_8c_1a539ad50b7780b0efc81c9b85f7e8df2b" kind="variable"><name>DEFAULT_NAME</name></member>
+    <member refid="main_8c_1a2af4ca44f722cc3b4b00a68b851b9e4d" kind="variable"><name>DEFAULT_MIN_RENTAL_NIGHTS</name></member>
+    <member refid="main_8c_1a139936736b1fed8ce48a58629647dcc0" kind="variable"><name>DEFAULT_MAX_RENTAL_NIGHTS</name></member>
+    <member refid="main_8c_1abaed5313319821e00c971ca48e071fcf" kind="variable"><name>DEFAULT_INTERVAL_1_NIGHTS</name></member>
+    <member refid="main_8c_1a33b4fb08407f315f236d0b93b39da793" kind="variable"><name>DEFAULT_INTERVAL_2_NIGHTS</name></member>
+    <member refid="main_8c_1abe3a8709ba5ff2e63b69fce41c24a0d0" kind="variable"><name>DEFAULT_RENTAL_RATE</name></member>
+    <member refid="main_8c_1a9cfdaa0c3a5488cbcb8e9cb738e19146" kind="variable"><name>DEFAULT_DISCOUNT</name></member>
+    <member refid="main_8c_1a5c96b971fedeb5955e05256b7e58e74e" kind="variable"><name>DEFAULT_DAY_RANGES</name></member>
+    <member refid="main_8c_1aa00256dbd2d2a34973cbaf5a254504b1" kind="variable"><name>DEFAULT_DISCOUNTS</name></member>
+    <member refid="main_8c_1aacb3b7f85948a76fa11df31c02e98fc8" kind="variable"><name>windows</name></member>
+    <member refid="main_8c_1a6c5820a0ceef740c20441d04df24950a" kind="variable"><name>names</name></member>
+    <member refid="main_8c_1a2a6b9e4ccbf60333a474b7433b21d19f" kind="function"><name>DEFINE_LL_OF_TYPE_ARR_WITH_SIZE</name></member>
+    <member refid="main_8c_1a73b13b5e2d9bcacf35a4369a9270c43f" kind="function"><name>initLocation</name></member>
+    <member refid="main_8c_1a579214ebbaa002f5dd7d119bc64ac24d" kind="function"><name>initProperty</name></member>
+    <member refid="main_8c_1acb547fc473a45efe1612cf333ec2b0a1" kind="function"><name>cleanUpReviews</name></member>
+    <member refid="main_8c_1af34961ca790e86a4ed67c0362924a260" kind="function"><name>addReview</name></member>
+    <member refid="main_8c_1ae379a5581cee8b7388a8d48b391a8d59" kind="function"><name>updateAdminInputs</name></member>
+    <member refid="main_8c_1ab9e636ad749a158db97c594fe5dcb182" kind="function"><name>getValidIntInputWithSentinels</name></member>
+    <member refid="main_8c_1aa136ea4239d59d6fdcf01a88db908497" kind="function"><name>calculateDiscount</name></member>
+    <member refid="main_8c_1a85bdc4d907ddea25da7b38f61eb95ccd" kind="function"><name>calculateCost</name></member>
+    <member refid="main_8c_1af930487fde31f5b0bfa65a3b0b1bdbfb" kind="function"><name>displayCost</name></member>
+    <member refid="main_8c_1a49be7264a1719899398ed267e69188d4" kind="function"><name>chargeUser</name></member>
+    <member refid="main_8c_1ad0b5b543d8690bb4ddefc6b64428f7eb" kind="function"><name>getBooking</name></member>
+    <member refid="main_8c_1a7eedf911c331de9894b62bdc926a0b07" kind="function"><name>intArrContains</name></member>
+    <member refid="main_8c_1a2fd4dc35b8b9778a29fc386d0829cda9" kind="function"><name>displayRentalPropertyInfo</name></member>
+    <member refid="main_8c_1ad7cb38bbd478918aa8706cb4fdd1665f" kind="function"><name>loginWindowInit</name></member>
+    <member refid="main_8c_1a2eb80223273d88428f6e32c89c5fa43b" kind="function"><name>reviewWindowInit</name></member>
+    <member refid="main_8c_1a9ee95d0f9c5cf3aafd0aa8a884fda2b9" kind="function"><name>makeBtnWithCb</name></member>
+    <member refid="main_8c_1af3816e05ba3a31e4a28e7592f87f6486" kind="function"><name>TabHeaders</name></member>
+    <member refid="main_8c_1aaeb868af8347698819f4dc75db19c53c" kind="function"><name>mainWindowUpdateReviews</name></member>
+    <member refid="main_8c_1a07025dc4a6f38c6b5f8a1072a13bb34a" kind="function"><name>onChange</name></member>
+    <member refid="main_8c_1a2875f745d129a0647f428c34f8f1abc1" kind="function"><name>onChangeValidateRangeOfReview</name></member>
+    <member refid="main_8c_1a83aea335c1f2fa19db792f3ab8f60d03" kind="function"><name>makeHtmlStyleLabelWithLabel</name></member>
+    <member refid="main_8c_1ad54d52e4f4952ec53742a47fbccedcce" kind="function"><name>onCharge</name></member>
+    <member refid="main_8c_1a00920ba3ffe9d4d1410c31175eb259bf" kind="function"><name>makeGridOfLabelsFromHeadersAndLinkedList</name></member>
+    <member refid="main_8c_1abef81d57e41bf73d65df4ef6652cea7e" kind="function"><name>cliMain</name></member>
+    <member refid="main_8c_1a400036319c87521708cac2d1599995c2" kind="function"><name>switchWin</name></member>
+    <member refid="main_8c_1a7361cb7f130f3688e8fbe933d285a18b" kind="function"><name>makeHtmlStyleEntryWithLabel</name></member>
+    <member refid="main_8c_1ae22daded04129238cf61daaecaa45d9c" kind="function"><name>windowBase</name></member>
+    <member refid="main_8c_1ad878e41a136921e7355db8333be2e443" kind="function"><name>mainWindowInit</name></member>
+    <member refid="main_8c_1a55a167266e07914aca5232a51ed9ccaf" kind="function"><name>onLogin</name></member>
+    <member refid="main_8c_1aea911ea17f37628f0934476b1b6e7641" kind="function"><name>onClick</name></member>
+    <member refid="main_8c_1a15e24f9376b617094f0ecc99cb8a2ad6" kind="function"><name>adminWindowInit</name></member>
+    <member refid="main_8c_1ac8d185b1db8b0153f14fd5cb4537cf2a" kind="function"><name>activate</name></member>
+    <member refid="main_8c_1a3c04138a5bfe5d72780bb7e82a18e627" kind="function"><name>main</name></member>
+    <member refid="main_8c_1aecb3b10f315423f9de2e0c640a6f2d0d" kind="function"><name>nBitRandom</name></member>
+  </compound>
+  <compound refid="readme_8md" kind="file"><name>readme.md</name>
+  </compound>
+  <compound refid="md_readme" kind="page"><name>md_readme</name>
+  </compound>
+</doxygenindex>

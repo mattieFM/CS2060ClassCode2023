@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structreview_window" kind="struct" language="C++" prot="public">
+    <compoundname>reviewWindow</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structreview_window_1a9a3f2e5a8dd7d12f937d7f9842202957" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1aa95cc25626aaea9a264528de81ad3c09" kindref="member">INHERIT_BASE_WIN</ref> GtkEntry *</type>
+        <definition>INHERIT_BASE_WIN GtkEntry* inputs[NUMBER_OF_REVIEW_CATS]</definition>
+        <argsstring>[NUMBER_OF_REVIEW_CATS]</argsstring>
+        <name>inputs</name>
+        <qualifiedname>reviewWindow::inputs</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="268" column="13" bodyfile="main.c" bodystart="268" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structreview_window_1ab7183ac989e82ad331573935544fa1ed" prot="public" static="no" mutable="no">
+        <type>GtkButton *</type>
+        <definition>GtkButton* submitBtn</definition>
+        <argsstring></argsstring>
+        <name>submitBtn</name>
+        <qualifiedname>reviewWindow::submitBtn</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="271" column="14" bodyfile="main.c" bodystart="271" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>the review Window of the app </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="main.c" line="263" column="1" bodyfile="main.c" bodystart="263" bodyend="273"/>
+    <listofallmembers>
+      <member refid="structreview_window_1a9a3f2e5a8dd7d12f937d7f9842202957" prot="public" virt="non-virtual"><scope>reviewWindow</scope><name>inputs</name></member>
+      <member refid="structreview_window_1ab7183ac989e82ad331573935544fa1ed" prot="public" virt="non-virtual"><scope>reviewWindow</scope><name>submitBtn</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

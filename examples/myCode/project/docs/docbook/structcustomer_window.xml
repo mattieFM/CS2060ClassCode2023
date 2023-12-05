@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structcustomer_window" xml:lang="en-US">
+<title>customerWindow Struct Reference</title>
+<indexterm><primary>customerWindow</primary></indexterm>
+<para>
+
+<para>the customer window of the app </para>
+ 
+</para>
+<simplesect>
+    <title>Data Fields    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link> GtkWidget * <link linkend="_structcustomer_window_1a794d03e6de4509b6d710079af21479fe">priceRendererWindow</link></para>
+</listitem>
+            <listitem><para>GtkWidget * <link linkend="_structcustomer_window_1a3e3af5fe6bee487683e343bb777b8293">inputEntry</link></para>
+</listitem>
+            <listitem><para>GtkWidget * <link linkend="_structcustomer_window_1a2e8db791568891a34d0bb2147e9218d2">reviewTable</link></para>
+</listitem>
+            <listitem><para>GtkWidget * <link linkend="_structcustomer_window_1a9e32cf5ab494c238e3a5a8de90872fb4">grid</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>the customer window of the app </para>
+</section>
+<section>
+<title>Field Documentation</title>
+<anchor xml:id="_structcustomer_window_1a9e32cf5ab494c238e3a5a8de90872fb4"/><section>
+    <title>grid</title>
+<indexterm><primary>grid</primary><secondary>customerWindow</secondary></indexterm>
+<indexterm><primary>customerWindow</primary><secondary>grid</secondary></indexterm>
+<para><computeroutput>GtkWidget* grid</computeroutput></para>
+<para>the review table </para>
+</section>
+<anchor xml:id="_structcustomer_window_1a3e3af5fe6bee487683e343bb777b8293"/><section>
+    <title>inputEntry</title>
+<indexterm><primary>inputEntry</primary><secondary>customerWindow</secondary></indexterm>
+<indexterm><primary>customerWindow</primary><secondary>inputEntry</secondary></indexterm>
+<para><computeroutput>GtkWidget* inputEntry</computeroutput></para>
+<para>the entry widget for the input of number of night </para>
+</section>
+<anchor xml:id="_structcustomer_window_1a794d03e6de4509b6d710079af21479fe"/><section>
+    <title>priceRendererWindow</title>
+<indexterm><primary>priceRendererWindow</primary><secondary>customerWindow</secondary></indexterm>
+<indexterm><primary>customerWindow</primary><secondary>priceRendererWindow</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link> GtkWidget* priceRendererWindow</computeroutput></para>
+<para>the label widget to store price within </para>
+</section>
+<anchor xml:id="_structcustomer_window_1a2e8db791568891a34d0bb2147e9218d2"/><section>
+    <title>reviewTable</title>
+<indexterm><primary>reviewTable</primary><secondary>customerWindow</secondary></indexterm>
+<indexterm><primary>customerWindow</primary><secondary>reviewTable</secondary></indexterm>
+<para><computeroutput>GtkWidget* reviewTable</computeroutput></para>
+<para>the review table </para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+<link linkend="_main_8c">main.c</link></section>
+</section>

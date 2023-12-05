@@ -30,32 +30,83 @@ Security Standard: SEI CERT C Standard
 #include <string.h>
 
 //Preprocessor constants
+/**
+ * @brief a constant for the number of price ranges
+ * That is to say how many times can the discount chagge
+*/
 #define NUMBER_OF_PRICE_RANGES 3
+/**
+ * @brief the nubmer of review categories
+*/
 #define NUMBER_OF_REVIEW_CATS 5
-#define NUMBER_OF_REVIEW_CATS 5
+/**
+ *  @brief max size of strings
+*/
 #define STRING_SIZE 80
+/**
+ * @brief the base first discount
+*/
 #define BASE_DISCOUNT 50
 
-//boolean
+/**
+ * @brief a boolean of whether mock data should be generated
+*/
 #define ADD_MOCK_REVIEWS 1
+/**
+ * @brief the max number than can be entered on the review's menu inputs
+*/
 #define MAX_REVIEW 5
+/**
+ * @brief the min number than can be entered on the review's menu inputs
+*/
 #define MIN_REVIEW 1
 
-//setup a generic linked list macro
+/**
+ * @brief setup a generic linked list of arrays of size 
+ * @param TYPE the data type of the linked list
+ * @param size the size of the array (the array is the data of the node)
+ * @param typeName the litteral name that the linked list type will be created as
+ * @param structName the litteral name that the linked list struct will be created as
+*/
 #define DEFINE_LL_OF_TYPE_ARR_WITH_SIZE(TYPE, size, typeName, structName) \
 typedef struct structName {\
   struct structName * next;\
   TYPE data[size];\
 } typeName;
 
-//global defualts for struct inits
+
+//TODO: refactor to use files for these
+/**
+ * @brief the default review headers
+*/
 const char DEFAULT_REVIEW_HEADERS[NUMBER_OF_REVIEW_CATS][STRING_SIZE] = {"Happiness", "Cleanliness", "Saftey", "Location", "Amenities"};
+/**
+ * @brief the default property name
+*/
 const char DEFAULT_NAME[STRING_SIZE] = "AIR UCCS";
+/**
+ * @brief the default minimum nights
+*/
 int unsigned const DEFAULT_MIN_RENTAL_NIGHTS = 1;
+/**
+ * @brief the default maximum nights
+*/
 unsigned int const DEFAULT_MAX_RENTAL_NIGHTS = 14;
+/**
+ * @brief the default interval that the first discount starts at
+*/
 unsigned int const DEFAULT_INTERVAL_1_NIGHTS = 3;
+/**
+ * @brief the default interval that the second discount starts at
+*/
 unsigned int const DEFAULT_INTERVAL_2_NIGHTS = 6;
+/**
+ * @brief the default cost per night
+*/
 double const DEFAULT_RENTAL_RATE = 400;
+/**
+ * @brief the default base discount before range multiplyers
+*/
 double const DEFAULT_DISCOUNT = 50;
 const int DEFAULT_DAY_RANGES[NUMBER_OF_PRICE_RANGES] = {0, DEFAULT_INTERVAL_1_NIGHTS, DEFAULT_INTERVAL_2_NIGHTS };
 const int DEFAULT_DISCOUNTS[NUMBER_OF_PRICE_RANGES] = {0, DEFAULT_DISCOUNT, DEFAULT_DISCOUNT*2};
@@ -80,6 +131,11 @@ typedef struct location {
 	int lon;
 } Location;
 
+/// @brief an initalizer for a new location struct. Initalizes an existing Location with good data
+/// @param loc the location struct pointer 
+/// @param address the adress of the location
+/// @param lat the int latitude
+/// @param lon the int longitude
 void initLocation(Location * loc, char address[STRING_SIZE], int lat, int lon){
   //copy adress
   strcpy(loc->address, address);
@@ -120,7 +176,8 @@ typedef struct  property {
   /// @brief an array of the headers of the review categories
   char headers[NUMBER_OF_REVIEW_CATS][STRING_SIZE] ;
 } Property;
-
+/// @brief Initalize a property with default values
+/// @param property the propertyPtr to initalize onto
 void initProperty(Property * property){
   property->baseDiscount = BASE_DISCOUNT;
   memcpy(&property->dayRanges, &DEFAULT_DAY_RANGES, sizeof(DEFAULT_DAY_RANGES));
@@ -134,7 +191,8 @@ void initProperty(Property * property){
   property->reviewsHead = nodePtr;
 }
 
-
+/// @brief A method for quickly cleaning up the linked list of the property reviews
+/// @param propertyPtr the property to cleanup
 void cleanUpReviews(Property * propertyPtr){
   while(propertyPtr->reviewsHead->next != NULL){
     ReviewNode * currentPtr = propertyPtr->reviewsHead;
@@ -278,7 +336,7 @@ void initLocation(Location * loc, char address[STRING_SIZE], int lat, int lon);
 static void updateAdminInputs(App * mainApp);
 
 /**
- Brief:
+ @brief
  Get a int that is either within [min-max] or in a list of sentinel values, from the user, prompting them with the prompt passed
  into this function and displaying the err prompt if they enter an invalid input.
 
@@ -299,7 +357,7 @@ static void updateAdminInputs(App * mainApp);
 int getValidIntInputWithSentinels(char const PROMPT[], int min, int max, int const SENTINEL_VALUES[], size_t length);
 
 /**
- Brief:
+ @brief
  A function that will calculate the discount of a day
 
  @param night {int} the night to find the discount of
@@ -312,7 +370,7 @@ int getValidIntInputWithSentinels(char const PROMPT[], int min, int max, int con
 double calculateDiscount(int night, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length);
 
 /**
- Brief:
+ @brief
  A function to calculate the cost of a stay in a AirUCCS rented building. Cost is based on nights stayed, the base price per night and the discounts applied.
  
  @param nights {int} how many nights the user has stayed
@@ -326,7 +384,7 @@ double calculateDiscount(int night, int const DISCOUNT_RANGES[], double const DI
 double calculateCost(int nights, double basePrice, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length);
 
 /**
- Brief:
+ @brief
  A function to display how much the user's stay cost in a user friendly way
 
  @param nights {int} how many nights the user has stayed
@@ -340,7 +398,7 @@ double calculateCost(int nights, double basePrice, int const DISCOUNT_RANGES[], 
 void displayCost(int nights, double cost);
 
 /**
- Brief: a method that would charge the user money for their stay. 
+ @brief a method that would charge the user money for their stay. 
 
  @param uuid, the id of the user's stay
  @param cost, the total cost to charge them
@@ -349,7 +407,7 @@ void displayCost(int nights, double cost);
 void chargeUser(char const uuid[], float cost, char const cardNum[]);
 
 /**
- brief:
+ @brief
  A function that will start the process of booking a room. 
 
  @param valuePt a pointer to a variable to store the value the user entered.
@@ -363,7 +421,7 @@ void chargeUser(char const uuid[], float cost, char const cardNum[]);
 bool getBooking(int* valuePt, int const SENTINELS[], int min, int max, size_t length);
 
 /**
- Brief: check if an array of ints contains a value.
+ @brief check if an array of ints contains a value.
 
  @param ARR[] the array to look through
  @param val the value to check for
@@ -375,7 +433,7 @@ bool getBooking(int* valuePt, int const SENTINELS[], int min, int max, size_t le
 bool intArrContains(int const ARR[], int val, size_t length);
 
 /**
- Brief: display the rental property info to the user before they are prompted to make a perchance.
+ @brief display the rental property info to the user before they are prompted to make a perchance.
 
  @param min, the minimum number of nights a user can stay
  @param max the maximum number of nights a user can stay
@@ -389,7 +447,7 @@ void displayRentalPropertyInfo(int min, int max, double basePrice, int const DIS
 
 
 /**
- * brief: initialize the login window "object-like" but do not spawn it into the current scene
+ * @brief initialize the login window "object-like" but do not spawn it into the current scene
  * @param mainWindow a GtkWidget pointer to initialize the mainWindow body onto
  * @param app the main gtk app.
 */
@@ -401,14 +459,14 @@ static void loginWindowInit(GtkApplication* app, App * mainApp);
 static void reviewWindowInit(GtkApplication* app, App * mainApp);
 
 /**
- * Brief: make a button with a callback when it is clicked
+ * @brief make a button with a callback when it is clicked
  * @param label the string to display on this button
  * @param cb, the function pointer to the function to call on this clicked. this function must take a gtk widget and the data pointer
 */
 static GtkWidget * makeBtnWithCb(char* label, void (*cb) (GtkWidget *widget, gpointer data));
 
 /**
- * Brief: the class of our tab headers widget that handles switching between tabs within the app
+ * @brief the class of our tab headers widget that handles switching between tabs within the app
 */
 static GtkWidget * TabHeaders(void);
 
@@ -798,7 +856,7 @@ static GtkWidget * makeGridOfLabelsFromHeadersAndLinkedList(char headers[NUMBER_
 }
 
 /**
- * brief: the base for every window of the app, defines all common elements such as teh tabs bar at the top
+ * @brief the base for every window of the app, defines all common elements such as teh tabs bar at the top
  * @param grid the gtkWidget grid child
 */
 static GtkWidget * windowBase(GtkApplication* app){
@@ -864,7 +922,7 @@ static void mainWindowUpdateReviews(App * mainApp){
 }
 
 /**
- * brief: initialize the main window "object-like" but do not spawn it into the current scene
+ * @brief initialize the main window "object-like" but do not spawn it into the current scene
  * @param mainWindow a GtkWidget pointer to initialize the mainWindow body onto
  * @param app the main gtk app.
 */
@@ -1121,7 +1179,7 @@ static void updateAdminInputs(App * mainApp){
 
 
 /**
- * brief: initialize the main window "object-like" but do not spawn it into the current scene
+ * @brief initialize the main window "object-like" but do not spawn it into the current scene
  * @param mainWindow a GtkWidget pointer to initialize the mainWindow body onto
  * @param app the main gtk app.
 */

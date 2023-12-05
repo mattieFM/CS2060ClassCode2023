@@ -1,0 +1,778 @@
+\doxysection{main.\+c File Reference}
+\hypertarget{main_8c}{}\label{main_8c}\index{main.c@{main.c}}
+{\ttfamily \#include $<$gtk/gtk.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\doxysubsubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structlocation}{location}}
+\begin{DoxyCompactList}\small\item\em the location of the property @initalizer\+: init\+Location \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structproperty}{property}}
+\begin{DoxyCompactList}\small\item\em A struct representing a property @initalizer\+: init\+Property. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structlog_in_window}{log\+In\+Window}}
+\begin{DoxyCompactList}\small\item\em the login window of the app \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structconfig_window}{config\+Window}}
+\begin{DoxyCompactList}\small\item\em the config window of the app \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structadmin_window}{admin\+Window}}
+\begin{DoxyCompactList}\small\item\em the admin window of the app \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structreview_window}{review\+Window}}
+\begin{DoxyCompactList}\small\item\em the review Window of the app \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structcustomer_window}{customer\+Window}}
+\begin{DoxyCompactList}\small\item\em the customer window of the app \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structapp}{app}}
+\begin{DoxyCompactList}\small\item\em the main struct containing all app info that we need \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{main_8c_a71147341558d2823036988bfc0e6575d}{NUMBER\+\_\+\+OF\+\_\+\+PRICE\+\_\+\+RANGES}}~3
+\begin{DoxyCompactList}\small\item\em a constant for the number of price ranges That is to say how many times can the discount chagge \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8c_afe66cf1c04080a4cba6fc79833c5d249}{NUMBER\+\_\+\+OF\+\_\+\+REVIEW\+\_\+\+CATS}}~5
+\begin{DoxyCompactList}\small\item\em the nubmer of review categories \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8c_ad78224efe1d3fb39b67ca74ad9d9eec7}{STRING\+\_\+\+SIZE}}~80
+\begin{DoxyCompactList}\small\item\em max size of strings \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8c_a74abd28f848a5dc45616674ac761f00d}{BASE\+\_\+\+DISCOUNT}}~50
+\begin{DoxyCompactList}\small\item\em the base first discount \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8c_a45f2278bc729f1796e44d1d1a2a79568}{ADD\+\_\+\+MOCK\+\_\+\+REVIEWS}}~1
+\begin{DoxyCompactList}\small\item\em a boolean of whether mock data should be generated \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8c_a2cac2faee136330ef8ab53af2312f4ec}{MAX\+\_\+\+REVIEW}}~5
+\begin{DoxyCompactList}\small\item\em the max number than can be entered on the review\textquotesingle{}s menu inputs \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8c_a190d1357e6d0ee51f3b008700ed84b08}{MIN\+\_\+\+REVIEW}}~1
+\begin{DoxyCompactList}\small\item\em the min number than can be entered on the review\textquotesingle{}s menu inputs \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8c_a72242c2e53086385d9d5dd3aadcdfa5b}{DEFINE\+\_\+\+LL\+\_\+\+OF\+\_\+\+TYPE\+\_\+\+ARR\+\_\+\+WITH\+\_\+\+SIZE}}(TYPE,  size,  type\+Name,  struct\+Name)
+\begin{DoxyCompactList}\small\item\em setup a generic linked list of arrays of size \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{main_8c_aa95cc25626aaea9a264528de81ad3c09}{INHERIT\+\_\+\+BASE\+\_\+\+WIN}}~  Gtk\+Widget\texorpdfstring{$\ast$}{*} window;
+\item 
+\#define \mbox{\hyperlink{main_8c_a0599f56005d18d1574abdb5b746e69cc}{Num\+Tabs}}~3
+\item 
+\#define \mbox{\hyperlink{main_8c_a826ece061102e9edb8bd1d2167fbc710}{BIT\+\_\+\+LEVEL}}~8
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structlocation}{location}} \mbox{\hyperlink{main_8c_a5f2225f46c54d4268143a3e9586f67a4}{Location}}
+\begin{DoxyCompactList}\small\item\em the location of the property @initalizer\+: init\+Location \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structproperty}{property}} \mbox{\hyperlink{main_8c_af6ffa2d6fd1c39d309a4465a1ce7af87}{Property}}
+\begin{DoxyCompactList}\small\item\em A struct representing a property @initalizer\+: init\+Property. \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structlog_in_window}{log\+In\+Window}} \mbox{\hyperlink{main_8c_a8e1170805a53ee8c3845cb6e425aa233}{Login\+Window}}
+\begin{DoxyCompactList}\small\item\em the login window of the app \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structconfig_window}{config\+Window}} \mbox{\hyperlink{main_8c_aed36cff1d64d95e664ec581815c2814b}{Config\+Window}}
+\begin{DoxyCompactList}\small\item\em the config window of the app \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structadmin_window}{admin\+Window}} \mbox{\hyperlink{main_8c_a5a63edfd294f78985feeb3fc83f194bd}{Admin\+Window}}
+\begin{DoxyCompactList}\small\item\em the admin window of the app \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structreview_window}{review\+Window}} \mbox{\hyperlink{main_8c_aedaaa3f425adc8ef27426e9ecbf63d29}{Review\+Window}}
+\begin{DoxyCompactList}\small\item\em the review Window of the app \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structcustomer_window}{customer\+Window}} \mbox{\hyperlink{main_8c_a0667ea4347c9b9d6c5692361185eab3a}{Customer\+Window}}
+\begin{DoxyCompactList}\small\item\em the customer window of the app \end{DoxyCompactList}\item 
+typedef struct \mbox{\hyperlink{structapp}{app}} \mbox{\hyperlink{main_8c_a7afb31fe444397deb0375c093030682d}{App}}
+\begin{DoxyCompactList}\small\item\em the main struct containing all app info that we need \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{main_8c_a2a6b9e4ccbf60333a474b7433b21d19f}{DEFINE\+\_\+\+LL\+\_\+\+OF\+\_\+\+TYPE\+\_\+\+ARR\+\_\+\+WITH\+\_\+\+SIZE}} (int, \mbox{\hyperlink{main_8c_afe66cf1c04080a4cba6fc79833c5d249}{NUMBER\+\_\+\+OF\+\_\+\+REVIEW\+\_\+\+CATS}}, Review\+Node, review\+Node)
+\item 
+void \mbox{\hyperlink{main_8c_a73b13b5e2d9bcacf35a4369a9270c43f}{init\+Location}} (\mbox{\hyperlink{main_8c_a5f2225f46c54d4268143a3e9586f67a4}{Location}} \texorpdfstring{$\ast$}{*}loc, char address\mbox{[}\mbox{\hyperlink{main_8c_ad78224efe1d3fb39b67ca74ad9d9eec7}{STRING\+\_\+\+SIZE}}\mbox{]}, int lat, int lon)
+\begin{DoxyCompactList}\small\item\em an initalizer for a new location struct. Initalizes an existing Location with good data \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a579214ebbaa002f5dd7d119bc64ac24d}{init\+Property}} (\mbox{\hyperlink{main_8c_af6ffa2d6fd1c39d309a4465a1ce7af87}{Property}} \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{structproperty}{property}})
+\begin{DoxyCompactList}\small\item\em Initalize a property with default values. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_acb547fc473a45efe1612cf333ec2b0a1}{clean\+Up\+Reviews}} (\mbox{\hyperlink{main_8c_af6ffa2d6fd1c39d309a4465a1ce7af87}{Property}} \texorpdfstring{$\ast$}{*}property\+Ptr)
+\begin{DoxyCompactList}\small\item\em A method for quickly cleaning up the linked list of the property reviews. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_af34961ca790e86a4ed67c0362924a260}{add\+Review}} (\mbox{\hyperlink{main_8c_a7afb31fe444397deb0375c093030682d}{App}} \texorpdfstring{$\ast$}{*}main\+App, const int review\mbox{[}\mbox{\hyperlink{main_8c_afe66cf1c04080a4cba6fc79833c5d249}{NUMBER\+\_\+\+OF\+\_\+\+REVIEW\+\_\+\+CATS}}\mbox{]})
+\begin{DoxyCompactList}\small\item\em Add a review to the linked list of reviews. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_ab9e636ad749a158db97c594fe5dcb182}{get\+Valid\+Int\+Input\+With\+Sentinels}} (char const PROMPT\mbox{[}$\,$\mbox{]}, int min, int max, int const SENTINEL\+\_\+\+VALUES\mbox{[}$\,$\mbox{]}, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Get a int that is either within \mbox{[}min-\/max\mbox{]} or in a list of sentinel values, from the user, prompting them with the prompt passed into this function and displaying the err prompt if they enter an invalid input. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{main_8c_aa136ea4239d59d6fdcf01a88db908497}{calculate\+Discount}} (int night, int const DISCOUNT\+\_\+\+RANGES\mbox{[}$\,$\mbox{]}, double const DISCOUNTS\mbox{[}$\,$\mbox{]}, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em A function that will calculate the discount of a day. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{main_8c_a85bdc4d907ddea25da7b38f61eb95ccd}{calculate\+Cost}} (int nights, double base\+Price, int const DISCOUNT\+\_\+\+RANGES\mbox{[}$\,$\mbox{]}, double const DISCOUNTS\mbox{[}$\,$\mbox{]}, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em A function to calculate the cost of a stay in a Air\+UCCS rented building. Cost is based on nights stayed, the base price per night and the discounts applied. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_af930487fde31f5b0bfa65a3b0b1bdbfb}{display\+Cost}} (int nights, double cost)
+\begin{DoxyCompactList}\small\item\em A function to display how much the user\textquotesingle{}s stay cost in a user friendly way. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a49be7264a1719899398ed267e69188d4}{charge\+User}} (char const uuid\mbox{[}$\,$\mbox{]}, float cost, char const card\+Num\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em a method that would charge the user money for their stay. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8c_ad0b5b543d8690bb4ddefc6b64428f7eb}{get\+Booking}} (int \texorpdfstring{$\ast$}{*}value\+Pt, int const SENTINELS\mbox{[}$\,$\mbox{]}, int min, int max, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em A function that will start the process of booking a room. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{main_8c_a7eedf911c331de9894b62bdc926a0b07}{int\+Arr\+Contains}} (int const ARR\mbox{[}$\,$\mbox{]}, int val, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em check if an array of ints contains a value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8c_a2fd4dc35b8b9778a29fc386d0829cda9}{display\+Rental\+Property\+Info}} (int min, int max, double base\+Price, int const DISCOUNT\+\_\+\+RANGES\mbox{[}$\,$\mbox{]}, double const DISCOUNTS\mbox{[}$\,$\mbox{]}, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em display the rental property info to the user before they are prompted to make a perchance. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_abef81d57e41bf73d65df4ef6652cea7e}{cli\+Main}} (void)
+\begin{DoxyCompactList}\small\item\em the main function for the program that will handle initialization/entry. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv)
+\item 
+unsigned long long \mbox{\hyperlink{main_8c_aecb3b10f315423f9de2e0c640a6f2d0d}{n\+Bit\+Random}} (int number\+Of\+Bits)
+\begin{DoxyCompactList}\small\item\em generate a random integer of n bits \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const char \mbox{\hyperlink{main_8c_a44287a1e2179ad86ebd481121eafb1f3}{DEFAULT\+\_\+\+REVIEW\+\_\+\+HEADERS}} \mbox{[}\mbox{\hyperlink{main_8c_afe66cf1c04080a4cba6fc79833c5d249}{NUMBER\+\_\+\+OF\+\_\+\+REVIEW\+\_\+\+CATS}}\mbox{]}\mbox{[}\mbox{\hyperlink{main_8c_ad78224efe1d3fb39b67ca74ad9d9eec7}{STRING\+\_\+\+SIZE}}\mbox{]} = \{"{}Happiness"{}, "{}Cleanliness"{}, "{}Saftey"{}, "{}Location"{}, "{}Amenities"{}\}
+\begin{DoxyCompactList}\small\item\em the default review headers \end{DoxyCompactList}\item 
+const char \mbox{\hyperlink{main_8c_a539ad50b7780b0efc81c9b85f7e8df2b}{DEFAULT\+\_\+\+NAME}} \mbox{[}\mbox{\hyperlink{main_8c_ad78224efe1d3fb39b67ca74ad9d9eec7}{STRING\+\_\+\+SIZE}}\mbox{]} = "{}AIR UCCS"{}
+\begin{DoxyCompactList}\small\item\em the default property name \end{DoxyCompactList}\item 
+int unsigned const \mbox{\hyperlink{main_8c_a2af4ca44f722cc3b4b00a68b851b9e4d}{DEFAULT\+\_\+\+MIN\+\_\+\+RENTAL\+\_\+\+NIGHTS}} = 1
+\begin{DoxyCompactList}\small\item\em the default minimum nights \end{DoxyCompactList}\item 
+unsigned int const \mbox{\hyperlink{main_8c_a139936736b1fed8ce48a58629647dcc0}{DEFAULT\+\_\+\+MAX\+\_\+\+RENTAL\+\_\+\+NIGHTS}} = 14
+\begin{DoxyCompactList}\small\item\em the default maximum nights \end{DoxyCompactList}\item 
+unsigned int const \mbox{\hyperlink{main_8c_abaed5313319821e00c971ca48e071fcf}{DEFAULT\+\_\+\+INTERVAL\+\_\+1\+\_\+\+NIGHTS}} = 3
+\begin{DoxyCompactList}\small\item\em the default interval that the first discount starts at \end{DoxyCompactList}\item 
+unsigned int const \mbox{\hyperlink{main_8c_a33b4fb08407f315f236d0b93b39da793}{DEFAULT\+\_\+\+INTERVAL\+\_\+2\+\_\+\+NIGHTS}} = 6
+\begin{DoxyCompactList}\small\item\em the default interval that the second discount starts at \end{DoxyCompactList}\item 
+double const \mbox{\hyperlink{main_8c_abe3a8709ba5ff2e63b69fce41c24a0d0}{DEFAULT\+\_\+\+RENTAL\+\_\+\+RATE}} = 400
+\begin{DoxyCompactList}\small\item\em the default cost per night \end{DoxyCompactList}\item 
+double const \mbox{\hyperlink{main_8c_a9cfdaa0c3a5488cbcb8e9cb738e19146}{DEFAULT\+\_\+\+DISCOUNT}} = 50
+\begin{DoxyCompactList}\small\item\em the default base discount before range multiplyers \end{DoxyCompactList}\item 
+const int \mbox{\hyperlink{main_8c_a5c96b971fedeb5955e05256b7e58e74e}{DEFAULT\+\_\+\+DAY\+\_\+\+RANGES}} \mbox{[}\mbox{\hyperlink{main_8c_a71147341558d2823036988bfc0e6575d}{NUMBER\+\_\+\+OF\+\_\+\+PRICE\+\_\+\+RANGES}}\mbox{]} = \{0, \mbox{\hyperlink{main_8c_abaed5313319821e00c971ca48e071fcf}{DEFAULT\+\_\+\+INTERVAL\+\_\+1\+\_\+\+NIGHTS}}, \mbox{\hyperlink{main_8c_a33b4fb08407f315f236d0b93b39da793}{DEFAULT\+\_\+\+INTERVAL\+\_\+2\+\_\+\+NIGHTS}} \}
+\item 
+const int \mbox{\hyperlink{main_8c_aa00256dbd2d2a34973cbaf5a254504b1}{DEFAULT\+\_\+\+DISCOUNTS}} \mbox{[}\mbox{\hyperlink{main_8c_a71147341558d2823036988bfc0e6575d}{NUMBER\+\_\+\+OF\+\_\+\+PRICE\+\_\+\+RANGES}}\mbox{]} = \{0, \mbox{\hyperlink{main_8c_a9cfdaa0c3a5488cbcb8e9cb738e19146}{DEFAULT\+\_\+\+DISCOUNT}}, \mbox{\hyperlink{main_8c_a9cfdaa0c3a5488cbcb8e9cb738e19146}{DEFAULT\+\_\+\+DISCOUNT}}\texorpdfstring{$\ast$}{*}2\}
+\item 
+Gtk\+Widget \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_aacb3b7f85948a76fa11df31c02e98fc8}{windows}} \mbox{[}\mbox{\hyperlink{main_8c_a0599f56005d18d1574abdb5b746e69cc}{Num\+Tabs}}\mbox{]} = \{\}
+\item 
+char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{main_8c_a6c5820a0ceef740c20441d04df24950a}{names}} \mbox{[}\mbox{\hyperlink{main_8c_a0599f56005d18d1574abdb5b746e69cc}{Num\+Tabs}}\mbox{]} = \{"{}Main"{}, "{}Analytics"{}, "{}Login"{}\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{main_8c_a45f2278bc729f1796e44d1d1a2a79568}\label{main_8c_a45f2278bc729f1796e44d1d1a2a79568} 
+\index{main.c@{main.c}!ADD\_MOCK\_REVIEWS@{ADD\_MOCK\_REVIEWS}}
+\index{ADD\_MOCK\_REVIEWS@{ADD\_MOCK\_REVIEWS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ADD\_MOCK\_REVIEWS}{ADD\_MOCK\_REVIEWS}}
+{\footnotesize\ttfamily \#define ADD\+\_\+\+MOCK\+\_\+\+REVIEWS~1}
+
+
+
+a boolean of whether mock data should be generated 
+
+\Hypertarget{main_8c_a74abd28f848a5dc45616674ac761f00d}\label{main_8c_a74abd28f848a5dc45616674ac761f00d} 
+\index{main.c@{main.c}!BASE\_DISCOUNT@{BASE\_DISCOUNT}}
+\index{BASE\_DISCOUNT@{BASE\_DISCOUNT}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{BASE\_DISCOUNT}{BASE\_DISCOUNT}}
+{\footnotesize\ttfamily \#define BASE\+\_\+\+DISCOUNT~50}
+
+
+
+the base first discount 
+
+\Hypertarget{main_8c_a826ece061102e9edb8bd1d2167fbc710}\label{main_8c_a826ece061102e9edb8bd1d2167fbc710} 
+\index{main.c@{main.c}!BIT\_LEVEL@{BIT\_LEVEL}}
+\index{BIT\_LEVEL@{BIT\_LEVEL}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{BIT\_LEVEL}{BIT\_LEVEL}}
+{\footnotesize\ttfamily \#define BIT\+\_\+\+LEVEL~8}
+
+First To walk anyone reading through the general methodology, recall that RSA is an algorithm for generating complex keys for pub/priv key crypto
+
+It asserts that it is very hard to find large integer common denominators of primes it consists of 4 steps
+
+1\+: choose two arbitraty large primes, denoted as p and q. I will use these names below as it is what they are called within the algorithm and is rather standard -\/These should be chosen at random, I will be using a probabalistic aproach to find primes as we only need to find 2 we can basically guess and assume we will be right within x where x is usually less than 2000 guesses which is computationally insignificant for this scale 2\+: we then compute n = p times q -\/-\/\texorpdfstring{$>$}{>} n=pq. 3\+: then it gets harder. We now compute Carmichaels totient function of n (denoted as λ(n)) Its a lot of math that will be explained in the functions below for it 4\+: choose an integer e such taht 2 \texorpdfstring{$<$}{<} e \texorpdfstring{$<$}{<} λ(n) and gcd(e, λ(n)) = 1; that is, e and λ(n) are coprime 5\+: determine d as d == e\texorpdfstring{$^\wedge$}{\string^}-\/1 that is d is the modular multiplicitive invers of e modulo λ(n)
+
+thus the public key becomes modulus n and the exponent e and the private key consists of exponent d, p, q and λ(n), which are used to compute d
+
+in short d is the private key n\texorpdfstring{$^\wedge$}{\string^}e is the public key ====================== \hypertarget{main_8c_autotoc_md4}{}\doxysubsection{\texorpdfstring{Declarations}{Declarations}}\label{main_8c_autotoc_md4}
+\Hypertarget{main_8c_a72242c2e53086385d9d5dd3aadcdfa5b}\label{main_8c_a72242c2e53086385d9d5dd3aadcdfa5b} 
+\index{main.c@{main.c}!DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE@{DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE}}
+\index{DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE@{DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE}{DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE}}
+{\footnotesize\ttfamily \#define DEFINE\+\_\+\+LL\+\_\+\+OF\+\_\+\+TYPE\+\_\+\+ARR\+\_\+\+WITH\+\_\+\+SIZE(\begin{DoxyParamCaption}\item[{}]{TYPE,  }\item[{}]{size,  }\item[{}]{type\+Name,  }\item[{}]{struct\+Name }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{typedef}\ \textcolor{keyword}{struct\ }structName\ \{\(\backslash\)}
+\DoxyCodeLine{\ \ \textcolor{keyword}{struct\ }structName\ *\ next;\(\backslash\)}
+\DoxyCodeLine{\ \ TYPE\ data[size];\(\backslash\)}
+\DoxyCodeLine{\}\ typeName;}
+
+\end{DoxyCode}
+
+
+setup a generic linked list of arrays of size 
+
+
+\begin{DoxyParams}{Parameters}
+{\em TYPE} & the data type of the linked list \\
+\hline
+{\em size} & the size of the array (the array is the data of the node) \\
+\hline
+{\em type\+Name} & the litteral name that the linked list type will be created as \\
+\hline
+{\em struct\+Name} & the litteral name that the linked list struct will be created as \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_aa95cc25626aaea9a264528de81ad3c09}\label{main_8c_aa95cc25626aaea9a264528de81ad3c09} 
+\index{main.c@{main.c}!INHERIT\_BASE\_WIN@{INHERIT\_BASE\_WIN}}
+\index{INHERIT\_BASE\_WIN@{INHERIT\_BASE\_WIN}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{INHERIT\_BASE\_WIN}{INHERIT\_BASE\_WIN}}
+{\footnotesize\ttfamily \#define INHERIT\+\_\+\+BASE\+\_\+\+WIN~  Gtk\+Widget\texorpdfstring{$\ast$}{*} window;}
+
+\Hypertarget{main_8c_a2cac2faee136330ef8ab53af2312f4ec}\label{main_8c_a2cac2faee136330ef8ab53af2312f4ec} 
+\index{main.c@{main.c}!MAX\_REVIEW@{MAX\_REVIEW}}
+\index{MAX\_REVIEW@{MAX\_REVIEW}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MAX\_REVIEW}{MAX\_REVIEW}}
+{\footnotesize\ttfamily \#define MAX\+\_\+\+REVIEW~5}
+
+
+
+the max number than can be entered on the review\textquotesingle{}s menu inputs 
+
+\Hypertarget{main_8c_a190d1357e6d0ee51f3b008700ed84b08}\label{main_8c_a190d1357e6d0ee51f3b008700ed84b08} 
+\index{main.c@{main.c}!MIN\_REVIEW@{MIN\_REVIEW}}
+\index{MIN\_REVIEW@{MIN\_REVIEW}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{MIN\_REVIEW}{MIN\_REVIEW}}
+{\footnotesize\ttfamily \#define MIN\+\_\+\+REVIEW~1}
+
+
+
+the min number than can be entered on the review\textquotesingle{}s menu inputs 
+
+\Hypertarget{main_8c_a71147341558d2823036988bfc0e6575d}\label{main_8c_a71147341558d2823036988bfc0e6575d} 
+\index{main.c@{main.c}!NUMBER\_OF\_PRICE\_RANGES@{NUMBER\_OF\_PRICE\_RANGES}}
+\index{NUMBER\_OF\_PRICE\_RANGES@{NUMBER\_OF\_PRICE\_RANGES}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{NUMBER\_OF\_PRICE\_RANGES}{NUMBER\_OF\_PRICE\_RANGES}}
+{\footnotesize\ttfamily \#define NUMBER\+\_\+\+OF\+\_\+\+PRICE\+\_\+\+RANGES~3}
+
+
+
+a constant for the number of price ranges That is to say how many times can the discount chagge 
+
+\begin{DoxyAuthor}{Author}
+\+: Mattie Fuller Class\+: CS2060-\/002 Project\+: Project Iteration\+: 2 Description\+: This is a project that will handle "{}airbnb"{} style bookings for a fictional renting service "{}airuccs."{} This is the second iteration and is fully GUI dependant and is attempting to implement private public key authentication. Note that in the spirit of staying as native to c as possible I have opted away from using xml (html-\/esque) GUI builders that gtk+ provides, these are much easier but are not really in the spirit of pure c program so I wont be using them.
+\end{DoxyAuthor}
+Note\+: it is really clunky having this entire thing in one file, so sorry about that
+
+Documentation style\+: comments are following doxgen C standard as I have found this is the most common style that tends to be used, let me know if you would prefer a different style.
+
+Security Standard\+: SEI CERT C Standard \Hypertarget{main_8c_afe66cf1c04080a4cba6fc79833c5d249}\label{main_8c_afe66cf1c04080a4cba6fc79833c5d249} 
+\index{main.c@{main.c}!NUMBER\_OF\_REVIEW\_CATS@{NUMBER\_OF\_REVIEW\_CATS}}
+\index{NUMBER\_OF\_REVIEW\_CATS@{NUMBER\_OF\_REVIEW\_CATS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{NUMBER\_OF\_REVIEW\_CATS}{NUMBER\_OF\_REVIEW\_CATS}}
+{\footnotesize\ttfamily \#define NUMBER\+\_\+\+OF\+\_\+\+REVIEW\+\_\+\+CATS~5}
+
+
+
+the nubmer of review categories 
+
+\Hypertarget{main_8c_a0599f56005d18d1574abdb5b746e69cc}\label{main_8c_a0599f56005d18d1574abdb5b746e69cc} 
+\index{main.c@{main.c}!NumTabs@{NumTabs}}
+\index{NumTabs@{NumTabs}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{NumTabs}{NumTabs}}
+{\footnotesize\ttfamily \#define Num\+Tabs~3}
+
+\Hypertarget{main_8c_ad78224efe1d3fb39b67ca74ad9d9eec7}\label{main_8c_ad78224efe1d3fb39b67ca74ad9d9eec7} 
+\index{main.c@{main.c}!STRING\_SIZE@{STRING\_SIZE}}
+\index{STRING\_SIZE@{STRING\_SIZE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{STRING\_SIZE}{STRING\_SIZE}}
+{\footnotesize\ttfamily \#define STRING\+\_\+\+SIZE~80}
+
+
+
+max size of strings 
+
+
+
+\doxysubsection{Typedef Documentation}
+\Hypertarget{main_8c_a5a63edfd294f78985feeb3fc83f194bd}\label{main_8c_a5a63edfd294f78985feeb3fc83f194bd} 
+\index{main.c@{main.c}!AdminWindow@{AdminWindow}}
+\index{AdminWindow@{AdminWindow}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{AdminWindow}{AdminWindow}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structadmin_window}{admin\+Window}} \mbox{\hyperlink{main_8c_a5a63edfd294f78985feeb3fc83f194bd}{Admin\+Window}}}
+
+
+
+the admin window of the app 
+
+\Hypertarget{main_8c_a7afb31fe444397deb0375c093030682d}\label{main_8c_a7afb31fe444397deb0375c093030682d} 
+\index{main.c@{main.c}!App@{App}}
+\index{App@{App}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{App}{App}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structapp}{app}} \mbox{\hyperlink{main_8c_a7afb31fe444397deb0375c093030682d}{App}}}
+
+
+
+the main struct containing all app info that we need 
+
+\Hypertarget{main_8c_aed36cff1d64d95e664ec581815c2814b}\label{main_8c_aed36cff1d64d95e664ec581815c2814b} 
+\index{main.c@{main.c}!ConfigWindow@{ConfigWindow}}
+\index{ConfigWindow@{ConfigWindow}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ConfigWindow}{ConfigWindow}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structconfig_window}{config\+Window}} \mbox{\hyperlink{main_8c_aed36cff1d64d95e664ec581815c2814b}{Config\+Window}}}
+
+
+
+the config window of the app 
+
+\Hypertarget{main_8c_a0667ea4347c9b9d6c5692361185eab3a}\label{main_8c_a0667ea4347c9b9d6c5692361185eab3a} 
+\index{main.c@{main.c}!CustomerWindow@{CustomerWindow}}
+\index{CustomerWindow@{CustomerWindow}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{CustomerWindow}{CustomerWindow}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structcustomer_window}{customer\+Window}} \mbox{\hyperlink{main_8c_a0667ea4347c9b9d6c5692361185eab3a}{Customer\+Window}}}
+
+
+
+the customer window of the app 
+
+\Hypertarget{main_8c_a5f2225f46c54d4268143a3e9586f67a4}\label{main_8c_a5f2225f46c54d4268143a3e9586f67a4} 
+\index{main.c@{main.c}!Location@{Location}}
+\index{Location@{Location}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{Location}{Location}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structlocation}{location}} \mbox{\hyperlink{main_8c_a5f2225f46c54d4268143a3e9586f67a4}{Location}}}
+
+
+
+the location of the property @initalizer\+: init\+Location 
+
+\Hypertarget{main_8c_a8e1170805a53ee8c3845cb6e425aa233}\label{main_8c_a8e1170805a53ee8c3845cb6e425aa233} 
+\index{main.c@{main.c}!LoginWindow@{LoginWindow}}
+\index{LoginWindow@{LoginWindow}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{LoginWindow}{LoginWindow}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structlog_in_window}{log\+In\+Window}} \mbox{\hyperlink{main_8c_a8e1170805a53ee8c3845cb6e425aa233}{Login\+Window}}}
+
+
+
+the login window of the app 
+
+\Hypertarget{main_8c_af6ffa2d6fd1c39d309a4465a1ce7af87}\label{main_8c_af6ffa2d6fd1c39d309a4465a1ce7af87} 
+\index{main.c@{main.c}!Property@{Property}}
+\index{Property@{Property}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{Property}{Property}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structproperty}{property}} \mbox{\hyperlink{main_8c_af6ffa2d6fd1c39d309a4465a1ce7af87}{Property}}}
+
+
+
+A struct representing a property @initalizer\+: init\+Property. 
+
+\Hypertarget{main_8c_aedaaa3f425adc8ef27426e9ecbf63d29}\label{main_8c_aedaaa3f425adc8ef27426e9ecbf63d29} 
+\index{main.c@{main.c}!ReviewWindow@{ReviewWindow}}
+\index{ReviewWindow@{ReviewWindow}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{ReviewWindow}{ReviewWindow}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structreview_window}{review\+Window}} \mbox{\hyperlink{main_8c_aedaaa3f425adc8ef27426e9ecbf63d29}{Review\+Window}}}
+
+
+
+the review Window of the app 
+
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8c_af34961ca790e86a4ed67c0362924a260}\label{main_8c_af34961ca790e86a4ed67c0362924a260} 
+\index{main.c@{main.c}!addReview@{addReview}}
+\index{addReview@{addReview}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{addReview()}{addReview()}}
+{\footnotesize\ttfamily void add\+Review (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a7afb31fe444397deb0375c093030682d}{App}} \texorpdfstring{$\ast$}{*}}]{main\+App,  }\item[{const int}]{review\mbox{[}\+NUMBER\+\_\+\+OF\+\_\+\+REVIEW\+\_\+\+CATS\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+Add a review to the linked list of reviews. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em property} & the property to add the review to \\
+\hline
+{\em review} & the review to add \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a85bdc4d907ddea25da7b38f61eb95ccd}\label{main_8c_a85bdc4d907ddea25da7b38f61eb95ccd} 
+\index{main.c@{main.c}!calculateCost@{calculateCost}}
+\index{calculateCost@{calculateCost}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{calculateCost()}{calculateCost()}}
+{\footnotesize\ttfamily double calculate\+Cost (\begin{DoxyParamCaption}\item[{int}]{nights,  }\item[{double}]{base\+Price,  }\item[{int const}]{DISCOUNT\+\_\+\+RANGES\mbox{[}$\,$\mbox{]},  }\item[{double const}]{DISCOUNTS\mbox{[}$\,$\mbox{]},  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+A function to calculate the cost of a stay in a Air\+UCCS rented building. Cost is based on nights stayed, the base price per night and the discounts applied. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nights} & \{int\} how many nights the user has stayed \\
+\hline
+{\em base\+Price} & \{float\} the base price per night before any discounts are applied. \\
+\hline
+{\em discount\+Ranges\mbox{[}$\,$\mbox{]}} & \{int\mbox{[}\mbox{]}) an array of ints in the format \mbox{[}discount\+Range1\+Start,discount\+Range1\+End,Discount\+Range2\+End,...) where the start of each range after 1 is the end of the last \\
+\hline
+{\em discounts\mbox{[}$\,$\mbox{]}} & \{floats\} an array of the discounts for each range \\
+\hline
+{\em length,\{size\+\_\+t\}} & the length of both the discount\+RRanges and discounts array, they must be same length\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\{double\} a double value representing how much the stay would cost. 
+\end{DoxyReturn}
+\Hypertarget{main_8c_aa136ea4239d59d6fdcf01a88db908497}\label{main_8c_aa136ea4239d59d6fdcf01a88db908497} 
+\index{main.c@{main.c}!calculateDiscount@{calculateDiscount}}
+\index{calculateDiscount@{calculateDiscount}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{calculateDiscount()}{calculateDiscount()}}
+{\footnotesize\ttfamily double calculate\+Discount (\begin{DoxyParamCaption}\item[{int}]{night,  }\item[{int const}]{DISCOUNT\+\_\+\+RANGES\mbox{[}$\,$\mbox{]},  }\item[{double const}]{DISCOUNTS\mbox{[}$\,$\mbox{]},  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+A function that will calculate the discount of a day. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em night} & \{int\} the night to find the discount of \\
+\hline
+{\em discount\+Ranges\mbox{[}$\,$\mbox{]}} & \{int\mbox{[}\mbox{]}) an array of ints in the format \mbox{[}discount\+Range1\+Start,discount\+Range1\+End,Discount\+Range2\+End,...) where the start of each range after 1 is the end of the last \\
+\hline
+{\em discounts\mbox{[}$\,$\mbox{]}} & \{floats\} an array of the discounts for each range \\
+\hline
+{\em length,\{size\+\_\+t\}} & the length of both the discount\+RRanges and discounts array, they must be same length\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+double, a dollar amount of the discount for this night 
+\end{DoxyReturn}
+\Hypertarget{main_8c_a49be7264a1719899398ed267e69188d4}\label{main_8c_a49be7264a1719899398ed267e69188d4} 
+\index{main.c@{main.c}!chargeUser@{chargeUser}}
+\index{chargeUser@{chargeUser}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{chargeUser()}{chargeUser()}}
+{\footnotesize\ttfamily void charge\+User (\begin{DoxyParamCaption}\item[{char const}]{uuid\mbox{[}$\,$\mbox{]},  }\item[{float}]{cost,  }\item[{char const}]{card\+Num\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+
+
+a method that would charge the user money for their stay. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em uuid,the} & id of the user\textquotesingle{}s stay \\
+\hline
+{\em cost,the} & total cost to charge them \\
+\hline
+{\em card\+Num} & the card to charge the cost to \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_acb547fc473a45efe1612cf333ec2b0a1}\label{main_8c_acb547fc473a45efe1612cf333ec2b0a1} 
+\index{main.c@{main.c}!cleanUpReviews@{cleanUpReviews}}
+\index{cleanUpReviews@{cleanUpReviews}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{cleanUpReviews()}{cleanUpReviews()}}
+{\footnotesize\ttfamily void clean\+Up\+Reviews (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_af6ffa2d6fd1c39d309a4465a1ce7af87}{Property}} \texorpdfstring{$\ast$}{*}}]{property\+Ptr }\end{DoxyParamCaption})}
+
+
+
+A method for quickly cleaning up the linked list of the property reviews. 
+
+free all memory held by review ll
+
+
+\begin{DoxyParams}{Parameters}
+{\em property\+Ptr} & the property to cleanup\\
+\hline
+{\em property\+Ptr} & the property \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_abef81d57e41bf73d65df4ef6652cea7e}\label{main_8c_abef81d57e41bf73d65df4ef6652cea7e} 
+\index{main.c@{main.c}!cliMain@{cliMain}}
+\index{cliMain@{cliMain}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{cliMain()}{cliMain()}}
+{\footnotesize\ttfamily int cli\+Main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+the main function for the program that will handle initialization/entry. 
+
+\begin{DoxyAuthor}{Author}
+Mattie\+FM 
+\end{DoxyAuthor}
+\Hypertarget{main_8c_a2a6b9e4ccbf60333a474b7433b21d19f}\label{main_8c_a2a6b9e4ccbf60333a474b7433b21d19f} 
+\index{main.c@{main.c}!DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE@{DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE}}
+\index{DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE@{DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE()}{DEFINE\_LL\_OF\_TYPE\_ARR\_WITH\_SIZE()}}
+{\footnotesize\ttfamily DEFINE\+\_\+\+LL\+\_\+\+OF\+\_\+\+TYPE\+\_\+\+ARR\+\_\+\+WITH\+\_\+\+SIZE (\begin{DoxyParamCaption}\item[{int}]{,  }\item[{\mbox{\hyperlink{main_8c_afe66cf1c04080a4cba6fc79833c5d249}{NUMBER\+\_\+\+OF\+\_\+\+REVIEW\+\_\+\+CATS}}}]{,  }\item[{Review\+Node}]{,  }\item[{review\+Node}]{ }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8c_af930487fde31f5b0bfa65a3b0b1bdbfb}\label{main_8c_af930487fde31f5b0bfa65a3b0b1bdbfb} 
+\index{main.c@{main.c}!displayCost@{displayCost}}
+\index{displayCost@{displayCost}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{displayCost()}{displayCost()}}
+{\footnotesize\ttfamily void display\+Cost (\begin{DoxyParamCaption}\item[{int}]{nights,  }\item[{double}]{cost }\end{DoxyParamCaption})}
+
+
+
+A function to display how much the user\textquotesingle{}s stay cost in a user friendly way. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nights} & \{int\} how many nights the user has stayed \\
+\hline
+{\em cost} & \{double\} the total cost of the user\textquotesingle{}s stay\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nothing, prints info to the console for the user. in the format\+: Nights Charge 5 \$nnnn.\+nn 
+\end{DoxyReturn}
+\Hypertarget{main_8c_a2fd4dc35b8b9778a29fc386d0829cda9}\label{main_8c_a2fd4dc35b8b9778a29fc386d0829cda9} 
+\index{main.c@{main.c}!displayRentalPropertyInfo@{displayRentalPropertyInfo}}
+\index{displayRentalPropertyInfo@{displayRentalPropertyInfo}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{displayRentalPropertyInfo()}{displayRentalPropertyInfo()}}
+{\footnotesize\ttfamily void display\+Rental\+Property\+Info (\begin{DoxyParamCaption}\item[{int}]{min,  }\item[{int}]{max,  }\item[{double}]{base\+Price,  }\item[{int const}]{DISCOUNT\+\_\+\+RANGES\mbox{[}$\,$\mbox{]},  }\item[{double const}]{DISCOUNTS\mbox{[}$\,$\mbox{]},  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+display the rental property info to the user before they are prompted to make a perchance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em min,the} & minimum number of nights a user can stay \\
+\hline
+{\em max} & the maximum number of nights a user can stay \\
+\hline
+{\em base\+Price} & the base price per night of the property \\
+\hline
+{\em DISCOUNT\+\_\+\+RANGES\mbox{[}$\,$\mbox{]}} & \{int\mbox{[}\mbox{]}) an array of ints in the format \mbox{[}discount\+Range1\+Start,discount\+Range1\+End,Discount\+Range2\+End,...) where the start of each range after 1 is the end of the last \\
+\hline
+{\em DISCOUNTS\mbox{[}$\,$\mbox{]}} & \{double\mbox{[}\mbox{]}\} an array of the discounts for each range, \\
+\hline
+{\em length,\{size\+\_\+t\}} & the length of both the discount\+RRanges and discounts array, they must be same length \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_ad0b5b543d8690bb4ddefc6b64428f7eb}\label{main_8c_ad0b5b543d8690bb4ddefc6b64428f7eb} 
+\index{main.c@{main.c}!getBooking@{getBooking}}
+\index{getBooking@{getBooking}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{getBooking()}{getBooking()}}
+{\footnotesize\ttfamily bool get\+Booking (\begin{DoxyParamCaption}\item[{int \texorpdfstring{$\ast$}{*}}]{value\+Pt,  }\item[{int const}]{SENTINELS\mbox{[}$\,$\mbox{]},  }\item[{int}]{min,  }\item[{int}]{max,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+A function that will start the process of booking a room. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value\+Pt} & a pointer to a variable to store the value the user entered. \\
+\hline
+{\em sentinels\mbox{[}$\,$\mbox{]}} & an array of sentinel values that are allowed \\
+\hline
+{\em min,the} & min value for nights allowed \\
+\hline
+{\em max,the} & max value for nights allowed \\
+\hline
+{\em length,\{size\+\_\+t\}} & the length of the sentinel\+\_\+values array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool, this will return true if the user has made a valid booking and false if they have entered a sentinel value. 
+\end{DoxyReturn}
+\Hypertarget{main_8c_ab9e636ad749a158db97c594fe5dcb182}\label{main_8c_ab9e636ad749a158db97c594fe5dcb182} 
+\index{main.c@{main.c}!getValidIntInputWithSentinels@{getValidIntInputWithSentinels}}
+\index{getValidIntInputWithSentinels@{getValidIntInputWithSentinels}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{getValidIntInputWithSentinels()}{getValidIntInputWithSentinels()}}
+{\footnotesize\ttfamily int get\+Valid\+Int\+Input\+With\+Sentinels (\begin{DoxyParamCaption}\item[{char const}]{PROMPT\mbox{[}$\,$\mbox{]},  }\item[{int}]{min,  }\item[{int}]{max,  }\item[{int const}]{SENTINEL\+\_\+\+VALUES\mbox{[}$\,$\mbox{]},  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Get a int that is either within \mbox{[}min-\/max\mbox{]} or in a list of sentinel values, from the user, prompting them with the prompt passed into this function and displaying the err prompt if they enter an invalid input. 
+
+@\+Author Mattie\+FM
+
+
+\begin{DoxyParams}{Parameters}
+{\em prompt} & \{char\mbox{[}\mbox{]}\} a string like array of chars to display to the user as a prompt \\
+\hline
+{\em err} & \{char\mbox{[}\mbox{]}\} a string like array to display to the user when they enter an invalid value, \\
+\hline
+{\em min\+Ascii\+Code} & \{signed int\} the lowest ascii code allowed to be entered \\
+\hline
+{\em max\+Ascii\+Code} & \{signed int\} the highest ascii code allowed to be entered \\
+\hline
+{\em sentinel\+Values} & \{signed int\mbox{[}\mbox{]}\} an array of explicitly allowed ascii codes \\
+\hline
+{\em length,\{size\+\_\+t\}} & the length of the sentinel\+\_\+values array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a signed int between \mbox{[}min-\/max\mbox{]} 
+\end{DoxyReturn}
+\Hypertarget{main_8c_a73b13b5e2d9bcacf35a4369a9270c43f}\label{main_8c_a73b13b5e2d9bcacf35a4369a9270c43f} 
+\index{main.c@{main.c}!initLocation@{initLocation}}
+\index{initLocation@{initLocation}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{initLocation()}{initLocation()}}
+{\footnotesize\ttfamily void init\+Location (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_a5f2225f46c54d4268143a3e9586f67a4}{Location}} \texorpdfstring{$\ast$}{*}}]{loc,  }\item[{char}]{address\mbox{[}\+STRING\+\_\+\+SIZE\mbox{]},  }\item[{int}]{lat,  }\item[{int}]{lon }\end{DoxyParamCaption})}
+
+
+
+an initalizer for a new location struct. Initalizes an existing Location with good data 
+
+Initalize a location structure.
+
+
+\begin{DoxyParams}{Parameters}
+{\em loc} & the location struct pointer \\
+\hline
+{\em address} & the adress of the location \\
+\hline
+{\em lat} & the int latitude \\
+\hline
+{\em lon} & the int longitude\\
+\hline
+{\em loc} & the location struct to init \\
+\hline
+{\em address} & the adress in the form of a string of the location \\
+\hline
+{\em lat} & the latitude of the location \\
+\hline
+{\em lon} & the longitude of the location \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a579214ebbaa002f5dd7d119bc64ac24d}\label{main_8c_a579214ebbaa002f5dd7d119bc64ac24d} 
+\index{main.c@{main.c}!initProperty@{initProperty}}
+\index{initProperty@{initProperty}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{initProperty()}{initProperty()}}
+{\footnotesize\ttfamily void init\+Property (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{main_8c_af6ffa2d6fd1c39d309a4465a1ce7af87}{Property}} \texorpdfstring{$\ast$}{*}}]{property }\end{DoxyParamCaption})}
+
+
+
+Initalize a property with default values. 
+
+Initalzize a property with default values.
+
+
+\begin{DoxyParams}{Parameters}
+{\em property} & the property\+Ptr to initalize onto\\
+\hline
+{\em property} & the property struct to initalize \\
+\hline
+\end{DoxyParams}
+\Hypertarget{main_8c_a7eedf911c331de9894b62bdc926a0b07}\label{main_8c_a7eedf911c331de9894b62bdc926a0b07} 
+\index{main.c@{main.c}!intArrContains@{intArrContains}}
+\index{intArrContains@{intArrContains}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{intArrContains()}{intArrContains()}}
+{\footnotesize\ttfamily bool int\+Arr\+Contains (\begin{DoxyParamCaption}\item[{int const}]{ARR\mbox{[}$\,$\mbox{]},  }\item[{int}]{val,  }\item[{size\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+check if an array of ints contains a value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ARR\mbox{[}$\,$\mbox{]}} & the array to look through \\
+\hline
+{\em val} & the value to check for \\
+\hline
+{\em length,\{size\+\_\+t\}} & the length of the array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool, true if value is in arr false if not. 
+\end{DoxyReturn}
+\Hypertarget{main_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{main_8c_a3c04138a5bfe5d72780bb7e82a18e627} 
+\index{main.c@{main.c}!main@{main}}
+\index{main@{main}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv }\end{DoxyParamCaption})}
+
+\Hypertarget{main_8c_aecb3b10f315423f9de2e0c640a6f2d0d}\label{main_8c_aecb3b10f315423f9de2e0c640a6f2d0d} 
+\index{main.c@{main.c}!nBitRandom@{nBitRandom}}
+\index{nBitRandom@{nBitRandom}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{nBitRandom()}{nBitRandom()}}
+{\footnotesize\ttfamily unsigned long long n\+Bit\+Random (\begin{DoxyParamCaption}\item[{int}]{number\+Of\+Bits }\end{DoxyParamCaption})}
+
+
+
+generate a random integer of n bits 
+
+====================== \hypertarget{main_8c_autotoc_md5}{}\doxysubsection{\texorpdfstring{Prototypes}{Prototypes}}\label{main_8c_autotoc_md5}
+====================== \hypertarget{main_8c_autotoc_md6}{}\doxysubsection{\texorpdfstring{Functions}{Functions}}\label{main_8c_autotoc_md6}
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8c_a5c96b971fedeb5955e05256b7e58e74e}\label{main_8c_a5c96b971fedeb5955e05256b7e58e74e} 
+\index{main.c@{main.c}!DEFAULT\_DAY\_RANGES@{DEFAULT\_DAY\_RANGES}}
+\index{DEFAULT\_DAY\_RANGES@{DEFAULT\_DAY\_RANGES}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_DAY\_RANGES}{DEFAULT\_DAY\_RANGES}}
+{\footnotesize\ttfamily const int DEFAULT\+\_\+\+DAY\+\_\+\+RANGES\mbox{[}\mbox{\hyperlink{main_8c_a71147341558d2823036988bfc0e6575d}{NUMBER\+\_\+\+OF\+\_\+\+PRICE\+\_\+\+RANGES}}\mbox{]} = \{0, \mbox{\hyperlink{main_8c_abaed5313319821e00c971ca48e071fcf}{DEFAULT\+\_\+\+INTERVAL\+\_\+1\+\_\+\+NIGHTS}}, \mbox{\hyperlink{main_8c_a33b4fb08407f315f236d0b93b39da793}{DEFAULT\+\_\+\+INTERVAL\+\_\+2\+\_\+\+NIGHTS}} \}}
+
+\Hypertarget{main_8c_a9cfdaa0c3a5488cbcb8e9cb738e19146}\label{main_8c_a9cfdaa0c3a5488cbcb8e9cb738e19146} 
+\index{main.c@{main.c}!DEFAULT\_DISCOUNT@{DEFAULT\_DISCOUNT}}
+\index{DEFAULT\_DISCOUNT@{DEFAULT\_DISCOUNT}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_DISCOUNT}{DEFAULT\_DISCOUNT}}
+{\footnotesize\ttfamily double const DEFAULT\+\_\+\+DISCOUNT = 50}
+
+
+
+the default base discount before range multiplyers 
+
+\Hypertarget{main_8c_aa00256dbd2d2a34973cbaf5a254504b1}\label{main_8c_aa00256dbd2d2a34973cbaf5a254504b1} 
+\index{main.c@{main.c}!DEFAULT\_DISCOUNTS@{DEFAULT\_DISCOUNTS}}
+\index{DEFAULT\_DISCOUNTS@{DEFAULT\_DISCOUNTS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_DISCOUNTS}{DEFAULT\_DISCOUNTS}}
+{\footnotesize\ttfamily const int DEFAULT\+\_\+\+DISCOUNTS\mbox{[}\mbox{\hyperlink{main_8c_a71147341558d2823036988bfc0e6575d}{NUMBER\+\_\+\+OF\+\_\+\+PRICE\+\_\+\+RANGES}}\mbox{]} = \{0, \mbox{\hyperlink{main_8c_a9cfdaa0c3a5488cbcb8e9cb738e19146}{DEFAULT\+\_\+\+DISCOUNT}}, \mbox{\hyperlink{main_8c_a9cfdaa0c3a5488cbcb8e9cb738e19146}{DEFAULT\+\_\+\+DISCOUNT}}\texorpdfstring{$\ast$}{*}2\}}
+
+\Hypertarget{main_8c_abaed5313319821e00c971ca48e071fcf}\label{main_8c_abaed5313319821e00c971ca48e071fcf} 
+\index{main.c@{main.c}!DEFAULT\_INTERVAL\_1\_NIGHTS@{DEFAULT\_INTERVAL\_1\_NIGHTS}}
+\index{DEFAULT\_INTERVAL\_1\_NIGHTS@{DEFAULT\_INTERVAL\_1\_NIGHTS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_INTERVAL\_1\_NIGHTS}{DEFAULT\_INTERVAL\_1\_NIGHTS}}
+{\footnotesize\ttfamily unsigned int const DEFAULT\+\_\+\+INTERVAL\+\_\+1\+\_\+\+NIGHTS = 3}
+
+
+
+the default interval that the first discount starts at 
+
+\Hypertarget{main_8c_a33b4fb08407f315f236d0b93b39da793}\label{main_8c_a33b4fb08407f315f236d0b93b39da793} 
+\index{main.c@{main.c}!DEFAULT\_INTERVAL\_2\_NIGHTS@{DEFAULT\_INTERVAL\_2\_NIGHTS}}
+\index{DEFAULT\_INTERVAL\_2\_NIGHTS@{DEFAULT\_INTERVAL\_2\_NIGHTS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_INTERVAL\_2\_NIGHTS}{DEFAULT\_INTERVAL\_2\_NIGHTS}}
+{\footnotesize\ttfamily unsigned int const DEFAULT\+\_\+\+INTERVAL\+\_\+2\+\_\+\+NIGHTS = 6}
+
+
+
+the default interval that the second discount starts at 
+
+\Hypertarget{main_8c_a139936736b1fed8ce48a58629647dcc0}\label{main_8c_a139936736b1fed8ce48a58629647dcc0} 
+\index{main.c@{main.c}!DEFAULT\_MAX\_RENTAL\_NIGHTS@{DEFAULT\_MAX\_RENTAL\_NIGHTS}}
+\index{DEFAULT\_MAX\_RENTAL\_NIGHTS@{DEFAULT\_MAX\_RENTAL\_NIGHTS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_MAX\_RENTAL\_NIGHTS}{DEFAULT\_MAX\_RENTAL\_NIGHTS}}
+{\footnotesize\ttfamily unsigned int const DEFAULT\+\_\+\+MAX\+\_\+\+RENTAL\+\_\+\+NIGHTS = 14}
+
+
+
+the default maximum nights 
+
+\Hypertarget{main_8c_a2af4ca44f722cc3b4b00a68b851b9e4d}\label{main_8c_a2af4ca44f722cc3b4b00a68b851b9e4d} 
+\index{main.c@{main.c}!DEFAULT\_MIN\_RENTAL\_NIGHTS@{DEFAULT\_MIN\_RENTAL\_NIGHTS}}
+\index{DEFAULT\_MIN\_RENTAL\_NIGHTS@{DEFAULT\_MIN\_RENTAL\_NIGHTS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_MIN\_RENTAL\_NIGHTS}{DEFAULT\_MIN\_RENTAL\_NIGHTS}}
+{\footnotesize\ttfamily int unsigned const DEFAULT\+\_\+\+MIN\+\_\+\+RENTAL\+\_\+\+NIGHTS = 1}
+
+
+
+the default minimum nights 
+
+\Hypertarget{main_8c_a539ad50b7780b0efc81c9b85f7e8df2b}\label{main_8c_a539ad50b7780b0efc81c9b85f7e8df2b} 
+\index{main.c@{main.c}!DEFAULT\_NAME@{DEFAULT\_NAME}}
+\index{DEFAULT\_NAME@{DEFAULT\_NAME}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_NAME}{DEFAULT\_NAME}}
+{\footnotesize\ttfamily const char DEFAULT\+\_\+\+NAME\mbox{[}\mbox{\hyperlink{main_8c_ad78224efe1d3fb39b67ca74ad9d9eec7}{STRING\+\_\+\+SIZE}}\mbox{]} = "{}AIR UCCS"{}}
+
+
+
+the default property name 
+
+\Hypertarget{main_8c_abe3a8709ba5ff2e63b69fce41c24a0d0}\label{main_8c_abe3a8709ba5ff2e63b69fce41c24a0d0} 
+\index{main.c@{main.c}!DEFAULT\_RENTAL\_RATE@{DEFAULT\_RENTAL\_RATE}}
+\index{DEFAULT\_RENTAL\_RATE@{DEFAULT\_RENTAL\_RATE}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_RENTAL\_RATE}{DEFAULT\_RENTAL\_RATE}}
+{\footnotesize\ttfamily double const DEFAULT\+\_\+\+RENTAL\+\_\+\+RATE = 400}
+
+
+
+the default cost per night 
+
+\Hypertarget{main_8c_a44287a1e2179ad86ebd481121eafb1f3}\label{main_8c_a44287a1e2179ad86ebd481121eafb1f3} 
+\index{main.c@{main.c}!DEFAULT\_REVIEW\_HEADERS@{DEFAULT\_REVIEW\_HEADERS}}
+\index{DEFAULT\_REVIEW\_HEADERS@{DEFAULT\_REVIEW\_HEADERS}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_REVIEW\_HEADERS}{DEFAULT\_REVIEW\_HEADERS}}
+{\footnotesize\ttfamily const char DEFAULT\+\_\+\+REVIEW\+\_\+\+HEADERS\mbox{[}\mbox{\hyperlink{main_8c_afe66cf1c04080a4cba6fc79833c5d249}{NUMBER\+\_\+\+OF\+\_\+\+REVIEW\+\_\+\+CATS}}\mbox{]}\mbox{[}\mbox{\hyperlink{main_8c_ad78224efe1d3fb39b67ca74ad9d9eec7}{STRING\+\_\+\+SIZE}}\mbox{]} = \{"{}Happiness"{}, "{}Cleanliness"{}, "{}Saftey"{}, "{}Location"{}, "{}Amenities"{}\}}
+
+
+
+the default review headers 
+
+\Hypertarget{main_8c_a6c5820a0ceef740c20441d04df24950a}\label{main_8c_a6c5820a0ceef740c20441d04df24950a} 
+\index{main.c@{main.c}!names@{names}}
+\index{names@{names}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{names}{names}}
+{\footnotesize\ttfamily char\texorpdfstring{$\ast$}{*} names\mbox{[}\mbox{\hyperlink{main_8c_a0599f56005d18d1574abdb5b746e69cc}{Num\+Tabs}}\mbox{]} = \{"{}Main"{}, "{}Analytics"{}, "{}Login"{}\}}
+
+\Hypertarget{main_8c_aacb3b7f85948a76fa11df31c02e98fc8}\label{main_8c_aacb3b7f85948a76fa11df31c02e98fc8} 
+\index{main.c@{main.c}!windows@{windows}}
+\index{windows@{windows}!main.c@{main.c}}
+\doxysubsubsection{\texorpdfstring{windows}{windows}}
+{\footnotesize\ttfamily Gtk\+Widget\texorpdfstring{$\ast$}{*} windows\mbox{[}\mbox{\hyperlink{main_8c_a0599f56005d18d1574abdb5b746e69cc}{Num\+Tabs}}\mbox{]} = \{\}}
+

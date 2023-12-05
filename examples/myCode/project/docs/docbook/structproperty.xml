@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structproperty" xml:lang="en-US">
+<title>property Struct Reference</title>
+<indexterm><primary>property</primary></indexterm>
+<para>
+
+<para>A struct representing a property @initalizer: initProperty. </para>
+ 
+</para>
+<simplesect>
+    <title>Data Fields    </title>
+        <itemizedlist>
+            <listitem><para>char <link linkend="_structproperty_1a191b09831ce959fea615beb6f2b609d3">propertyName</link> [<link linkend="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7">STRING_SIZE</link>]</para>
+</listitem>
+            <listitem><para><link linkend="_main_8c_1a5f2225f46c54d4268143a3e9586f67a4">Location</link> <link linkend="_structproperty_1a260defa82d536dcea2aa22452b862110">location</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_structproperty_1ac25840037114824712a266b5827a4f37">dayRanges</link> [<link linkend="_main_8c_1a71147341558d2823036988bfc0e6575d">NUMBER_OF_PRICE_RANGES</link>]</para>
+</listitem>
+            <listitem><para>double <link linkend="_structproperty_1a78cfc4adb15fb15e26a8bee390778e7a">discounts</link> [<link linkend="_main_8c_1a71147341558d2823036988bfc0e6575d">NUMBER_OF_PRICE_RANGES</link>]</para>
+</listitem>
+            <listitem><para>double <link linkend="_structproperty_1a7b621736f2a57bb77067f9ef4d8798c2">baseDiscount</link></para>
+</listitem>
+            <listitem><para>double <link linkend="_structproperty_1a36c611bac2391f464098144cfdfd95d0">totalMoney</link></para>
+</listitem>
+            <listitem><para>double <link linkend="_structproperty_1a85d4797ede393d7546c32bf2e3f18196">totalNights</link></para>
+</listitem>
+            <listitem><para>ReviewNode * <link linkend="_structproperty_1ac53d8f9542287aabb0ac5b5dc94db274">reviewsHead</link></para>
+
+<para>the head of the review&apos;s linked list </para>
+</listitem>
+            <listitem><para>char <link linkend="_structproperty_1af08531d2b1e2a3c0dff557786a09341d">headers</link> [<link linkend="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249">NUMBER_OF_REVIEW_CATS</link>][<link linkend="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7">STRING_SIZE</link>]</para>
+
+<para>an array of the headers of the review categories </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>A struct representing a property @initalizer: initProperty. </para>
+</section>
+<section>
+<title>Field Documentation</title>
+<anchor xml:id="_structproperty_1a7b621736f2a57bb77067f9ef4d8798c2"/><section>
+    <title>baseDiscount</title>
+<indexterm><primary>baseDiscount</primary><secondary>property</secondary></indexterm>
+<indexterm><primary>property</primary><secondary>baseDiscount</secondary></indexterm>
+<para><computeroutput>double baseDiscount</computeroutput></para></section>
+<anchor xml:id="_structproperty_1ac25840037114824712a266b5827a4f37"/><section>
+    <title>dayRanges</title>
+<indexterm><primary>dayRanges</primary><secondary>property</secondary></indexterm>
+<indexterm><primary>property</primary><secondary>dayRanges</secondary></indexterm>
+<para><computeroutput>int dayRanges[<link linkend="_main_8c_1a71147341558d2823036988bfc0e6575d">NUMBER_OF_PRICE_RANGES</link>]</computeroutput></para></section>
+<anchor xml:id="_structproperty_1a78cfc4adb15fb15e26a8bee390778e7a"/><section>
+    <title>discounts</title>
+<indexterm><primary>discounts</primary><secondary>property</secondary></indexterm>
+<indexterm><primary>property</primary><secondary>discounts</secondary></indexterm>
+<para><computeroutput>double discounts[<link linkend="_main_8c_1a71147341558d2823036988bfc0e6575d">NUMBER_OF_PRICE_RANGES</link>]</computeroutput></para>
+<para>@description the discounts for each range </para>
+</section>
+<anchor xml:id="_structproperty_1af08531d2b1e2a3c0dff557786a09341d"/><section>
+    <title>headers</title>
+<indexterm><primary>headers</primary><secondary>property</secondary></indexterm>
+<indexterm><primary>property</primary><secondary>headers</secondary></indexterm>
+<para><computeroutput>char headers[<link linkend="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249">NUMBER_OF_REVIEW_CATS</link>][<link linkend="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7">STRING_SIZE</link>]</computeroutput></para><para>
+
+<para>an array of the headers of the review categories </para>
+</para>
+</section>
+<anchor xml:id="_structproperty_1a260defa82d536dcea2aa22452b862110"/><section>
+    <title>location</title>
+<indexterm><primary>location</primary><secondary>property</secondary></indexterm>
+<indexterm><primary>property</primary><secondary>location</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1a5f2225f46c54d4268143a3e9586f67a4">Location</link> <link linkend="_structlocation">location</link></computeroutput></para></section>
+<anchor xml:id="_structproperty_1a191b09831ce959fea615beb6f2b609d3"/><section>
+    <title>propertyName</title>
+<indexterm><primary>propertyName</primary><secondary>property</secondary></indexterm>
+<indexterm><primary>property</primary><secondary>propertyName</secondary></indexterm>
+<para><computeroutput>char propertyName[<link linkend="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7">STRING_SIZE</link>]</computeroutput></para></section>
+<anchor xml:id="_structproperty_1ac53d8f9542287aabb0ac5b5dc94db274"/><section>
+    <title>reviewsHead</title>
+<indexterm><primary>reviewsHead</primary><secondary>property</secondary></indexterm>
+<indexterm><primary>property</primary><secondary>reviewsHead</secondary></indexterm>
+<para><computeroutput>ReviewNode* reviewsHead</computeroutput></para><para>
+
+<para>the head of the review&apos;s linked list </para>
+</para>
+</section>
+<anchor xml:id="_structproperty_1a36c611bac2391f464098144cfdfd95d0"/><section>
+    <title>totalMoney</title>
+<indexterm><primary>totalMoney</primary><secondary>property</secondary></indexterm>
+<indexterm><primary>property</primary><secondary>totalMoney</secondary></indexterm>
+<para><computeroutput>double totalMoney</computeroutput></para>
+<para>@description how much money has this property made durring this runtime </para>
+</section>
+<anchor xml:id="_structproperty_1a85d4797ede393d7546c32bf2e3f18196"/><section>
+    <title>totalNights</title>
+<indexterm><primary>totalNights</primary><secondary>property</secondary></indexterm>
+<indexterm><primary>property</primary><secondary>totalNights</secondary></indexterm>
+<para><computeroutput>double totalNights</computeroutput></para>
+<para>@description how many nights has this property booked durring this runtime </para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+<link linkend="_main_8c">main.c</link></section>
+</section>

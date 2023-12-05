@@ -1,0 +1,664 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="key_gen_8c" kind="file" language="C++">
+    <compoundname>keyGen.c</compoundname>
+    <includes local="no">time.h</includes>
+    <includes local="no">stdint.h</includes>
+    <includes local="no">stdio.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes local="no">math.h</includes>
+    <includes local="no">stdbool.h</includes>
+    <incdepgraph>
+      <node id="1">
+        <label>keyGen.c</label>
+        <link refid="key_gen_8c"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>math.h</label>
+      </node>
+      <node id="7">
+        <label>stdbool.h</label>
+      </node>
+      <node id="3">
+        <label>stdint.h</label>
+      </node>
+      <node id="4">
+        <label>stdio.h</label>
+      </node>
+      <node id="5">
+        <label>stdlib.h</label>
+      </node>
+      <node id="2">
+        <label>time.h</label>
+      </node>
+    </incdepgraph>
+    <sectiondef kind="define">
+      <memberdef kind="define" id="key_gen_8c_1a826ece061102e9edb8bd1d2167fbc710" prot="public" static="no">
+        <name>BIT_LEVEL</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>First To walk anyone reading through the general methodology, recall that RSA is an algorithm for generating complex keys for pub/priv key crypto</para>
+<para>It asserts that it is very hard to find large integer common denominators of primes it consists of 4 steps</para>
+<para>1: choose two arbitraty large primes, denoted as p and q. I will use these names below as it is what they are called within the algorithm and is rather standard -These should be chosen at random, I will be using a probabalistic aproach to find primes as we only need to find 2 we can basically guess and assume we will be right within x where x is usually less than 2000 guesses which is computationally insignificant for this scale 2: we then compute n = p times q --&gt; n=pq. 3: then it gets harder. We now compute Carmichaels totient function of n (denoted as λ(n)) Its a lot of math that will be explained in the functions below for it 4: choose an integer e such taht 2 &lt; e &lt; λ(n) and gcd(e, λ(n)) = 1; that is, e and λ(n) are coprime 5: determine d as d == e^-1 that is d is the modular multiplicitive invers of e modulo λ(n)</para>
+<para>thus the public key becomes modulus n and the exponent e and the private key consists of exponent d, p, q and λ(n), which are used to compute d</para>
+<para>in short d is the private key n^e is the public key ====================== </para>
+<sect1 id="key_gen_8c_1autotoc_md0">
+<title>Declarations</title>
+</sect1>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="49" column="9" bodyfile="keyGen.c" bodystart="49" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="key_gen_8c_1aecb3b10f315423f9de2e0c640a6f2d0d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>unsigned long long nBitRandom</definition>
+        <argsstring>(int numberOfBits)</argsstring>
+        <name>nBitRandom</name>
+        <param>
+          <type>int</type>
+          <declname>numberOfBits</declname>
+        </param>
+        <briefdescription>
+<para>generate a random integer of n bits </para>
+        </briefdescription>
+        <detaileddescription>
+<para>====================== </para>
+<sect1 id="key_gen_8c_1autotoc_md1">
+<title>Prototypes</title>
+<para>====================== </para>
+</sect1>
+<sect1 id="key_gen_8c_1autotoc_md2">
+<title>Functions</title>
+<para>====================== </para>
+</sect1>
+<sect1 id="key_gen_8c_1autotoc_md3">
+<title>Prime Calc (working)</title>
+<para>====================== </para>
+</sect1>
+<sect1 id="main_8c_1autotoc_md6">
+<title>Functions</title>
+</sect1>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="85" column="9" bodyfile="keyGen.c" bodystart="85" bodyend="97" declfile="keyGen.c" declline="55" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1ac91f9172b8051a1bde670848303d5d9b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isPrime</definition>
+        <argsstring>(int64_t n)</argsstring>
+        <name>isPrime</name>
+        <param>
+          <type>int64_t</type>
+          <declname>n</declname>
+        </param>
+        <briefdescription>
+<para>check if a number is prime </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="99" column="6" bodyfile="keyGen.c" bodystart="99" bodyend="110" declfile="keyGen.c" declline="58" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1a3e0f477fa66432159bcbae34c260d7e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool isCoPrime</definition>
+        <argsstring>(int64_t a, int64_t b)</argsstring>
+        <name>isCoPrime</name>
+        <param>
+          <type>int64_t</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int64_t</type>
+          <declname>b</declname>
+        </param>
+        <briefdescription>
+<para>check if 2 numbers are co prime with eachother </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number1 </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>number2 </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>whether they are coPrime or not </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="112" column="6" bodyfile="keyGen.c" bodystart="112" bodyend="126" declfile="keyGen.c" declline="64" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1a0c0228a5e832c9d0499165c091fad58b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>int64_t getRandPrime</definition>
+        <argsstring>()</argsstring>
+        <name>getRandPrime</name>
+        <briefdescription>
+<para>get a random prime number </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="137" column="9" bodyfile="keyGen.c" bodystart="137" bodyend="143" declfile="keyGen.c" declline="67" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1ab04146f8a570dc92f787b2282e765ed3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>RSAKeyGen</definition>
+        <argsstring>(int64_t *outN, int64_t *outD, int64_t *outE)</argsstring>
+        <name>RSAKeyGen</name>
+        <param>
+          <type>int64_t *</type>
+          <declname>outN</declname>
+        </param>
+        <param>
+          <type>int64_t *</type>
+          <declname>outD</declname>
+        </param>
+        <param>
+          <type>int64_t *</type>
+          <declname>outE</declname>
+        </param>
+        <briefdescription>
+<para>generate a private and a public key </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="196" column="1" bodyfile="keyGen.c" bodystart="196" bodyend="234" declfile="keyGen.c" declline="70" declcolumn="1"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1a998536f24ed663f5bf570155d4fa8c12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>int64_t encrypt</definition>
+        <argsstring>(char c, int64_t n, int64_t e)</argsstring>
+        <name>encrypt</name>
+        <param>
+          <type>char</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>int64_t</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>int64_t</type>
+          <declname>e</declname>
+        </param>
+        <briefdescription>
+<para>encrypt a char with the public key </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="259" column="9" bodyfile="keyGen.c" bodystart="259" bodyend="261" declfile="keyGen.c" declline="73" declcolumn="9"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1af7375ab0bf45fd807afe156684650e77" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>char</type>
+        <definition>char decrypt</definition>
+        <argsstring>(char c, int64_t n, int64_t d)</argsstring>
+        <name>decrypt</name>
+        <param>
+          <type>char</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>int64_t</type>
+          <declname>n</declname>
+        </param>
+        <param>
+          <type>int64_t</type>
+          <declname>d</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="263" column="6" bodyfile="keyGen.c" bodystart="263" bodyend="265" declfile="keyGen.c" declline="74" declcolumn="6"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1aa58bed47ea7118092ea9b44fd73b6599" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>int64_t randBetween</definition>
+        <argsstring>(int64_t min, int64_t max)</argsstring>
+        <name>randBetween</name>
+        <param>
+          <type>int64_t</type>
+          <declname>min</declname>
+        </param>
+        <param>
+          <type>int64_t</type>
+          <declname>max</declname>
+        </param>
+        <briefdescription>
+<para>get a rand between min and max </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>min</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para><linebreak/>
+ </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="132" column="9" bodyfile="keyGen.c" bodystart="132" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1aa63f1211c949c32d009a7e53ee192bbc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void _extended_euclid</definition>
+        <argsstring>(int a, int b, int *x, int *y)</argsstring>
+        <name>_extended_euclid</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>y</declname>
+        </param>
+        <briefdescription>
+<para>Finds the multiplicative inverses of the two numbers. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="153" column="6" bodyfile="keyGen.c" bodystart="153" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1ad23df605b76582c10025af5432ac36d2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int _mod_inv</definition>
+        <argsstring>(int a, int m)</argsstring>
+        <name>_mod_inv</name>
+        <param>
+          <type>int</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+<para>Returns the multiplicative inverse of a under base m. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>m</parametername>
+</parameternamelist>
+<parameterdescription>
+<para></para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>int </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="180" column="5" bodyfile="keyGen.c" bodystart="180" bodyend="193"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1a576a5085a2eaef327c962e0f4004693c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int64_t</type>
+        <definition>int64_t modExponent</definition>
+        <argsstring>(int64_t a, int64_t b, int64_t m)</argsstring>
+        <name>modExponent</name>
+        <param>
+          <type>int64_t</type>
+          <declname>a</declname>
+        </param>
+        <param>
+          <type>int64_t</type>
+          <declname>b</declname>
+        </param>
+        <param>
+          <type>int64_t</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="236" column="9" bodyfile="keyGen.c" bodystart="236" bodyend="257"/>
+      </memberdef>
+      <memberdef kind="function" id="key_gen_8c_1acdef7a1fd863a6d3770c1268cb06add3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="keyGen.c" line="271" column="6" bodyfile="keyGen.c" bodystart="271" bodyend="282"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//I<sp/>know<sp/>this<sp/>is<sp/>javascript<sp/>comment<sp/>syntax<sp/>but<sp/>its<sp/>pretty<sp/>and<sp/>is<sp/>my<sp/>preset.<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//**========================================================================</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"><sp/></highlight><highlight class="comment">/*<sp/>?<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RSA<sp/>KEY<sp/>GEN<sp/>section</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/>@author<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mattie<sp/>--me:<sp/><sp/></highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/>@email<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mmfulelr22@gmail.com:<sp/><sp/></highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/>@repo<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>https://github.com/mattieFM/CS2060ClassCode2023:<sp/><sp/></highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>@createdOn<sp/><sp/><sp/><sp/><sp/><sp/>idk:<sp/><sp/></highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>@description<sp/><sp/><sp/><sp/>RSA<sp/>key<sp/>generation<sp/>for<sp/>pub/priv<sp/>key<sp/>pair<sp/>cypto:<sp/><sp/></highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>*========================================================================**/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;time.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdint.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdio.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;math.h&gt;</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdbool.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment">//the<sp/>number<sp/>of<sp/>bits<sp/>of<sp/>our<sp/>prime<sp/>numbers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>BIT_LEVEL<sp/>8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal">int64_t<sp/><ref refid="key_gen_8c_1aecb3b10f315423f9de2e0c640a6f2d0d" kindref="member">nBitRandom</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>numberOfBits);</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1ac91f9172b8051a1bde670848303d5d9b" kindref="member">isPrime</ref>(int64_t<sp/>n);</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1a3e0f477fa66432159bcbae34c260d7e6" kindref="member">isCoPrime</ref>(int64_t<sp/>a,<sp/>int64_t<sp/>b);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal">int64_t<sp/><ref refid="key_gen_8c_1a0c0228a5e832c9d0499165c091fad58b" kindref="member">getRandPrime</ref>();</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><ref refid="key_gen_8c_1ab04146f8a570dc92f787b2282e765ed3" kindref="member">RSAKeyGen</ref>(int64_t<sp/>*<sp/>outN,<sp/>int64_t<sp/>*<sp/>outD,<sp/>int64_t<sp/>*<sp/>outE);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal">int64_t<sp/><ref refid="key_gen_8c_1a998536f24ed663f5bf570155d4fa8c12" kindref="member">encrypt</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>c,<sp/>int64_t<sp/>n,<sp/>int64_t<sp/>e);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1af7375ab0bf45fd807afe156684650e77" kindref="member">decrypt</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>c,<sp/>int64_t<sp/>n,<sp/>int64_t<sp/>d);</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="comment">//note<sp/>there<sp/>are<sp/>much<sp/>much<sp/>better<sp/>ways<sp/>to<sp/>do<sp/>this,<sp/>but<sp/>for<sp/>now<sp/>this<sp/>is<sp/>fine.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal">int64_t<sp/><ref refid="key_gen_8c_1aecb3b10f315423f9de2e0c640a6f2d0d" kindref="member">nBitRandom</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>numberOfBits){</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>srand(time(0));</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//this<sp/>is<sp/>relatively<sp/>basic<sp/>math.<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//since<sp/>binary<sp/>max<sp/>of<sp/>n<sp/>bits<sp/>is<sp/>2^n<sp/>-1<sp/>for<sp/>unsigned<sp/>numbs<sp/>we<sp/>can<sp/>make<sp/>an<sp/>easy<sp/>max</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>int64_t<sp/>maximum<sp/>=<sp/>(int64_t)<sp/>powl(2,<sp/>numberOfBits)<sp/>-<sp/>1;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//then<sp/>we<sp/>want<sp/>the<sp/>smallest<sp/>n<sp/>bit<sp/>number<sp/>which<sp/>is<sp/>similarly<sp/>to<sp/>above<sp/>just<sp/>2^n-1<sp/>+<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>int64_t<sp/>minimum<sp/>=<sp/>(int64_t)<sp/>powl(2,<sp/>numberOfBits<sp/>-<sp/>1)<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//since<sp/>all<sp/>primes<sp/>are<sp/>odd<sp/>lets<sp/>just<sp/>flip<sp/>the<sp/>last<sp/>bit</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/>int64_t<sp/>val<sp/>=<sp/>minimum<sp/>+<sp/>(rand()<sp/>%<sp/>(<sp/>maximum<sp/>-<sp/>minimum<sp/>+<sp/>1<sp/>));</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>val<sp/>|<sp/>((int64_t)1<sp/>&lt;&lt;<sp/>numberOfBits);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1ac91f9172b8051a1bde670848303d5d9b" kindref="member">isPrime</ref>(int64_t<sp/>n){</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//since<sp/>we<sp/>only<sp/>need<sp/>to<sp/>check<sp/>from<sp/>2<sp/>-<sp/>sqrt<sp/>n<sp/>devisible<sp/>due<sp/>to<sp/>how<sp/>primes<sp/>work</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//note<sp/>yes<sp/>I<sp/>am<sp/>using<sp/>multi-returns<sp/>here<sp/>since<sp/>this<sp/>is<sp/>a<sp/>very<sp/>heavy<sp/>function<sp/>and<sp/>we<sp/>want<sp/>the<sp/>proformance<sp/>saved</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//also<sp/>note<sp/>this<sp/>does<sp/>not<sp/>actually<sp/>check<sp/>if<sp/>something<sp/>is<sp/>prime,<sp/>but<sp/>combined<sp/>with<sp/>the<sp/>stipulations<sp/>of<sp/>how<sp/>we<sp/>are<sp/>generating<sp/>our<sp/>rands<sp/>it<sp/>should<sp/>work<sp/>properly</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal">(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>2;<sp/>i<sp/>&lt;=<sp/>sqrt(n);<sp/>i+=2){<sp/></highlight><highlight class="comment">//only<sp/>odds<sp/>are<sp/>prime</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(n%i==0){</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1a3e0f477fa66432159bcbae34c260d7e6" kindref="member">isCoPrime</ref>(int64_t<sp/>a,<sp/>int64_t<sp/>b){</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//numbers<sp/>are<sp/>co-prime<sp/>if<sp/>together<sp/>their<sp/>only<sp/>common<sp/>divisor<sp/>is<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//hence<sp/>8<sp/>and<sp/>9<sp/>are<sp/>co-prime<sp/>while<sp/>nither<sp/>are<sp/>prime</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//using<sp/>the<sp/>euclidian<sp/>algorithem<sp/>we<sp/>can<sp/>assert<sp/>that<sp/>by<sp/>taking<sp/>the<sp/>largest<sp/>number<sp/>that<sp/>divides<sp/>both<sp/>numbers,<sp/>and<sp/>replacing<sp/>the<sp/>larger<sp/>of<sp/>the<sp/>two<sp/>numbers<sp/>with<sp/>the<sp/>difference<sp/>untill<sp/>we<sp/>hit<sp/>the<sp/>smaller<sp/>number<sp/>being<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//from<sp/>there<sp/>we<sp/>can<sp/>assert<sp/>that<sp/>the<sp/>modulus,<sp/>the<sp/>remainder<sp/>of<sp/>the<sp/>division<sp/>also<sp/>remains<sp/>the<sp/>same<sp/>(due<sp/>to<sp/>numbers<sp/>being<sp/>cool)<sp/>and<sp/>thus:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//base<sp/>case</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(b<sp/>==<sp/>0){</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//when<sp/>b<sp/>is<sp/>0,<sp/>if<sp/>a<sp/>is<sp/>equal<sp/>to<sp/>1<sp/>the<sp/>greatest<sp/>common<sp/>divisor<sp/>was<sp/>one<sp/>and<sp/>thus<sp/>they<sp/>are<sp/>co<sp/>prime</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>a<sp/>==<sp/>1;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>mod<sp/>=<sp/>a<sp/>%<sp/>b;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1a3e0f477fa66432159bcbae34c260d7e6" kindref="member">isCoPrime</ref>(b,<sp/>mod);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal">int64_t<sp/><ref refid="key_gen_8c_1aa58bed47ea7118092ea9b44fd73b6599" kindref="member">randBetween</ref>(int64_t<sp/>min,<sp/>int64_t<sp/>max){</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(rand()<sp/>%<sp/>(max<sp/>-<sp/>1<sp/>+<sp/>1))<sp/>+<sp/>min;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal">int64_t<sp/><ref refid="key_gen_8c_1a0c0228a5e832c9d0499165c091fad58b" kindref="member">getRandPrime</ref>(){</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>n<sp/>=<sp/>6;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">do</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>n<sp/>=<sp/><ref refid="key_gen_8c_1aecb3b10f315423f9de2e0c640a6f2d0d" kindref="member">nBitRandom</ref>(<ref refid="key_gen_8c_1a826ece061102e9edb8bd1d2167fbc710" kindref="member">BIT_LEVEL</ref>);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!<ref refid="key_gen_8c_1ac91f9172b8051a1bde670848303d5d9b" kindref="member">isPrime</ref>(n));</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>n;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1aa63f1211c949c32d009a7e53ee192bbc" kindref="member">_extended_euclid</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>b,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>*x,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>*y)<sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>If<sp/>second<sp/>number<sp/>is<sp/>zero<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!a)<sp/>{</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*x<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*y<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>_x,<sp/>_y;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Find<sp/>the<sp/>coefficients<sp/>recursively<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="key_gen_8c_1aa63f1211c949c32d009a7e53ee192bbc" kindref="member">_extended_euclid</ref>(b<sp/>%<sp/>a,<sp/>a,<sp/>&amp;_x,<sp/>&amp;_y);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Update<sp/>the<sp/>coefficients<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>*x<sp/>=<sp/>_y<sp/>-<sp/>(b<sp/>/<sp/>a)<sp/>*<sp/>_x;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>*y<sp/>=<sp/>_x;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1ad23df605b76582c10025af5432ac36d2" kindref="member">_mod_inv</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>a,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>m)<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>inv_a,<sp/>inv_m;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Compute<sp/>the<sp/>coefficients<sp/>using<sp/>extended<sp/>euclidean<sp/>algorithm<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="key_gen_8c_1aa63f1211c949c32d009a7e53ee192bbc" kindref="member">_extended_euclid</ref>(a,<sp/>m,<sp/>&amp;inv_a,<sp/>&amp;inv_m);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>If<sp/>the<sp/>inverse<sp/>is<sp/>negative<sp/>convert<sp/>it<sp/>to<sp/>positive<sp/>under<sp/>m<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(inv_a<sp/>&lt;<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inv_a<sp/>=<sp/>(m<sp/>+<sp/>inv_a)<sp/>%<sp/>m;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inv_a;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><ref refid="key_gen_8c_1ab04146f8a570dc92f787b2282e765ed3" kindref="member">RSAKeyGen</ref>(int64_t<sp/>*<sp/>outN,<sp/>int64_t<sp/>*<sp/>outD,<sp/>int64_t<sp/>*<sp/>outE){</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Step<sp/>1:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//find<sp/>unquie<sp/>primes,<sp/>p<sp/>and<sp/>q</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int64_t<sp/>p<sp/>=<sp/><ref refid="key_gen_8c_1a0c0228a5e832c9d0499165c091fad58b" kindref="member">getRandPrime</ref>();</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>tempQ<sp/>=<sp/><ref refid="key_gen_8c_1a0c0228a5e832c9d0499165c091fad58b" kindref="member">getRandPrime</ref>();</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(tempQ<sp/>==<sp/>p){</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tempQ<sp/>=<sp/><ref refid="key_gen_8c_1a0c0228a5e832c9d0499165c091fad58b" kindref="member">getRandPrime</ref>();</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int64_t<sp/>q<sp/>=<sp/>tempQ;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Step<sp/>2:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//compute<sp/>n</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int64_t<sp/>n<sp/>=<sp/>p<sp/>*<sp/>q;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Step<sp/>3:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//find<sp/>the<sp/>lowest<sp/>common<sp/>multiplyor<sp/>of<sp/>p<sp/>and<sp/>q<sp/>to<sp/>find<sp/>n</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>int64_t<sp/>lamdaN<sp/>=<sp/>(p-1)*(q-1);</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Step<sp/>4</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//choose<sp/>any<sp/>number<sp/>coprime<sp/>to<sp/>lamdaN<sp/>greater<sp/>than<sp/>2.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>e<sp/>=<sp/><ref refid="key_gen_8c_1aa58bed47ea7118092ea9b44fd73b6599" kindref="member">randBetween</ref>(2,<sp/>lamdaN-1);</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//loop<sp/>till<sp/>its<sp/>co<sp/>prime</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(!<ref refid="key_gen_8c_1a3e0f477fa66432159bcbae34c260d7e6" kindref="member">isCoPrime</ref>(e,<sp/>lamdaN)){</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>e<sp/>=<sp/><ref refid="key_gen_8c_1aa58bed47ea7118092ea9b44fd73b6599" kindref="member">randBetween</ref>(2,<sp/>lamdaN-1);</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//e<sp/>is<sp/>now<sp/>co-prime<sp/>between<sp/>2<sp/>and<sp/>lamda<sp/>n</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Now<sp/>we<sp/>need<sp/>to<sp/>find<sp/>d.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//d<sp/>is<sp/>the<sp/>modular<sp/>multiplicative<sp/>inverse<sp/>of<sp/>e</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>d<sp/>=<sp/><ref refid="key_gen_8c_1ad23df605b76582c10025af5432ac36d2" kindref="member">_mod_inv</ref>(e,<sp/>lamdaN);</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>*outE<sp/>=<sp/>e;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/>*outD<sp/>=<sp/>d;</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>*outN<sp/>=<sp/>n;</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal">int64_t<sp/><ref refid="key_gen_8c_1a576a5085a2eaef327c962e0f4004693c" kindref="member">modExponent</ref>(int64_t<sp/>a,<sp/>int64_t<sp/>b,<sp/>int64_t<sp/>m){</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//start<sp/>at<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>result<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/>a<sp/>=<sp/>a<sp/>%<sp/>m;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(a<sp/>==0){</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(b<sp/>&gt;0){</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(b<sp/>&amp;<sp/>1){</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>=<sp/>(result<sp/>*<sp/>a)<sp/>%<sp/>m;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>b<sp/>=<sp/>b<sp/>&gt;&gt;<sp/>1;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>a<sp/>=<sp/>(a*a)<sp/>%<sp/>m;</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="257"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal">int64_t<sp/><ref refid="key_gen_8c_1a998536f24ed663f5bf570155d4fa8c12" kindref="member">encrypt</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>c,<sp/>int64_t<sp/>n,<sp/>int64_t<sp/>e){</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1a576a5085a2eaef327c962e0f4004693c" kindref="member">modExponent</ref>((int64_t)<sp/>c,<sp/>e,<sp/>n);</highlight></codeline>
+<codeline lineno="261"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1af7375ab0bf45fd807afe156684650e77" kindref="member">decrypt</ref>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>c,<sp/>int64_t<sp/>n,<sp/>int64_t<sp/>d){</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">char</highlight><highlight class="normal">)<sp/><ref refid="key_gen_8c_1a576a5085a2eaef327c962e0f4004693c" kindref="member">modExponent</ref>((int64_t)<sp/>c,<sp/>d,<sp/>n);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="key_gen_8c_1acdef7a1fd863a6d3770c1268cb06add3" kindref="member">main</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>n;</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>e;</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>d;</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="key_gen_8c_1ab04146f8a570dc92f787b2282e765ed3" kindref="member">RSAKeyGen</ref>(&amp;n,<sp/>&amp;d,<sp/>&amp;e);</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;n:<sp/>%lld,<sp/>d:<sp/>%lld<sp/>e:<sp/>%lld\n&quot;</highlight><highlight class="normal">,<sp/>n,<sp/>d,<sp/>e);</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>m<sp/>=<sp/></highlight><highlight class="charliteral">&apos;m&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/>int64_t<sp/>encrptyedM<sp/>=<sp/><ref refid="key_gen_8c_1a998536f24ed663f5bf570155d4fa8c12" kindref="member">encrypt</ref>(m,<sp/>n,e);</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>decryptedM<sp/>=<sp/><ref refid="key_gen_8c_1af7375ab0bf45fd807afe156684650e77" kindref="member">decrypt</ref>(m,n,d);</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/>printf(</highlight><highlight class="stringliteral">&quot;%c<sp/>(%d)<sp/>was<sp/>encrypted<sp/>into<sp/>%d,<sp/>was<sp/>decrypted<sp/>into:<sp/>%d&quot;</highlight><highlight class="normal">,<sp/>m,<sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">)<sp/>m,<sp/><sp/>encrptyedM,<sp/>decryptedM);</highlight></codeline>
+<codeline lineno="282"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="keyGen.c"/>
+  </compounddef>
+</doxygen>

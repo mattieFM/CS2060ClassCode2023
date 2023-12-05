@@ -1,0 +1,208 @@
+.TH "keyGen.c" 3 "Version 1" "AirUCCS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+keyGen.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <time\&.h>\fP
+.br
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBBIT_LEVEL\fP   8"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int64_t \fBnBitRandom\fP (int numberOfBits)"
+.br
+.RI "generate a random integer of n bits "
+.ti -1c
+.RI "bool \fBisPrime\fP (int64_t n)"
+.br
+.RI "check if a number is prime "
+.ti -1c
+.RI "bool \fBisCoPrime\fP (int64_t a, int64_t b)"
+.br
+.RI "check if 2 numbers are co prime with eachother "
+.ti -1c
+.RI "int64_t \fBgetRandPrime\fP ()"
+.br
+.RI "get a random prime number "
+.ti -1c
+.RI "\fBRSAKeyGen\fP (int64_t *outN, int64_t *outD, int64_t *outE)"
+.br
+.RI "generate a private and a public key "
+.ti -1c
+.RI "int64_t \fBencrypt\fP (char c, int64_t n, int64_t e)"
+.br
+.RI "encrypt a char with the public key "
+.ti -1c
+.RI "char \fBdecrypt\fP (char c, int64_t n, int64_t d)"
+.br
+.ti -1c
+.RI "int64_t \fBrandBetween\fP (int64_t min, int64_t max)"
+.br
+.RI "get a rand between min and max "
+.ti -1c
+.RI "void \fB_extended_euclid\fP (int a, int b, int *x, int *y)"
+.br
+.RI "Finds the multiplicative inverses of the two numbers\&. "
+.ti -1c
+.RI "int \fB_mod_inv\fP (int a, int m)"
+.br
+.RI "Returns the multiplicative inverse of a under base m\&. "
+.ti -1c
+.RI "int64_t \fBmodExponent\fP (int64_t a, int64_t b, int64_t m)"
+.br
+.ti -1c
+.RI "void \fBmain\fP ()"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define BIT_LEVEL   8"
+First To walk anyone reading through the general methodology, recall that RSA is an algorithm for generating complex keys for pub/priv key crypto
+.PP
+It asserts that it is very hard to find large integer common denominators of primes it consists of 4 steps
+.PP
+1: choose two arbitraty large primes, denoted as p and q\&. I will use these names below as it is what they are called within the algorithm and is rather standard -These should be chosen at random, I will be using a probabalistic aproach to find primes as we only need to find 2 we can basically guess and assume we will be right within x where x is usually less than 2000 guesses which is computationally insignificant for this scale 2: we then compute n = p times q --> n=pq\&. 3: then it gets harder\&. We now compute Carmichaels totient function of n (denoted as λ(n)) Its a lot of math that will be explained in the functions below for it 4: choose an integer e such taht 2 < e < λ(n) and gcd(e, λ(n)) = 1; that is, e and λ(n) are coprime 5: determine d as d == e^-1 that is d is the modular multiplicitive invers of e modulo λ(n)
+.PP
+thus the public key becomes modulus n and the exponent e and the private key consists of exponent d, p, q and λ(n), which are used to compute d
+.PP
+in short d is the private key n^e is the public key ====================== 
+.SH "Declarations"
+.PP
+
+.SH "Function Documentation"
+.PP 
+.SS "void _extended_euclid (int a, int b, int * x, int * y)"
+
+.PP
+Finds the multiplicative inverses of the two numbers\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIa\fP 
+.br
+\fIb\fP 
+.br
+\fIx\fP 
+.br
+\fIy\fP 
+.RE
+.PP
+
+.SS "int _mod_inv (int a, int m)"
+
+.PP
+Returns the multiplicative inverse of a under base m\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIa\fP 
+.br
+\fIm\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+int 
+.RE
+.PP
+
+.SS "char decrypt (char c, int64_t n, int64_t d)"
+
+.SS "int64_t encrypt (char c, int64_t n, int64_t e)"
+
+.PP
+encrypt a char with the public key 
+.SS "int64_t getRandPrime ()"
+
+.PP
+get a random prime number 
+.SS "bool isCoPrime (int64_t a, int64_t b)"
+
+.PP
+check if 2 numbers are co prime with eachother 
+.PP
+\fBParameters\fP
+.RS 4
+\fIa\fP number1 
+.br
+\fIb\fP number2 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+whether they are coPrime or not 
+.RE
+.PP
+
+.SS "bool isPrime (int64_t n)"
+
+.PP
+check if a number is prime 
+.SS "void main ()"
+
+.SS "int64_t modExponent (int64_t a, int64_t b, int64_t m)"
+
+.SS "unsigned long long nBitRandom (int numberOfBits)"
+
+.PP
+generate a random integer of n bits ====================== 
+.SH "Prototypes"
+.PP
+====================== 
+.SH "Functions"
+.PP
+====================== 
+.SH "Prime Calc (working)"
+.PP
+====================== 
+.SH "Functions"
+.PP
+
+.SS "int64_t randBetween (int64_t min, int64_t max)"
+
+.PP
+get a rand between min and max 
+.PP
+\fBParameters\fP
+.RS 4
+\fImin\fP 
+.br
+\fImax\fP 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+
+.br
+ 
+.RE
+.PP
+
+.SS "RSAKeyGen (int64_t * outN, int64_t * outD, int64_t * outE)"
+
+.PP
+generate a private and a public key 
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AirUCCS from the source code\&.

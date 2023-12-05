@@ -1,0 +1,1187 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_main_8c" xml:lang="en-US">
+<title>main.c File Reference</title>
+<indexterm><primary>main.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;gtk/gtk.h&gt;<?linebreak?>#include &lt;stdlib.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;stdbool.h&gt;<?linebreak?>#include &lt;string.h&gt;<?linebreak?>#include &lt;time.h&gt;<?linebreak?>#include &lt;math.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Data Structures    </title>
+        <itemizedlist>
+            <listitem><para>struct <link linkend="_structlocation">location</link></para>
+
+<para>the location of the property @initalizer: initLocation </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structproperty">property</link></para>
+
+<para>A struct representing a property @initalizer: initProperty. </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structlog_in_window">logInWindow</link></para>
+
+<para>the login window of the app </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structconfig_window">configWindow</link></para>
+
+<para>the config window of the app </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structadmin_window">adminWindow</link></para>
+
+<para>the admin window of the app </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structreview_window">reviewWindow</link></para>
+
+<para>the review Window of the app </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structcustomer_window">customerWindow</link></para>
+
+<para>the customer window of the app </para>
+</listitem>
+            <listitem><para>struct <link linkend="_structapp">app</link></para>
+
+<para>the main struct containing all app info that we need </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_main_8c_1a71147341558d2823036988bfc0e6575d">NUMBER_OF_PRICE_RANGES</link>&#160;&#160;&#160;3</para>
+
+<para>a constant for the number of price ranges That is to say how many times can the discount chagge </para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249">NUMBER_OF_REVIEW_CATS</link>&#160;&#160;&#160;5</para>
+
+<para>the nubmer of review categories </para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7">STRING_SIZE</link>&#160;&#160;&#160;80</para>
+
+<para>max size of strings </para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8c_1a74abd28f848a5dc45616674ac761f00d">BASE_DISCOUNT</link>&#160;&#160;&#160;50</para>
+
+<para>the base first discount </para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8c_1a45f2278bc729f1796e44d1d1a2a79568">ADD_MOCK_REVIEWS</link>&#160;&#160;&#160;1</para>
+
+<para>a boolean of whether mock data should be generated </para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8c_1a2cac2faee136330ef8ab53af2312f4ec">MAX_REVIEW</link>&#160;&#160;&#160;5</para>
+
+<para>the max number than can be entered on the review&apos;s menu inputs </para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8c_1a190d1357e6d0ee51f3b008700ed84b08">MIN_REVIEW</link>&#160;&#160;&#160;1</para>
+
+<para>the min number than can be entered on the review&apos;s menu inputs </para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8c_1a72242c2e53086385d9d5dd3aadcdfa5b">DEFINE_LL_OF_TYPE_ARR_WITH_SIZE</link>(TYPE,  size,  typeName,  structName)</para>
+
+<para>setup a generic linked list of arrays of size </para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link>&#160;&#160;&#160;  GtkWidget* window;</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8c_1a0599f56005d18d1574abdb5b746e69cc">NumTabs</link>&#160;&#160;&#160;3</para>
+</listitem>
+            <listitem><para>#define <link linkend="_main_8c_1a826ece061102e9edb8bd1d2167fbc710">BIT_LEVEL</link>&#160;&#160;&#160;8</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Typedefs    </title>
+        <itemizedlist>
+            <listitem><para>typedef struct <link linkend="_structlocation">location</link> <link linkend="_main_8c_1a5f2225f46c54d4268143a3e9586f67a4">Location</link></para>
+
+<para>the location of the property @initalizer: initLocation </para>
+</listitem>
+            <listitem><para>typedef struct <link linkend="_structproperty">property</link> <link linkend="_main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87">Property</link></para>
+
+<para>A struct representing a property @initalizer: initProperty. </para>
+</listitem>
+            <listitem><para>typedef struct <link linkend="_structlog_in_window">logInWindow</link> <link linkend="_main_8c_1a8e1170805a53ee8c3845cb6e425aa233">LoginWindow</link></para>
+
+<para>the login window of the app </para>
+</listitem>
+            <listitem><para>typedef struct <link linkend="_structconfig_window">configWindow</link> <link linkend="_main_8c_1aed36cff1d64d95e664ec581815c2814b">ConfigWindow</link></para>
+
+<para>the config window of the app </para>
+</listitem>
+            <listitem><para>typedef struct <link linkend="_structadmin_window">adminWindow</link> <link linkend="_main_8c_1a5a63edfd294f78985feeb3fc83f194bd">AdminWindow</link></para>
+
+<para>the admin window of the app </para>
+</listitem>
+            <listitem><para>typedef struct <link linkend="_structreview_window">reviewWindow</link> <link linkend="_main_8c_1aedaaa3f425adc8ef27426e9ecbf63d29">ReviewWindow</link></para>
+
+<para>the review Window of the app </para>
+</listitem>
+            <listitem><para>typedef struct <link linkend="_structcustomer_window">customerWindow</link> <link linkend="_main_8c_1a0667ea4347c9b9d6c5692361185eab3a">CustomerWindow</link></para>
+
+<para>the customer window of the app </para>
+</listitem>
+            <listitem><para>typedef struct <link linkend="_structapp">app</link> <link linkend="_main_8c_1a7afb31fe444397deb0375c093030682d">App</link></para>
+
+<para>the main struct containing all app info that we need </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_main_8c_1a2a6b9e4ccbf60333a474b7433b21d19f">DEFINE_LL_OF_TYPE_ARR_WITH_SIZE</link> (int, <link linkend="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249">NUMBER_OF_REVIEW_CATS</link>, ReviewNode, reviewNode)</para>
+</listitem>
+            <listitem><para>void <link linkend="_main_8c_1a73b13b5e2d9bcacf35a4369a9270c43f">initLocation</link> (<link linkend="_main_8c_1a5f2225f46c54d4268143a3e9586f67a4">Location</link> *loc, char address[<link linkend="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7">STRING_SIZE</link>], int lat, int lon)</para>
+
+<para>an initalizer for a new location struct. Initalizes an existing Location with good data </para>
+</listitem>
+            <listitem><para>void <link linkend="_main_8c_1a579214ebbaa002f5dd7d119bc64ac24d">initProperty</link> (<link linkend="_main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87">Property</link> *<link linkend="_structproperty">property</link>)</para>
+
+<para>Initalize a property with default values. </para>
+</listitem>
+            <listitem><para>void <link linkend="_main_8c_1acb547fc473a45efe1612cf333ec2b0a1">cleanUpReviews</link> (<link linkend="_main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87">Property</link> *propertyPtr)</para>
+
+<para>A method for quickly cleaning up the linked list of the property reviews. </para>
+</listitem>
+            <listitem><para>void <link linkend="_main_8c_1af34961ca790e86a4ed67c0362924a260">addReview</link> (<link linkend="_main_8c_1a7afb31fe444397deb0375c093030682d">App</link> *mainApp, const int review[<link linkend="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249">NUMBER_OF_REVIEW_CATS</link>])</para>
+
+<para>Add a review to the linked list of reviews. </para>
+</listitem>
+            <listitem><para>int <link linkend="_main_8c_1ab9e636ad749a158db97c594fe5dcb182">getValidIntInputWithSentinels</link> (char const PROMPT[], int min, int max, int const SENTINEL_VALUES[], size_t length)</para>
+
+<para>Get a int that is either within [min-max] or in a list of sentinel values, from the user, prompting them with the prompt passed into this function and displaying the err prompt if they enter an invalid input. </para>
+</listitem>
+            <listitem><para>double <link linkend="_main_8c_1aa136ea4239d59d6fdcf01a88db908497">calculateDiscount</link> (int night, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)</para>
+
+<para>A function that will calculate the discount of a day. </para>
+</listitem>
+            <listitem><para>double <link linkend="_main_8c_1a85bdc4d907ddea25da7b38f61eb95ccd">calculateCost</link> (int nights, double basePrice, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)</para>
+
+<para>A function to calculate the cost of a stay in a AirUCCS rented building. Cost is based on nights stayed, the base price per night and the discounts applied. </para>
+</listitem>
+            <listitem><para>void <link linkend="_main_8c_1af930487fde31f5b0bfa65a3b0b1bdbfb">displayCost</link> (int nights, double cost)</para>
+
+<para>A function to display how much the user&apos;s stay cost in a user friendly way. </para>
+</listitem>
+            <listitem><para>void <link linkend="_main_8c_1a49be7264a1719899398ed267e69188d4">chargeUser</link> (char const uuid[], float cost, char const cardNum[])</para>
+
+<para>a method that would charge the user money for their stay. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_main_8c_1ad0b5b543d8690bb4ddefc6b64428f7eb">getBooking</link> (int *valuePt, int const SENTINELS[], int min, int max, size_t length)</para>
+
+<para>A function that will start the process of booking a room. </para>
+</listitem>
+            <listitem><para>bool <link linkend="_main_8c_1a7eedf911c331de9894b62bdc926a0b07">intArrContains</link> (int const ARR[], int val, size_t length)</para>
+
+<para>check if an array of ints contains a value. </para>
+</listitem>
+            <listitem><para>void <link linkend="_main_8c_1a2fd4dc35b8b9778a29fc386d0829cda9">displayRentalPropertyInfo</link> (int min, int max, double basePrice, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)</para>
+
+<para>display the rental property info to the user before they are prompted to make a perchance. </para>
+</listitem>
+            <listitem><para>int <link linkend="_main_8c_1abef81d57e41bf73d65df4ef6652cea7e">cliMain</link> (void)</para>
+
+<para>the main function for the program that will handle initialization/entry. </para>
+</listitem>
+            <listitem><para>int <link linkend="_main_8c_1a3c04138a5bfe5d72780bb7e82a18e627">main</link> (int argc, char **argv)</para>
+</listitem>
+            <listitem><para>unsigned long long <link linkend="_main_8c_1aecb3b10f315423f9de2e0c640a6f2d0d">nBitRandom</link> (int numberOfBits)</para>
+
+<para>generate a random integer of n bits </para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Variables    </title>
+        <itemizedlist>
+            <listitem><para>const char <link linkend="_main_8c_1a44287a1e2179ad86ebd481121eafb1f3">DEFAULT_REVIEW_HEADERS</link> [<link linkend="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249">NUMBER_OF_REVIEW_CATS</link>][<link linkend="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7">STRING_SIZE</link>] = {&quot;Happiness&quot;, &quot;Cleanliness&quot;, &quot;Saftey&quot;, &quot;Location&quot;, &quot;Amenities&quot;}</para>
+
+<para>the default review headers </para>
+</listitem>
+            <listitem><para>const char <link linkend="_main_8c_1a539ad50b7780b0efc81c9b85f7e8df2b">DEFAULT_NAME</link> [<link linkend="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7">STRING_SIZE</link>] = &quot;AIR UCCS&quot;</para>
+
+<para>the default property name </para>
+</listitem>
+            <listitem><para>int unsigned const <link linkend="_main_8c_1a2af4ca44f722cc3b4b00a68b851b9e4d">DEFAULT_MIN_RENTAL_NIGHTS</link> = 1</para>
+
+<para>the default minimum nights </para>
+</listitem>
+            <listitem><para>unsigned int const <link linkend="_main_8c_1a139936736b1fed8ce48a58629647dcc0">DEFAULT_MAX_RENTAL_NIGHTS</link> = 14</para>
+
+<para>the default maximum nights </para>
+</listitem>
+            <listitem><para>unsigned int const <link linkend="_main_8c_1abaed5313319821e00c971ca48e071fcf">DEFAULT_INTERVAL_1_NIGHTS</link> = 3</para>
+
+<para>the default interval that the first discount starts at </para>
+</listitem>
+            <listitem><para>unsigned int const <link linkend="_main_8c_1a33b4fb08407f315f236d0b93b39da793">DEFAULT_INTERVAL_2_NIGHTS</link> = 6</para>
+
+<para>the default interval that the second discount starts at </para>
+</listitem>
+            <listitem><para>double const <link linkend="_main_8c_1abe3a8709ba5ff2e63b69fce41c24a0d0">DEFAULT_RENTAL_RATE</link> = 400</para>
+
+<para>the default cost per night </para>
+</listitem>
+            <listitem><para>double const <link linkend="_main_8c_1a9cfdaa0c3a5488cbcb8e9cb738e19146">DEFAULT_DISCOUNT</link> = 50</para>
+
+<para>the default base discount before range multiplyers </para>
+</listitem>
+            <listitem><para>const int <link linkend="_main_8c_1a5c96b971fedeb5955e05256b7e58e74e">DEFAULT_DAY_RANGES</link> [<link linkend="_main_8c_1a71147341558d2823036988bfc0e6575d">NUMBER_OF_PRICE_RANGES</link>] = {0, <link linkend="_main_8c_1abaed5313319821e00c971ca48e071fcf">DEFAULT_INTERVAL_1_NIGHTS</link>, <link linkend="_main_8c_1a33b4fb08407f315f236d0b93b39da793">DEFAULT_INTERVAL_2_NIGHTS</link> }</para>
+</listitem>
+            <listitem><para>const int <link linkend="_main_8c_1aa00256dbd2d2a34973cbaf5a254504b1">DEFAULT_DISCOUNTS</link> [<link linkend="_main_8c_1a71147341558d2823036988bfc0e6575d">NUMBER_OF_PRICE_RANGES</link>] = {0, <link linkend="_main_8c_1a9cfdaa0c3a5488cbcb8e9cb738e19146">DEFAULT_DISCOUNT</link>, <link linkend="_main_8c_1a9cfdaa0c3a5488cbcb8e9cb738e19146">DEFAULT_DISCOUNT</link>*2}</para>
+</listitem>
+            <listitem><para>GtkWidget * <link linkend="_main_8c_1aacb3b7f85948a76fa11df31c02e98fc8">windows</link> [<link linkend="_main_8c_1a0599f56005d18d1574abdb5b746e69cc">NumTabs</link>] = {}</para>
+</listitem>
+            <listitem><para>char * <link linkend="_main_8c_1a6c5820a0ceef740c20441d04df24950a">names</link> [<link linkend="_main_8c_1a0599f56005d18d1574abdb5b746e69cc">NumTabs</link>] = {&quot;Main&quot;, &quot;Analytics&quot;, &quot;Login&quot;}</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_main_8c_1a45f2278bc729f1796e44d1d1a2a79568"/><section>
+    <title>ADD_MOCK_REVIEWS</title>
+<indexterm><primary>ADD_MOCK_REVIEWS</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>ADD_MOCK_REVIEWS</secondary></indexterm>
+<para><computeroutput>#define ADD_MOCK_REVIEWS&#160;&#160;&#160;1</computeroutput></para><para>
+
+<para>a boolean of whether mock data should be generated </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a74abd28f848a5dc45616674ac761f00d"/><section>
+    <title>BASE_DISCOUNT</title>
+<indexterm><primary>BASE_DISCOUNT</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>BASE_DISCOUNT</secondary></indexterm>
+<para><computeroutput>#define BASE_DISCOUNT&#160;&#160;&#160;50</computeroutput></para><para>
+
+<para>the base first discount </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a826ece061102e9edb8bd1d2167fbc710"/><section>
+    <title>BIT_LEVEL</title>
+<indexterm><primary>BIT_LEVEL</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>BIT_LEVEL</secondary></indexterm>
+<para><computeroutput>#define BIT_LEVEL&#160;&#160;&#160;8</computeroutput></para>
+<para>First To walk anyone reading through the general methodology, recall that RSA is an algorithm for generating complex keys for pub/priv key crypto</para>
+
+<para>It asserts that it is very hard to find large integer common denominators of primes it consists of 4 steps</para>
+
+<para>1: choose two arbitraty large primes, denoted as p and q. I will use these names below as it is what they are called within the algorithm and is rather standard -These should be chosen at random, I will be using a probabalistic aproach to find primes as we only need to find 2 we can basically guess and assume we will be right within x where x is usually less than 2000 guesses which is computationally insignificant for this scale 2: we then compute n = p times q --&gt; n=pq. 3: then it gets harder. We now compute Carmichaels totient function of n (denoted as λ(n)) Its a lot of math that will be explained in the functions below for it 4: choose an integer e such taht 2 &lt; e &lt; λ(n) and gcd(e, λ(n)) = 1; that is, e and λ(n) are coprime 5: determine d as d == e^-1 that is d is the modular multiplicitive invers of e modulo λ(n)</para>
+
+<para>thus the public key becomes modulus n and the exponent e and the private key consists of exponent d, p, q and λ(n), which are used to compute d</para>
+
+<para>in short d is the private key n^e is the public key ====================== </para>
+<section xml:id="_main_8c_1autotoc_md4">
+<title>Declarations</title>
+</section>
+</section>
+<anchor xml:id="_main_8c_1a72242c2e53086385d9d5dd3aadcdfa5b"/><section>
+    <title>DEFINE_LL_OF_TYPE_ARR_WITH_SIZE</title>
+<indexterm><primary>DEFINE_LL_OF_TYPE_ARR_WITH_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFINE_LL_OF_TYPE_ARR_WITH_SIZE</secondary></indexterm>
+<para><computeroutput>#define DEFINE_LL_OF_TYPE_ARR_WITH_SIZE( TYPE,  size,  typeName,  structName)</computeroutput></para><emphasis role="strong">Value:</emphasis><programlisting linenumbering="unnumbered"><emphasis role="keyword">typedef</emphasis>&#32;<emphasis role="keyword">struct&#32;</emphasis>structName&#32;{\
+&#32;&#32;<emphasis role="keyword">struct&#32;</emphasis>structName&#32;*&#32;next;\
+&#32;&#32;TYPE&#32;data[size];\
+}&#32;typeName;
+</programlisting><para>
+
+<para>setup a generic linked list of arrays of size </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>TYPE</entry><entry>
+<para>the data type of the linked list </para>
+</entry>
+                            </row>
+                            <row>
+<entry>size</entry><entry>
+<para>the size of the array (the array is the data of the node) </para>
+</entry>
+                            </row>
+                            <row>
+<entry>typeName</entry><entry>
+<para>the litteral name that the linked list type will be created as </para>
+</entry>
+                            </row>
+                            <row>
+<entry>structName</entry><entry>
+<para>the litteral name that the linked list struct will be created as </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_main_8c_1aa95cc25626aaea9a264528de81ad3c09"/><section>
+    <title>INHERIT_BASE_WIN</title>
+<indexterm><primary>INHERIT_BASE_WIN</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>INHERIT_BASE_WIN</secondary></indexterm>
+<para><computeroutput>#define INHERIT_BASE_WIN&#160;&#160;&#160;  GtkWidget* window;</computeroutput></para></section>
+<anchor xml:id="_main_8c_1a2cac2faee136330ef8ab53af2312f4ec"/><section>
+    <title>MAX_REVIEW</title>
+<indexterm><primary>MAX_REVIEW</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>MAX_REVIEW</secondary></indexterm>
+<para><computeroutput>#define MAX_REVIEW&#160;&#160;&#160;5</computeroutput></para><para>
+
+<para>the max number than can be entered on the review&apos;s menu inputs </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a190d1357e6d0ee51f3b008700ed84b08"/><section>
+    <title>MIN_REVIEW</title>
+<indexterm><primary>MIN_REVIEW</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>MIN_REVIEW</secondary></indexterm>
+<para><computeroutput>#define MIN_REVIEW&#160;&#160;&#160;1</computeroutput></para><para>
+
+<para>the min number than can be entered on the review&apos;s menu inputs </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a71147341558d2823036988bfc0e6575d"/><section>
+    <title>NUMBER_OF_PRICE_RANGES</title>
+<indexterm><primary>NUMBER_OF_PRICE_RANGES</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>NUMBER_OF_PRICE_RANGES</secondary></indexterm>
+<para><computeroutput>#define NUMBER_OF_PRICE_RANGES&#160;&#160;&#160;3</computeroutput></para><para>
+
+<para>a constant for the number of price ranges That is to say how many times can the discount chagge </para>
+</para>
+
+<para><formalpara><title>Author</title>
+
+<para>: Mattie Fuller Class: CS2060-002 Project: Project Iteration: 2 Description: This is a project that will handle &quot;airbnb&quot; style bookings for a fictional renting service &quot;airuccs.&quot; This is the second iteration and is fully GUI dependant and is attempting to implement private public key authentication. Note that in the spirit of staying as native to c as possible I have opted away from using xml (html-esque) GUI builders that gtk+ provides, these are much easier but are not really in the spirit of pure c program so I wont be using them.</para>
+</formalpara>
+Note: it is really clunky having this entire thing in one file, so sorry about that</para>
+
+<para>Documentation style: comments are following doxgen C standard as I have found this is the most common style that tends to be used, let me know if you would prefer a different style.</para>
+
+<para>Security Standard: SEI CERT C Standard </para>
+</section>
+<anchor xml:id="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249"/><section>
+    <title>NUMBER_OF_REVIEW_CATS</title>
+<indexterm><primary>NUMBER_OF_REVIEW_CATS</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>NUMBER_OF_REVIEW_CATS</secondary></indexterm>
+<para><computeroutput>#define NUMBER_OF_REVIEW_CATS&#160;&#160;&#160;5</computeroutput></para><para>
+
+<para>the nubmer of review categories </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a0599f56005d18d1574abdb5b746e69cc"/><section>
+    <title>NumTabs</title>
+<indexterm><primary>NumTabs</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>NumTabs</secondary></indexterm>
+<para><computeroutput>#define NumTabs&#160;&#160;&#160;3</computeroutput></para></section>
+<anchor xml:id="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7"/><section>
+    <title>STRING_SIZE</title>
+<indexterm><primary>STRING_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>STRING_SIZE</secondary></indexterm>
+<para><computeroutput>#define STRING_SIZE&#160;&#160;&#160;80</computeroutput></para><para>
+
+<para>max size of strings </para>
+</para>
+</section>
+</section>
+<section>
+<title>Typedef Documentation</title>
+<anchor xml:id="_main_8c_1a5a63edfd294f78985feeb3fc83f194bd"/><section>
+    <title>AdminWindow</title>
+<indexterm><primary>AdminWindow</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>AdminWindow</secondary></indexterm>
+<para><computeroutput>typedef struct <link linkend="_structadmin_window">adminWindow</link> <link linkend="_main_8c_1a5a63edfd294f78985feeb3fc83f194bd">AdminWindow</link></computeroutput></para><para>
+
+<para>the admin window of the app </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a7afb31fe444397deb0375c093030682d"/><section>
+    <title>App</title>
+<indexterm><primary>App</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>App</secondary></indexterm>
+<para><computeroutput>typedef struct <link linkend="_structapp">app</link> <link linkend="_main_8c_1a7afb31fe444397deb0375c093030682d">App</link></computeroutput></para><para>
+
+<para>the main struct containing all app info that we need </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1aed36cff1d64d95e664ec581815c2814b"/><section>
+    <title>ConfigWindow</title>
+<indexterm><primary>ConfigWindow</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>ConfigWindow</secondary></indexterm>
+<para><computeroutput>typedef struct <link linkend="_structconfig_window">configWindow</link> <link linkend="_main_8c_1aed36cff1d64d95e664ec581815c2814b">ConfigWindow</link></computeroutput></para><para>
+
+<para>the config window of the app </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a0667ea4347c9b9d6c5692361185eab3a"/><section>
+    <title>CustomerWindow</title>
+<indexterm><primary>CustomerWindow</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>CustomerWindow</secondary></indexterm>
+<para><computeroutput>typedef struct <link linkend="_structcustomer_window">customerWindow</link> <link linkend="_main_8c_1a0667ea4347c9b9d6c5692361185eab3a">CustomerWindow</link></computeroutput></para><para>
+
+<para>the customer window of the app </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a5f2225f46c54d4268143a3e9586f67a4"/><section>
+    <title>Location</title>
+<indexterm><primary>Location</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>Location</secondary></indexterm>
+<para><computeroutput>typedef struct <link linkend="_structlocation">location</link> <link linkend="_main_8c_1a5f2225f46c54d4268143a3e9586f67a4">Location</link></computeroutput></para><para>
+
+<para>the location of the property @initalizer: initLocation </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a8e1170805a53ee8c3845cb6e425aa233"/><section>
+    <title>LoginWindow</title>
+<indexterm><primary>LoginWindow</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>LoginWindow</secondary></indexterm>
+<para><computeroutput>typedef struct <link linkend="_structlog_in_window">logInWindow</link> <link linkend="_main_8c_1a8e1170805a53ee8c3845cb6e425aa233">LoginWindow</link></computeroutput></para><para>
+
+<para>the login window of the app </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87"/><section>
+    <title>Property</title>
+<indexterm><primary>Property</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>Property</secondary></indexterm>
+<para><computeroutput>typedef struct <link linkend="_structproperty">property</link> <link linkend="_main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87">Property</link></computeroutput></para><para>
+
+<para>A struct representing a property @initalizer: initProperty. </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1aedaaa3f425adc8ef27426e9ecbf63d29"/><section>
+    <title>ReviewWindow</title>
+<indexterm><primary>ReviewWindow</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>ReviewWindow</secondary></indexterm>
+<para><computeroutput>typedef struct <link linkend="_structreview_window">reviewWindow</link> <link linkend="_main_8c_1aedaaa3f425adc8ef27426e9ecbf63d29">ReviewWindow</link></computeroutput></para><para>
+
+<para>the review Window of the app </para>
+</para>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_main_8c_1af34961ca790e86a4ed67c0362924a260"/><section>
+    <title>addReview()</title>
+<indexterm><primary>addReview</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>addReview</secondary></indexterm>
+<para><computeroutput>void addReview (<link linkend="_main_8c_1a7afb31fe444397deb0375c093030682d">App</link> * mainApp, const int review[NUMBER_OF_REVIEW_CATS])</computeroutput></para><para>
+
+<para>Add a review to the linked list of reviews. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>property</entry><entry>
+<para>the property to add the review to </para>
+</entry>
+                            </row>
+                            <row>
+<entry>review</entry><entry>
+<para>the review to add </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_main_8c_1a85bdc4d907ddea25da7b38f61eb95ccd"/><section>
+    <title>calculateCost()</title>
+<indexterm><primary>calculateCost</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>calculateCost</secondary></indexterm>
+<para><computeroutput>double calculateCost (int nights, double basePrice, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)</computeroutput></para><para>
+
+<para>A function to calculate the cost of a stay in a AirUCCS rented building. Cost is based on nights stayed, the base price per night and the discounts applied. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>nights</entry><entry>
+<para>{int} how many nights the user has stayed </para>
+</entry>
+                            </row>
+                            <row>
+<entry>basePrice</entry><entry>
+<para>{float} the base price per night before any discounts are applied. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>discountRanges[]</entry><entry>
+<para>{int[]) an array of ints in the format [discountRange1Start,discountRange1End,DiscountRange2End,...) where the start of each range after 1 is the end of the last </para>
+</entry>
+                            </row>
+                            <row>
+<entry>discounts[]</entry><entry>
+<para>{floats} an array of the discounts for each range </para>
+</entry>
+                            </row>
+                            <row>
+<entry>length, {size_t}</entry><entry>
+<para>the length of both the discountRRanges and discounts array, they must be same length</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>{double} a double value representing how much the stay would cost. </para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_main_8c_1aa136ea4239d59d6fdcf01a88db908497"/><section>
+    <title>calculateDiscount()</title>
+<indexterm><primary>calculateDiscount</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>calculateDiscount</secondary></indexterm>
+<para><computeroutput>double calculateDiscount (int night, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)</computeroutput></para><para>
+
+<para>A function that will calculate the discount of a day. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>night</entry><entry>
+<para>{int} the night to find the discount of </para>
+</entry>
+                            </row>
+                            <row>
+<entry>discountRanges[]</entry><entry>
+<para>{int[]) an array of ints in the format [discountRange1Start,discountRange1End,DiscountRange2End,...) where the start of each range after 1 is the end of the last </para>
+</entry>
+                            </row>
+                            <row>
+<entry>discounts[]</entry><entry>
+<para>{floats} an array of the discounts for each range </para>
+</entry>
+                            </row>
+                            <row>
+<entry>length, {size_t}</entry><entry>
+<para>the length of both the discountRRanges and discounts array, they must be same length</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>double, a dollar amount of the discount for this night </para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a49be7264a1719899398ed267e69188d4"/><section>
+    <title>chargeUser()</title>
+<indexterm><primary>chargeUser</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>chargeUser</secondary></indexterm>
+<para><computeroutput>void chargeUser (char const uuid[], float cost, char const cardNum[])</computeroutput></para><para>
+
+<para>a method that would charge the user money for their stay. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>uuid, the</entry><entry>
+<para>id of the user&apos;s stay </para>
+</entry>
+                            </row>
+                            <row>
+<entry>cost, the</entry><entry>
+<para>total cost to charge them </para>
+</entry>
+                            </row>
+                            <row>
+<entry>cardNum</entry><entry>
+<para>the card to charge the cost to </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_main_8c_1acb547fc473a45efe1612cf333ec2b0a1"/><section>
+    <title>cleanUpReviews()</title>
+<indexterm><primary>cleanUpReviews</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>cleanUpReviews</secondary></indexterm>
+<para><computeroutput>void cleanUpReviews (<link linkend="_main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87">Property</link> * propertyPtr)</computeroutput></para><para>
+
+<para>A method for quickly cleaning up the linked list of the property reviews. </para>
+</para>
+
+<para>free all memory held by review ll</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>propertyPtr</entry><entry>
+<para>the property to cleanup</para>
+</entry>
+                            </row>
+                            <row>
+<entry>propertyPtr</entry><entry>
+<para>the property </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_main_8c_1abef81d57e41bf73d65df4ef6652cea7e"/><section>
+    <title>cliMain()</title>
+<indexterm><primary>cliMain</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>cliMain</secondary></indexterm>
+<para><computeroutput>int cliMain (void )</computeroutput></para><para>
+
+<para>the main function for the program that will handle initialization/entry. </para>
+</para>
+
+<para><formalpara><title>Author</title>
+
+<para>MattieFM </para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a2a6b9e4ccbf60333a474b7433b21d19f"/><section>
+    <title>DEFINE_LL_OF_TYPE_ARR_WITH_SIZE()</title>
+<indexterm><primary>DEFINE_LL_OF_TYPE_ARR_WITH_SIZE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFINE_LL_OF_TYPE_ARR_WITH_SIZE</secondary></indexterm>
+<para><computeroutput>DEFINE_LL_OF_TYPE_ARR_WITH_SIZE (int , <link linkend="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249">NUMBER_OF_REVIEW_CATS</link> , ReviewNode , reviewNode )</computeroutput></para></section>
+<anchor xml:id="_main_8c_1af930487fde31f5b0bfa65a3b0b1bdbfb"/><section>
+    <title>displayCost()</title>
+<indexterm><primary>displayCost</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>displayCost</secondary></indexterm>
+<para><computeroutput>void displayCost (int nights, double cost)</computeroutput></para><para>
+
+<para>A function to display how much the user&apos;s stay cost in a user friendly way. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>nights</entry><entry>
+<para>{int} how many nights the user has stayed </para>
+</entry>
+                            </row>
+                            <row>
+<entry>cost</entry><entry>
+<para>{double} the total cost of the user&apos;s stay</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>nothing, prints info to the console for the user. in the format: Nights Charge 5 $nnnn.nn </para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a2fd4dc35b8b9778a29fc386d0829cda9"/><section>
+    <title>displayRentalPropertyInfo()</title>
+<indexterm><primary>displayRentalPropertyInfo</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>displayRentalPropertyInfo</secondary></indexterm>
+<para><computeroutput>void displayRentalPropertyInfo (int min, int max, double basePrice, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)</computeroutput></para><para>
+
+<para>display the rental property info to the user before they are prompted to make a perchance. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>min, the</entry><entry>
+<para>minimum number of nights a user can stay </para>
+</entry>
+                            </row>
+                            <row>
+<entry>max</entry><entry>
+<para>the maximum number of nights a user can stay </para>
+</entry>
+                            </row>
+                            <row>
+<entry>basePrice</entry><entry>
+<para>the base price per night of the property </para>
+</entry>
+                            </row>
+                            <row>
+<entry>DISCOUNT_RANGES[]</entry><entry>
+<para>{int[]) an array of ints in the format [discountRange1Start,discountRange1End,DiscountRange2End,...) where the start of each range after 1 is the end of the last </para>
+</entry>
+                            </row>
+                            <row>
+<entry>DISCOUNTS[]</entry><entry>
+<para>{double[]} an array of the discounts for each range, </para>
+</entry>
+                            </row>
+                            <row>
+<entry>length, {size_t}</entry><entry>
+<para>the length of both the discountRRanges and discounts array, they must be same length </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_main_8c_1ad0b5b543d8690bb4ddefc6b64428f7eb"/><section>
+    <title>getBooking()</title>
+<indexterm><primary>getBooking</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>getBooking</secondary></indexterm>
+<para><computeroutput>bool getBooking (int * valuePt, int const SENTINELS[], int min, int max, size_t length)</computeroutput></para><para>
+
+<para>A function that will start the process of booking a room. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>valuePt</entry><entry>
+<para>a pointer to a variable to store the value the user entered. </para>
+</entry>
+                            </row>
+                            <row>
+<entry>sentinels[]</entry><entry>
+<para>an array of sentinel values that are allowed </para>
+</entry>
+                            </row>
+                            <row>
+<entry>min, the</entry><entry>
+<para>min value for nights allowed </para>
+</entry>
+                            </row>
+                            <row>
+<entry>max, the</entry><entry>
+<para>max value for nights allowed </para>
+</entry>
+                            </row>
+                            <row>
+<entry>length, {size_t}</entry><entry>
+<para>the length of the sentinel_values array</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>bool, this will return true if the user has made a valid booking and false if they have entered a sentinel value. </para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_main_8c_1ab9e636ad749a158db97c594fe5dcb182"/><section>
+    <title>getValidIntInputWithSentinels()</title>
+<indexterm><primary>getValidIntInputWithSentinels</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>getValidIntInputWithSentinels</secondary></indexterm>
+<para><computeroutput>int getValidIntInputWithSentinels (char const PROMPT[], int min, int max, int const SENTINEL_VALUES[], size_t length)</computeroutput></para><para>
+
+<para>Get a int that is either within [min-max] or in a list of sentinel values, from the user, prompting them with the prompt passed into this function and displaying the err prompt if they enter an invalid input. </para>
+</para>
+
+<para>@Author MattieFM</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>prompt</entry><entry>
+<para>{char[]} a string like array of chars to display to the user as a prompt </para>
+</entry>
+                            </row>
+                            <row>
+<entry>err</entry><entry>
+<para>{char[]} a string like array to display to the user when they enter an invalid value, </para>
+</entry>
+                            </row>
+                            <row>
+<entry>minAsciiCode</entry><entry>
+<para>{signed int} the lowest ascii code allowed to be entered </para>
+</entry>
+                            </row>
+                            <row>
+<entry>maxAsciiCode</entry><entry>
+<para>{signed int} the highest ascii code allowed to be entered </para>
+</entry>
+                            </row>
+                            <row>
+<entry>sentinelValues</entry><entry>
+<para>{signed int[]} an array of explicitly allowed ascii codes </para>
+</entry>
+                            </row>
+                            <row>
+<entry>length, {size_t}</entry><entry>
+<para>the length of the sentinel_values array</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>a signed int between [min-max] </para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a73b13b5e2d9bcacf35a4369a9270c43f"/><section>
+    <title>initLocation()</title>
+<indexterm><primary>initLocation</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>initLocation</secondary></indexterm>
+<para><computeroutput>void initLocation (<link linkend="_main_8c_1a5f2225f46c54d4268143a3e9586f67a4">Location</link> * loc, char address[STRING_SIZE], int lat, int lon)</computeroutput></para><para>
+
+<para>an initalizer for a new location struct. Initalizes an existing Location with good data </para>
+</para>
+
+<para>Initalize a location structure.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>loc</entry><entry>
+<para>the location struct pointer </para>
+</entry>
+                            </row>
+                            <row>
+<entry>address</entry><entry>
+<para>the adress of the location </para>
+</entry>
+                            </row>
+                            <row>
+<entry>lat</entry><entry>
+<para>the int latitude </para>
+</entry>
+                            </row>
+                            <row>
+<entry>lon</entry><entry>
+<para>the int longitude</para>
+</entry>
+                            </row>
+                            <row>
+<entry>loc</entry><entry>
+<para>the location struct to init </para>
+</entry>
+                            </row>
+                            <row>
+<entry>address</entry><entry>
+<para>the adress in the form of a string of the location </para>
+</entry>
+                            </row>
+                            <row>
+<entry>lat</entry><entry>
+<para>the latitude of the location </para>
+</entry>
+                            </row>
+                            <row>
+<entry>lon</entry><entry>
+<para>the longitude of the location </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_main_8c_1a579214ebbaa002f5dd7d119bc64ac24d"/><section>
+    <title>initProperty()</title>
+<indexterm><primary>initProperty</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>initProperty</secondary></indexterm>
+<para><computeroutput>void initProperty (<link linkend="_main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87">Property</link> * property)</computeroutput></para><para>
+
+<para>Initalize a property with default values. </para>
+</para>
+
+<para>Initalzize a property with default values.</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>property</entry><entry>
+<para>the propertyPtr to initalize onto</para>
+</entry>
+                            </row>
+                            <row>
+<entry>property</entry><entry>
+<para>the property struct to initalize </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_main_8c_1a7eedf911c331de9894b62bdc926a0b07"/><section>
+    <title>intArrContains()</title>
+<indexterm><primary>intArrContains</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>intArrContains</secondary></indexterm>
+<para><computeroutput>bool intArrContains (int const ARR[], int val, size_t length)</computeroutput></para><para>
+
+<para>check if an array of ints contains a value. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>ARR[]</entry><entry>
+<para>the array to look through </para>
+</entry>
+                            </row>
+                            <row>
+<entry>val</entry><entry>
+<para>the value to check for </para>
+</entry>
+                            </row>
+                            <row>
+<entry>length, {size_t}</entry><entry>
+<para>the length of the array</para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>bool, true if value is in arr false if not. </para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a3c04138a5bfe5d72780bb7e82a18e627"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>int main (int argc, char ** argv)</computeroutput></para></section>
+<anchor xml:id="_main_8c_1aecb3b10f315423f9de2e0c640a6f2d0d"/><section>
+    <title>nBitRandom()</title>
+<indexterm><primary>nBitRandom</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>nBitRandom</secondary></indexterm>
+<para><computeroutput>unsigned long long nBitRandom (int numberOfBits)</computeroutput></para><para>
+
+<para>generate a random integer of n bits </para>
+</para>
+
+<para>====================== </para>
+<section xml:id="_main_8c_1autotoc_md5">
+<title>Prototypes</title>
+
+<para>====================== </para>
+</section>
+<section xml:id="_main_8c_1autotoc_md6">
+<title>Functions</title>
+</section>
+</section>
+</section>
+<section>
+<title>Variable Documentation</title>
+<anchor xml:id="_main_8c_1a5c96b971fedeb5955e05256b7e58e74e"/><section>
+    <title>DEFAULT_DAY_RANGES</title>
+<indexterm><primary>DEFAULT_DAY_RANGES</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFAULT_DAY_RANGES</secondary></indexterm>
+<para><computeroutput>const int DEFAULT_DAY_RANGES[<link linkend="_main_8c_1a71147341558d2823036988bfc0e6575d">NUMBER_OF_PRICE_RANGES</link>] = {0, <link linkend="_main_8c_1abaed5313319821e00c971ca48e071fcf">DEFAULT_INTERVAL_1_NIGHTS</link>, <link linkend="_main_8c_1a33b4fb08407f315f236d0b93b39da793">DEFAULT_INTERVAL_2_NIGHTS</link> }</computeroutput></para></section>
+<anchor xml:id="_main_8c_1a9cfdaa0c3a5488cbcb8e9cb738e19146"/><section>
+    <title>DEFAULT_DISCOUNT</title>
+<indexterm><primary>DEFAULT_DISCOUNT</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFAULT_DISCOUNT</secondary></indexterm>
+<para><computeroutput>double const DEFAULT_DISCOUNT = 50</computeroutput></para><para>
+
+<para>the default base discount before range multiplyers </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1aa00256dbd2d2a34973cbaf5a254504b1"/><section>
+    <title>DEFAULT_DISCOUNTS</title>
+<indexterm><primary>DEFAULT_DISCOUNTS</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFAULT_DISCOUNTS</secondary></indexterm>
+<para><computeroutput>const int DEFAULT_DISCOUNTS[<link linkend="_main_8c_1a71147341558d2823036988bfc0e6575d">NUMBER_OF_PRICE_RANGES</link>] = {0, <link linkend="_main_8c_1a9cfdaa0c3a5488cbcb8e9cb738e19146">DEFAULT_DISCOUNT</link>, <link linkend="_main_8c_1a9cfdaa0c3a5488cbcb8e9cb738e19146">DEFAULT_DISCOUNT</link>*2}</computeroutput></para></section>
+<anchor xml:id="_main_8c_1abaed5313319821e00c971ca48e071fcf"/><section>
+    <title>DEFAULT_INTERVAL_1_NIGHTS</title>
+<indexterm><primary>DEFAULT_INTERVAL_1_NIGHTS</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFAULT_INTERVAL_1_NIGHTS</secondary></indexterm>
+<para><computeroutput>unsigned int const DEFAULT_INTERVAL_1_NIGHTS = 3</computeroutput></para><para>
+
+<para>the default interval that the first discount starts at </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a33b4fb08407f315f236d0b93b39da793"/><section>
+    <title>DEFAULT_INTERVAL_2_NIGHTS</title>
+<indexterm><primary>DEFAULT_INTERVAL_2_NIGHTS</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFAULT_INTERVAL_2_NIGHTS</secondary></indexterm>
+<para><computeroutput>unsigned int const DEFAULT_INTERVAL_2_NIGHTS = 6</computeroutput></para><para>
+
+<para>the default interval that the second discount starts at </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a139936736b1fed8ce48a58629647dcc0"/><section>
+    <title>DEFAULT_MAX_RENTAL_NIGHTS</title>
+<indexterm><primary>DEFAULT_MAX_RENTAL_NIGHTS</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFAULT_MAX_RENTAL_NIGHTS</secondary></indexterm>
+<para><computeroutput>unsigned int const DEFAULT_MAX_RENTAL_NIGHTS = 14</computeroutput></para><para>
+
+<para>the default maximum nights </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a2af4ca44f722cc3b4b00a68b851b9e4d"/><section>
+    <title>DEFAULT_MIN_RENTAL_NIGHTS</title>
+<indexterm><primary>DEFAULT_MIN_RENTAL_NIGHTS</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFAULT_MIN_RENTAL_NIGHTS</secondary></indexterm>
+<para><computeroutput>int unsigned const DEFAULT_MIN_RENTAL_NIGHTS = 1</computeroutput></para><para>
+
+<para>the default minimum nights </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a539ad50b7780b0efc81c9b85f7e8df2b"/><section>
+    <title>DEFAULT_NAME</title>
+<indexterm><primary>DEFAULT_NAME</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFAULT_NAME</secondary></indexterm>
+<para><computeroutput>const char DEFAULT_NAME[<link linkend="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7">STRING_SIZE</link>] = &quot;AIR UCCS&quot;</computeroutput></para><para>
+
+<para>the default property name </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1abe3a8709ba5ff2e63b69fce41c24a0d0"/><section>
+    <title>DEFAULT_RENTAL_RATE</title>
+<indexterm><primary>DEFAULT_RENTAL_RATE</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFAULT_RENTAL_RATE</secondary></indexterm>
+<para><computeroutput>double const DEFAULT_RENTAL_RATE = 400</computeroutput></para><para>
+
+<para>the default cost per night </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a44287a1e2179ad86ebd481121eafb1f3"/><section>
+    <title>DEFAULT_REVIEW_HEADERS</title>
+<indexterm><primary>DEFAULT_REVIEW_HEADERS</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>DEFAULT_REVIEW_HEADERS</secondary></indexterm>
+<para><computeroutput>const char DEFAULT_REVIEW_HEADERS[<link linkend="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249">NUMBER_OF_REVIEW_CATS</link>][<link linkend="_main_8c_1ad78224efe1d3fb39b67ca74ad9d9eec7">STRING_SIZE</link>] = {&quot;Happiness&quot;, &quot;Cleanliness&quot;, &quot;Saftey&quot;, &quot;Location&quot;, &quot;Amenities&quot;}</computeroutput></para><para>
+
+<para>the default review headers </para>
+</para>
+</section>
+<anchor xml:id="_main_8c_1a6c5820a0ceef740c20441d04df24950a"/><section>
+    <title>names</title>
+<indexterm><primary>names</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>names</secondary></indexterm>
+<para><computeroutput>char* names[<link linkend="_main_8c_1a0599f56005d18d1574abdb5b746e69cc">NumTabs</link>] = {&quot;Main&quot;, &quot;Analytics&quot;, &quot;Login&quot;}</computeroutput></para></section>
+<anchor xml:id="_main_8c_1aacb3b7f85948a76fa11df31c02e98fc8"/><section>
+    <title>windows</title>
+<indexterm><primary>windows</primary><secondary>main.c</secondary></indexterm>
+<indexterm><primary>main.c</primary><secondary>windows</secondary></indexterm>
+<para><computeroutput>GtkWidget* windows[<link linkend="_main_8c_1a0599f56005d18d1574abdb5b746e69cc">NumTabs</link>] = {}</computeroutput></para></section>
+</section>
+</section>

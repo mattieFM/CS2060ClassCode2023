@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structlog_in_window" kind="struct" language="C++" prot="public">
+    <compoundname>logInWindow</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structlog_in_window_1a7ffe728874b6e9722a628acbf978a224" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1aa95cc25626aaea9a264528de81ad3c09" kindref="member">INHERIT_BASE_WIN</ref> GtkEntry *</type>
+        <definition>INHERIT_BASE_WIN GtkEntry* passwordField</definition>
+        <argsstring></argsstring>
+        <name>passwordField</name>
+        <qualifiedname>logInWindow::passwordField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="222" column="13" bodyfile="main.c" bodystart="222" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlog_in_window_1a43a4588fa53f66599d2e81f055dd7ef7" prot="public" static="no" mutable="no">
+        <type>GtkEntry *</type>
+        <definition>GtkEntry* usernameField</definition>
+        <argsstring></argsstring>
+        <name>usernameField</name>
+        <qualifiedname>logInWindow::usernameField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="223" column="13" bodyfile="main.c" bodystart="223" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlog_in_window_1a8e1de2175d8aeda26c2b0725b91632a8" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int attempts</definition>
+        <argsstring></argsstring>
+        <name>attempts</name>
+        <qualifiedname>logInWindow::attempts</qualifiedname>
+        <briefdescription>
+<para>how many times has the user attempted a login so fare </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="227" column="7" bodyfile="main.c" bodystart="227" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlog_in_window_1a0bd9e40aa54582b6eaac4ee0c51f0f7f" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int maxLoginAttempts</definition>
+        <argsstring></argsstring>
+        <name>maxLoginAttempts</name>
+        <qualifiedname>logInWindow::maxLoginAttempts</qualifiedname>
+        <briefdescription>
+<para>max times the user can try to login <ndash/>needs refactor to config.json eventually </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="230" column="7" bodyfile="main.c" bodystart="230" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlog_in_window_1a59460a3ff2c12443d1022e5cc0fba85c" prot="public" static="no" mutable="no">
+        <type>char *</type>
+        <definition>char* password</definition>
+        <argsstring></argsstring>
+        <name>password</name>
+        <qualifiedname>logInWindow::password</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>TEMP a string password just for testing guis </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="233" column="9" bodyfile="main.c" bodystart="233" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>the login window of the app </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="main.c" line="217" column="1" bodyfile="main.c" bodystart="217" bodyend="236"/>
+    <listofallmembers>
+      <member refid="structlog_in_window_1a8e1de2175d8aeda26c2b0725b91632a8" prot="public" virt="non-virtual"><scope>logInWindow</scope><name>attempts</name></member>
+      <member refid="structlog_in_window_1a0bd9e40aa54582b6eaac4ee0c51f0f7f" prot="public" virt="non-virtual"><scope>logInWindow</scope><name>maxLoginAttempts</name></member>
+      <member refid="structlog_in_window_1a59460a3ff2c12443d1022e5cc0fba85c" prot="public" virt="non-virtual"><scope>logInWindow</scope><name>password</name></member>
+      <member refid="structlog_in_window_1a7ffe728874b6e9722a628acbf978a224" prot="public" virt="non-virtual"><scope>logInWindow</scope><name>passwordField</name></member>
+      <member refid="structlog_in_window_1a43a4588fa53f66599d2e81f055dd7ef7" prot="public" virt="non-virtual"><scope>logInWindow</scope><name>usernameField</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

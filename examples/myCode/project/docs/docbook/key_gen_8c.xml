@@ -1,0 +1,329 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_key_gen_8c" xml:lang="en-US">
+<title>keyGen.c File Reference</title>
+<indexterm><primary>keyGen.c</primary></indexterm>
+<programlisting linenumbering="unnumbered">#include &lt;time.h&gt;<?linebreak?>#include &lt;stdint.h&gt;<?linebreak?>#include &lt;stdio.h&gt;<?linebreak?>#include &lt;stdlib.h&gt;<?linebreak?>#include &lt;math.h&gt;<?linebreak?>#include &lt;stdbool.h&gt;<?linebreak?></programlisting><simplesect>
+    <title>Macros    </title>
+        <itemizedlist>
+            <listitem><para>#define <link linkend="_key_gen_8c_1a826ece061102e9edb8bd1d2167fbc710">BIT_LEVEL</link>&#160;&#160;&#160;8</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<simplesect>
+    <title>Functions    </title>
+        <itemizedlist>
+            <listitem><para>int64_t <link linkend="_key_gen_8c_1aecb3b10f315423f9de2e0c640a6f2d0d">nBitRandom</link> (int numberOfBits)</para>
+
+<para>generate a random integer of n bits </para>
+</listitem>
+            <listitem><para>bool <link linkend="_key_gen_8c_1ac91f9172b8051a1bde670848303d5d9b">isPrime</link> (int64_t n)</para>
+
+<para>check if a number is prime </para>
+</listitem>
+            <listitem><para>bool <link linkend="_key_gen_8c_1a3e0f477fa66432159bcbae34c260d7e6">isCoPrime</link> (int64_t a, int64_t b)</para>
+
+<para>check if 2 numbers are co prime with eachother </para>
+</listitem>
+            <listitem><para>int64_t <link linkend="_key_gen_8c_1a0c0228a5e832c9d0499165c091fad58b">getRandPrime</link> ()</para>
+
+<para>get a random prime number </para>
+</listitem>
+            <listitem><para><link linkend="_key_gen_8c_1ab04146f8a570dc92f787b2282e765ed3">RSAKeyGen</link> (int64_t *outN, int64_t *outD, int64_t *outE)</para>
+
+<para>generate a private and a public key </para>
+</listitem>
+            <listitem><para>int64_t <link linkend="_key_gen_8c_1a998536f24ed663f5bf570155d4fa8c12">encrypt</link> (char c, int64_t n, int64_t e)</para>
+
+<para>encrypt a char with the public key </para>
+</listitem>
+            <listitem><para>char <link linkend="_key_gen_8c_1af7375ab0bf45fd807afe156684650e77">decrypt</link> (char c, int64_t n, int64_t d)</para>
+</listitem>
+            <listitem><para>int64_t <link linkend="_key_gen_8c_1aa58bed47ea7118092ea9b44fd73b6599">randBetween</link> (int64_t min, int64_t max)</para>
+
+<para>get a rand between min and max </para>
+</listitem>
+            <listitem><para>void <link linkend="_key_gen_8c_1aa63f1211c949c32d009a7e53ee192bbc">_extended_euclid</link> (int a, int b, int *x, int *y)</para>
+
+<para>Finds the multiplicative inverses of the two numbers. </para>
+</listitem>
+            <listitem><para>int <link linkend="_key_gen_8c_1ad23df605b76582c10025af5432ac36d2">_mod_inv</link> (int a, int m)</para>
+
+<para>Returns the multiplicative inverse of a under base m. </para>
+</listitem>
+            <listitem><para>int64_t <link linkend="_key_gen_8c_1a576a5085a2eaef327c962e0f4004693c">modExponent</link> (int64_t a, int64_t b, int64_t m)</para>
+</listitem>
+            <listitem><para>void <link linkend="_key_gen_8c_1acdef7a1fd863a6d3770c1268cb06add3">main</link> ()</para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Macro Definition Documentation</title>
+<anchor xml:id="_key_gen_8c_1a826ece061102e9edb8bd1d2167fbc710"/><section>
+    <title>BIT_LEVEL</title>
+<indexterm><primary>BIT_LEVEL</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>BIT_LEVEL</secondary></indexterm>
+<para><computeroutput>#define BIT_LEVEL&#160;&#160;&#160;8</computeroutput></para>
+<para>First To walk anyone reading through the general methodology, recall that RSA is an algorithm for generating complex keys for pub/priv key crypto</para>
+
+<para>It asserts that it is very hard to find large integer common denominators of primes it consists of 4 steps</para>
+
+<para>1: choose two arbitraty large primes, denoted as p and q. I will use these names below as it is what they are called within the algorithm and is rather standard -These should be chosen at random, I will be using a probabalistic aproach to find primes as we only need to find 2 we can basically guess and assume we will be right within x where x is usually less than 2000 guesses which is computationally insignificant for this scale 2: we then compute n = p times q --&gt; n=pq. 3: then it gets harder. We now compute Carmichaels totient function of n (denoted as λ(n)) Its a lot of math that will be explained in the functions below for it 4: choose an integer e such taht 2 &lt; e &lt; λ(n) and gcd(e, λ(n)) = 1; that is, e and λ(n) are coprime 5: determine d as d == e^-1 that is d is the modular multiplicitive invers of e modulo λ(n)</para>
+
+<para>thus the public key becomes modulus n and the exponent e and the private key consists of exponent d, p, q and λ(n), which are used to compute d</para>
+
+<para>in short d is the private key n^e is the public key ====================== </para>
+<section xml:id="_key_gen_8c_1autotoc_md0">
+<title>Declarations</title>
+</section>
+</section>
+</section>
+<section>
+<title>Function Documentation</title>
+<anchor xml:id="_key_gen_8c_1aa63f1211c949c32d009a7e53ee192bbc"/><section>
+    <title>_extended_euclid()</title>
+<indexterm><primary>_extended_euclid</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>_extended_euclid</secondary></indexterm>
+<para><computeroutput>void _extended_euclid (int a, int b, int * x, int * y)</computeroutput></para><para>
+
+<para>Finds the multiplicative inverses of the two numbers. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>a</entry><entry>
+<para></para>
+</entry>
+                            </row>
+                            <row>
+<entry>b</entry><entry>
+<para></para>
+</entry>
+                            </row>
+                            <row>
+<entry>x</entry><entry>
+<para></para>
+</entry>
+                            </row>
+                            <row>
+<entry>y</entry><entry>
+<para></para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                </para>
+</section>
+<anchor xml:id="_key_gen_8c_1ad23df605b76582c10025af5432ac36d2"/><section>
+    <title>_mod_inv()</title>
+<indexterm><primary>_mod_inv</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>_mod_inv</secondary></indexterm>
+<para><computeroutput>int _mod_inv (int a, int m)</computeroutput></para><para>
+
+<para>Returns the multiplicative inverse of a under base m. </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>a</entry><entry>
+<para></para>
+</entry>
+                            </row>
+                            <row>
+<entry>m</entry><entry>
+<para></para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>int </para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_key_gen_8c_1af7375ab0bf45fd807afe156684650e77"/><section>
+    <title>decrypt()</title>
+<indexterm><primary>decrypt</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>decrypt</secondary></indexterm>
+<para><computeroutput>char decrypt (char c, int64_t n, int64_t d)</computeroutput></para></section>
+<anchor xml:id="_key_gen_8c_1a998536f24ed663f5bf570155d4fa8c12"/><section>
+    <title>encrypt()</title>
+<indexterm><primary>encrypt</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>encrypt</secondary></indexterm>
+<para><computeroutput>int64_t encrypt (char c, int64_t n, int64_t e)</computeroutput></para><para>
+
+<para>encrypt a char with the public key </para>
+</para>
+</section>
+<anchor xml:id="_key_gen_8c_1a0c0228a5e832c9d0499165c091fad58b"/><section>
+    <title>getRandPrime()</title>
+<indexterm><primary>getRandPrime</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>getRandPrime</secondary></indexterm>
+<para><computeroutput>int64_t getRandPrime ( )</computeroutput></para><para>
+
+<para>get a random prime number </para>
+</para>
+</section>
+<anchor xml:id="_key_gen_8c_1a3e0f477fa66432159bcbae34c260d7e6"/><section>
+    <title>isCoPrime()</title>
+<indexterm><primary>isCoPrime</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>isCoPrime</secondary></indexterm>
+<para><computeroutput>bool isCoPrime (int64_t a, int64_t b)</computeroutput></para><para>
+
+<para>check if 2 numbers are co prime with eachother </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>a</entry><entry>
+<para>number1 </para>
+</entry>
+                            </row>
+                            <row>
+<entry>b</entry><entry>
+<para>number2 </para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para>whether they are coPrime or not </para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_key_gen_8c_1ac91f9172b8051a1bde670848303d5d9b"/><section>
+    <title>isPrime()</title>
+<indexterm><primary>isPrime</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>isPrime</secondary></indexterm>
+<para><computeroutput>bool isPrime (int64_t n)</computeroutput></para><para>
+
+<para>check if a number is prime </para>
+</para>
+</section>
+<anchor xml:id="_key_gen_8c_1acdef7a1fd863a6d3770c1268cb06add3"/><section>
+    <title>main()</title>
+<indexterm><primary>main</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>main</secondary></indexterm>
+<para><computeroutput>void main ( )</computeroutput></para></section>
+<anchor xml:id="_key_gen_8c_1a576a5085a2eaef327c962e0f4004693c"/><section>
+    <title>modExponent()</title>
+<indexterm><primary>modExponent</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>modExponent</secondary></indexterm>
+<para><computeroutput>int64_t modExponent (int64_t a, int64_t b, int64_t m)</computeroutput></para></section>
+<anchor xml:id="_key_gen_8c_1aecb3b10f315423f9de2e0c640a6f2d0d"/><section>
+    <title>nBitRandom()</title>
+<indexterm><primary>nBitRandom</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>nBitRandom</secondary></indexterm>
+<para><computeroutput>unsigned long long nBitRandom (int numberOfBits)</computeroutput></para><para>
+
+<para>generate a random integer of n bits </para>
+</para>
+
+<para>====================== </para>
+<section xml:id="_key_gen_8c_1autotoc_md1">
+<title>Prototypes</title>
+
+<para>====================== </para>
+</section>
+<section xml:id="_key_gen_8c_1autotoc_md2">
+<title>Functions</title>
+
+<para>====================== </para>
+</section>
+<section xml:id="_key_gen_8c_1autotoc_md3">
+<title>Prime Calc (working)</title>
+
+<para>====================== </para>
+</section>
+<section xml:id="_main_8c_1autotoc_md6">
+<title>Functions</title>
+</section>
+</section>
+<anchor xml:id="_key_gen_8c_1aa58bed47ea7118092ea9b44fd73b6599"/><section>
+    <title>randBetween()</title>
+<indexterm><primary>randBetween</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>randBetween</secondary></indexterm>
+<para><computeroutput>int64_t randBetween (int64_t min, int64_t max)</computeroutput></para><para>
+
+<para>get a rand between min and max </para>
+</para>
+
+<para>
+                <formalpara>
+                    <title>
+Parameters</title>
+                    <para>
+                    <table frame="all">
+                        <tgroup cols="2" align="left" colsep="1" rowsep="1">
+                        <colspec colwidth="1*"/>
+                        <colspec colwidth="4*"/>
+                        <tbody>
+                            <row>
+<entry>min</entry><entry>
+<para></para>
+</entry>
+                            </row>
+                            <row>
+<entry>max</entry><entry>
+<para></para>
+</entry>
+                            </row>
+                        </tbody>
+                        </tgroup>
+                    </table>
+                    </para>
+                </formalpara>
+                <formalpara><title>Returns</title>
+
+<para><?linebreak?> </para>
+</formalpara>
+</para>
+</section>
+<anchor xml:id="_key_gen_8c_1ab04146f8a570dc92f787b2282e765ed3"/><section>
+    <title>RSAKeyGen()</title>
+<indexterm><primary>RSAKeyGen</primary><secondary>keyGen.c</secondary></indexterm>
+<indexterm><primary>keyGen.c</primary><secondary>RSAKeyGen</secondary></indexterm>
+<para><computeroutput>RSAKeyGen (int64_t * outN, int64_t * outD, int64_t * outE)</computeroutput></para><para>
+
+<para>generate a private and a public key </para>
+</para>
+</section>
+</section>
+</section>

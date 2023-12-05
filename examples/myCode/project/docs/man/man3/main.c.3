@@ -1,0 +1,676 @@
+.TH "main.c" 3 "Version 1" "AirUCCS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+main.c
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <gtk/gtk\&.h>\fP
+.br
+\fC#include <stdlib\&.h>\fP
+.br
+\fC#include <stdio\&.h>\fP
+.br
+\fC#include <stdbool\&.h>\fP
+.br
+\fC#include <string\&.h>\fP
+.br
+\fC#include <time\&.h>\fP
+.br
+\fC#include <math\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fBlocation\fP"
+.br
+.RI "the location of the property @initalizer: initLocation "
+.ti -1c
+.RI "struct \fBproperty\fP"
+.br
+.RI "A struct representing a property @initalizer: initProperty\&. "
+.ti -1c
+.RI "struct \fBlogInWindow\fP"
+.br
+.RI "the login window of the app "
+.ti -1c
+.RI "struct \fBconfigWindow\fP"
+.br
+.RI "the config window of the app "
+.ti -1c
+.RI "struct \fBadminWindow\fP"
+.br
+.RI "the admin window of the app "
+.ti -1c
+.RI "struct \fBreviewWindow\fP"
+.br
+.RI "the review Window of the app "
+.ti -1c
+.RI "struct \fBcustomerWindow\fP"
+.br
+.RI "the customer window of the app "
+.ti -1c
+.RI "struct \fBapp\fP"
+.br
+.RI "the main struct containing all app info that we need "
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBNUMBER_OF_PRICE_RANGES\fP   3"
+.br
+.RI "a constant for the number of price ranges That is to say how many times can the discount chagge "
+.ti -1c
+.RI "#define \fBNUMBER_OF_REVIEW_CATS\fP   5"
+.br
+.RI "the nubmer of review categories "
+.ti -1c
+.RI "#define \fBSTRING_SIZE\fP   80"
+.br
+.RI "max size of strings "
+.ti -1c
+.RI "#define \fBBASE_DISCOUNT\fP   50"
+.br
+.RI "the base first discount "
+.ti -1c
+.RI "#define \fBADD_MOCK_REVIEWS\fP   1"
+.br
+.RI "a boolean of whether mock data should be generated "
+.ti -1c
+.RI "#define \fBMAX_REVIEW\fP   5"
+.br
+.RI "the max number than can be entered on the review's menu inputs "
+.ti -1c
+.RI "#define \fBMIN_REVIEW\fP   1"
+.br
+.RI "the min number than can be entered on the review's menu inputs "
+.ti -1c
+.RI "#define \fBDEFINE_LL_OF_TYPE_ARR_WITH_SIZE\fP(TYPE,  size,  typeName,  structName)"
+.br
+.RI "setup a generic linked list of arrays of size "
+.ti -1c
+.RI "#define \fBINHERIT_BASE_WIN\fP     GtkWidget* window;"
+.br
+.ti -1c
+.RI "#define \fBNumTabs\fP   3"
+.br
+.ti -1c
+.RI "#define \fBBIT_LEVEL\fP   8"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fBlocation\fP \fBLocation\fP"
+.br
+.RI "the location of the property @initalizer: initLocation "
+.ti -1c
+.RI "typedef struct \fBproperty\fP \fBProperty\fP"
+.br
+.RI "A struct representing a property @initalizer: initProperty\&. "
+.ti -1c
+.RI "typedef struct \fBlogInWindow\fP \fBLoginWindow\fP"
+.br
+.RI "the login window of the app "
+.ti -1c
+.RI "typedef struct \fBconfigWindow\fP \fBConfigWindow\fP"
+.br
+.RI "the config window of the app "
+.ti -1c
+.RI "typedef struct \fBadminWindow\fP \fBAdminWindow\fP"
+.br
+.RI "the admin window of the app "
+.ti -1c
+.RI "typedef struct \fBreviewWindow\fP \fBReviewWindow\fP"
+.br
+.RI "the review Window of the app "
+.ti -1c
+.RI "typedef struct \fBcustomerWindow\fP \fBCustomerWindow\fP"
+.br
+.RI "the customer window of the app "
+.ti -1c
+.RI "typedef struct \fBapp\fP \fBApp\fP"
+.br
+.RI "the main struct containing all app info that we need "
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBDEFINE_LL_OF_TYPE_ARR_WITH_SIZE\fP (int, \fBNUMBER_OF_REVIEW_CATS\fP, ReviewNode, reviewNode)"
+.br
+.ti -1c
+.RI "void \fBinitLocation\fP (\fBLocation\fP *loc, char address[\fBSTRING_SIZE\fP], int lat, int lon)"
+.br
+.RI "an initalizer for a new location struct\&. Initalizes an existing Location with good data "
+.ti -1c
+.RI "void \fBinitProperty\fP (\fBProperty\fP *\fBproperty\fP)"
+.br
+.RI "Initalize a property with default values\&. "
+.ti -1c
+.RI "void \fBcleanUpReviews\fP (\fBProperty\fP *propertyPtr)"
+.br
+.RI "A method for quickly cleaning up the linked list of the property reviews\&. "
+.ti -1c
+.RI "void \fBaddReview\fP (\fBApp\fP *mainApp, const int review[\fBNUMBER_OF_REVIEW_CATS\fP])"
+.br
+.RI "Add a review to the linked list of reviews\&. "
+.ti -1c
+.RI "int \fBgetValidIntInputWithSentinels\fP (char const PROMPT[], int min, int max, int const SENTINEL_VALUES[], size_t length)"
+.br
+.RI "Get a int that is either within [min-max] or in a list of sentinel values, from the user, prompting them with the prompt passed into this function and displaying the err prompt if they enter an invalid input\&. "
+.ti -1c
+.RI "double \fBcalculateDiscount\fP (int night, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)"
+.br
+.RI "A function that will calculate the discount of a day\&. "
+.ti -1c
+.RI "double \fBcalculateCost\fP (int nights, double basePrice, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)"
+.br
+.RI "A function to calculate the cost of a stay in a AirUCCS rented building\&. Cost is based on nights stayed, the base price per night and the discounts applied\&. "
+.ti -1c
+.RI "void \fBdisplayCost\fP (int nights, double cost)"
+.br
+.RI "A function to display how much the user's stay cost in a user friendly way\&. "
+.ti -1c
+.RI "void \fBchargeUser\fP (char const uuid[], float cost, char const cardNum[])"
+.br
+.RI "a method that would charge the user money for their stay\&. "
+.ti -1c
+.RI "bool \fBgetBooking\fP (int *valuePt, int const SENTINELS[], int min, int max, size_t length)"
+.br
+.RI "A function that will start the process of booking a room\&. "
+.ti -1c
+.RI "bool \fBintArrContains\fP (int const ARR[], int val, size_t length)"
+.br
+.RI "check if an array of ints contains a value\&. "
+.ti -1c
+.RI "void \fBdisplayRentalPropertyInfo\fP (int min, int max, double basePrice, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)"
+.br
+.RI "display the rental property info to the user before they are prompted to make a perchance\&. "
+.ti -1c
+.RI "int \fBcliMain\fP (void)"
+.br
+.RI "the main function for the program that will handle initialization/entry\&. "
+.ti -1c
+.RI "int \fBmain\fP (int argc, char **argv)"
+.br
+.ti -1c
+.RI "unsigned long long \fBnBitRandom\fP (int numberOfBits)"
+.br
+.RI "generate a random integer of n bits "
+.in -1c
+.SS "Variables"
+
+.in +1c
+.ti -1c
+.RI "const char \fBDEFAULT_REVIEW_HEADERS\fP [\fBNUMBER_OF_REVIEW_CATS\fP][\fBSTRING_SIZE\fP] = {'Happiness', 'Cleanliness', 'Saftey', 'Location', 'Amenities'}"
+.br
+.RI "the default review headers "
+.ti -1c
+.RI "const char \fBDEFAULT_NAME\fP [\fBSTRING_SIZE\fP] = 'AIR UCCS'"
+.br
+.RI "the default property name "
+.ti -1c
+.RI "int unsigned const \fBDEFAULT_MIN_RENTAL_NIGHTS\fP = 1"
+.br
+.RI "the default minimum nights "
+.ti -1c
+.RI "unsigned int const \fBDEFAULT_MAX_RENTAL_NIGHTS\fP = 14"
+.br
+.RI "the default maximum nights "
+.ti -1c
+.RI "unsigned int const \fBDEFAULT_INTERVAL_1_NIGHTS\fP = 3"
+.br
+.RI "the default interval that the first discount starts at "
+.ti -1c
+.RI "unsigned int const \fBDEFAULT_INTERVAL_2_NIGHTS\fP = 6"
+.br
+.RI "the default interval that the second discount starts at "
+.ti -1c
+.RI "double const \fBDEFAULT_RENTAL_RATE\fP = 400"
+.br
+.RI "the default cost per night "
+.ti -1c
+.RI "double const \fBDEFAULT_DISCOUNT\fP = 50"
+.br
+.RI "the default base discount before range multiplyers "
+.ti -1c
+.RI "const int \fBDEFAULT_DAY_RANGES\fP [\fBNUMBER_OF_PRICE_RANGES\fP] = {0, \fBDEFAULT_INTERVAL_1_NIGHTS\fP, \fBDEFAULT_INTERVAL_2_NIGHTS\fP }"
+.br
+.ti -1c
+.RI "const int \fBDEFAULT_DISCOUNTS\fP [\fBNUMBER_OF_PRICE_RANGES\fP] = {0, \fBDEFAULT_DISCOUNT\fP, \fBDEFAULT_DISCOUNT\fP*2}"
+.br
+.ti -1c
+.RI "GtkWidget * \fBwindows\fP [\fBNumTabs\fP] = {}"
+.br
+.ti -1c
+.RI "char * \fBnames\fP [\fBNumTabs\fP] = {'Main', 'Analytics', 'Login'}"
+.br
+.in -1c
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ADD_MOCK_REVIEWS   1"
+
+.PP
+a boolean of whether mock data should be generated 
+.SS "#define BASE_DISCOUNT   50"
+
+.PP
+the base first discount 
+.SS "#define BIT_LEVEL   8"
+First To walk anyone reading through the general methodology, recall that RSA is an algorithm for generating complex keys for pub/priv key crypto
+.PP
+It asserts that it is very hard to find large integer common denominators of primes it consists of 4 steps
+.PP
+1: choose two arbitraty large primes, denoted as p and q\&. I will use these names below as it is what they are called within the algorithm and is rather standard -These should be chosen at random, I will be using a probabalistic aproach to find primes as we only need to find 2 we can basically guess and assume we will be right within x where x is usually less than 2000 guesses which is computationally insignificant for this scale 2: we then compute n = p times q --> n=pq\&. 3: then it gets harder\&. We now compute Carmichaels totient function of n (denoted as λ(n)) Its a lot of math that will be explained in the functions below for it 4: choose an integer e such taht 2 < e < λ(n) and gcd(e, λ(n)) = 1; that is, e and λ(n) are coprime 5: determine d as d == e^-1 that is d is the modular multiplicitive invers of e modulo λ(n)
+.PP
+thus the public key becomes modulus n and the exponent e and the private key consists of exponent d, p, q and λ(n), which are used to compute d
+.PP
+in short d is the private key n^e is the public key ====================== 
+.SH "Declarations"
+.PP
+
+.SS "#define DEFINE_LL_OF_TYPE_ARR_WITH_SIZE(TYPE, size, typeName, structName)"
+\fBValue:\fP.PP
+.nf
+typedef struct structName {\\
+  struct structName * next;\\
+  TYPE data[size];\\
+} typeName;
+.fi
+
+.PP
+setup a generic linked list of arrays of size 
+.PP
+\fBParameters\fP
+.RS 4
+\fITYPE\fP the data type of the linked list 
+.br
+\fIsize\fP the size of the array (the array is the data of the node) 
+.br
+\fItypeName\fP the litteral name that the linked list type will be created as 
+.br
+\fIstructName\fP the litteral name that the linked list struct will be created as 
+.RE
+.PP
+
+.SS "#define INHERIT_BASE_WIN     GtkWidget* window;"
+
+.SS "#define MAX_REVIEW   5"
+
+.PP
+the max number than can be entered on the review's menu inputs 
+.SS "#define MIN_REVIEW   1"
+
+.PP
+the min number than can be entered on the review's menu inputs 
+.SS "#define NUMBER_OF_PRICE_RANGES   3"
+
+.PP
+a constant for the number of price ranges That is to say how many times can the discount chagge 
+.PP
+\fBAuthor\fP
+.RS 4
+: Mattie Fuller Class: CS2060-002 Project: Project Iteration: 2 Description: This is a project that will handle 'airbnb' style bookings for a fictional renting service 'airuccs\&.' This is the second iteration and is fully GUI dependant and is attempting to implement private public key authentication\&. Note that in the spirit of staying as native to c as possible I have opted away from using xml (html-esque) GUI builders that gtk+ provides, these are much easier but are not really in the spirit of pure c program so I wont be using them\&.
+.RE
+.PP
+Note: it is really clunky having this entire thing in one file, so sorry about that
+.PP
+Documentation style: comments are following doxgen C standard as I have found this is the most common style that tends to be used, let me know if you would prefer a different style\&.
+.PP
+Security Standard: SEI CERT C Standard 
+.SS "#define NUMBER_OF_REVIEW_CATS   5"
+
+.PP
+the nubmer of review categories 
+.SS "#define NumTabs   3"
+
+.SS "#define STRING_SIZE   80"
+
+.PP
+max size of strings 
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fBadminWindow\fP \fBAdminWindow\fP"
+
+.PP
+the admin window of the app 
+.SS "typedef struct \fBapp\fP \fBApp\fP"
+
+.PP
+the main struct containing all app info that we need 
+.SS "typedef struct \fBconfigWindow\fP \fBConfigWindow\fP"
+
+.PP
+the config window of the app 
+.SS "typedef struct \fBcustomerWindow\fP \fBCustomerWindow\fP"
+
+.PP
+the customer window of the app 
+.SS "typedef struct \fBlocation\fP \fBLocation\fP"
+
+.PP
+the location of the property @initalizer: initLocation 
+.SS "typedef struct \fBlogInWindow\fP \fBLoginWindow\fP"
+
+.PP
+the login window of the app 
+.SS "typedef struct \fBproperty\fP \fBProperty\fP"
+
+.PP
+A struct representing a property @initalizer: initProperty\&. 
+.SS "typedef struct \fBreviewWindow\fP \fBReviewWindow\fP"
+
+.PP
+the review Window of the app 
+.SH "Function Documentation"
+.PP 
+.SS "void addReview (\fBApp\fP * mainApp, const int review[NUMBER_OF_REVIEW_CATS])"
+
+.PP
+Add a review to the linked list of reviews\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIproperty\fP the property to add the review to 
+.br
+\fIreview\fP the review to add 
+.RE
+.PP
+
+.SS "double calculateCost (int nights, double basePrice, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)"
+
+.PP
+A function to calculate the cost of a stay in a AirUCCS rented building\&. Cost is based on nights stayed, the base price per night and the discounts applied\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInights\fP {int} how many nights the user has stayed 
+.br
+\fIbasePrice\fP {float} the base price per night before any discounts are applied\&. 
+.br
+\fIdiscountRanges[]\fP {int[]) an array of ints in the format [discountRange1Start,discountRange1End,DiscountRange2End,\&.\&.\&.) where the start of each range after 1 is the end of the last 
+.br
+\fIdiscounts[]\fP {floats} an array of the discounts for each range 
+.br
+\fIlength,{size_t}\fP the length of both the discountRRanges and discounts array, they must be same length
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+{double} a double value representing how much the stay would cost\&. 
+.RE
+.PP
+
+.SS "double calculateDiscount (int night, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)"
+
+.PP
+A function that will calculate the discount of a day\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInight\fP {int} the night to find the discount of 
+.br
+\fIdiscountRanges[]\fP {int[]) an array of ints in the format [discountRange1Start,discountRange1End,DiscountRange2End,\&.\&.\&.) where the start of each range after 1 is the end of the last 
+.br
+\fIdiscounts[]\fP {floats} an array of the discounts for each range 
+.br
+\fIlength,{size_t}\fP the length of both the discountRRanges and discounts array, they must be same length
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+double, a dollar amount of the discount for this night 
+.RE
+.PP
+
+.SS "void chargeUser (char const uuid[], float cost, char const cardNum[])"
+
+.PP
+a method that would charge the user money for their stay\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIuuid,the\fP id of the user's stay 
+.br
+\fIcost,the\fP total cost to charge them 
+.br
+\fIcardNum\fP the card to charge the cost to 
+.RE
+.PP
+
+.SS "void cleanUpReviews (\fBProperty\fP * propertyPtr)"
+
+.PP
+A method for quickly cleaning up the linked list of the property reviews\&. free all memory held by review ll
+.PP
+\fBParameters\fP
+.RS 4
+\fIpropertyPtr\fP the property to cleanup
+.br
+\fIpropertyPtr\fP the property 
+.RE
+.PP
+
+.SS "int cliMain (void)"
+
+.PP
+the main function for the program that will handle initialization/entry\&. 
+.PP
+\fBAuthor\fP
+.RS 4
+MattieFM 
+.RE
+.PP
+
+.SS "DEFINE_LL_OF_TYPE_ARR_WITH_SIZE (int, \fBNUMBER_OF_REVIEW_CATS\fP, ReviewNode, reviewNode)"
+
+.SS "void displayCost (int nights, double cost)"
+
+.PP
+A function to display how much the user's stay cost in a user friendly way\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fInights\fP {int} how many nights the user has stayed 
+.br
+\fIcost\fP {double} the total cost of the user's stay
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+nothing, prints info to the console for the user\&. in the format: Nights Charge 5 $nnnn\&.nn 
+.RE
+.PP
+
+.SS "void displayRentalPropertyInfo (int min, int max, double basePrice, int const DISCOUNT_RANGES[], double const DISCOUNTS[], size_t length)"
+
+.PP
+display the rental property info to the user before they are prompted to make a perchance\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fImin,the\fP minimum number of nights a user can stay 
+.br
+\fImax\fP the maximum number of nights a user can stay 
+.br
+\fIbasePrice\fP the base price per night of the property 
+.br
+\fIDISCOUNT_RANGES[]\fP {int[]) an array of ints in the format [discountRange1Start,discountRange1End,DiscountRange2End,\&.\&.\&.) where the start of each range after 1 is the end of the last 
+.br
+\fIDISCOUNTS[]\fP {double[]} an array of the discounts for each range, 
+.br
+\fIlength,{size_t}\fP the length of both the discountRRanges and discounts array, they must be same length 
+.RE
+.PP
+
+.SS "bool getBooking (int * valuePt, int const SENTINELS[], int min, int max, size_t length)"
+
+.PP
+A function that will start the process of booking a room\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIvaluePt\fP a pointer to a variable to store the value the user entered\&. 
+.br
+\fIsentinels[]\fP an array of sentinel values that are allowed 
+.br
+\fImin,the\fP min value for nights allowed 
+.br
+\fImax,the\fP max value for nights allowed 
+.br
+\fIlength,{size_t}\fP the length of the sentinel_values array
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+bool, this will return true if the user has made a valid booking and false if they have entered a sentinel value\&. 
+.RE
+.PP
+
+.SS "int getValidIntInputWithSentinels (char const PROMPT[], int min, int max, int const SENTINEL_VALUES[], size_t length)"
+
+.PP
+Get a int that is either within [min-max] or in a list of sentinel values, from the user, prompting them with the prompt passed into this function and displaying the err prompt if they enter an invalid input\&. @Author MattieFM
+.PP
+\fBParameters\fP
+.RS 4
+\fIprompt\fP {char[]} a string like array of chars to display to the user as a prompt 
+.br
+\fIerr\fP {char[]} a string like array to display to the user when they enter an invalid value, 
+.br
+\fIminAsciiCode\fP {signed int} the lowest ascii code allowed to be entered 
+.br
+\fImaxAsciiCode\fP {signed int} the highest ascii code allowed to be entered 
+.br
+\fIsentinelValues\fP {signed int[]} an array of explicitly allowed ascii codes 
+.br
+\fIlength,{size_t}\fP the length of the sentinel_values array
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+a signed int between [min-max] 
+.RE
+.PP
+
+.SS "void initLocation (\fBLocation\fP * loc, char address[STRING_SIZE], int lat, int lon)"
+
+.PP
+an initalizer for a new location struct\&. Initalizes an existing Location with good data Initalize a location structure\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIloc\fP the location struct pointer 
+.br
+\fIaddress\fP the adress of the location 
+.br
+\fIlat\fP the int latitude 
+.br
+\fIlon\fP the int longitude
+.br
+\fIloc\fP the location struct to init 
+.br
+\fIaddress\fP the adress in the form of a string of the location 
+.br
+\fIlat\fP the latitude of the location 
+.br
+\fIlon\fP the longitude of the location 
+.RE
+.PP
+
+.SS "void initProperty (\fBProperty\fP * property)"
+
+.PP
+Initalize a property with default values\&. Initalzize a property with default values\&.
+.PP
+\fBParameters\fP
+.RS 4
+\fIproperty\fP the propertyPtr to initalize onto
+.br
+\fIproperty\fP the property struct to initalize 
+.RE
+.PP
+
+.SS "bool intArrContains (int const ARR[], int val, size_t length)"
+
+.PP
+check if an array of ints contains a value\&. 
+.PP
+\fBParameters\fP
+.RS 4
+\fIARR[]\fP the array to look through 
+.br
+\fIval\fP the value to check for 
+.br
+\fIlength,{size_t}\fP the length of the array
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+bool, true if value is in arr false if not\&. 
+.RE
+.PP
+
+.SS "int main (int argc, char ** argv)"
+
+.SS "unsigned long long nBitRandom (int numberOfBits)"
+
+.PP
+generate a random integer of n bits ====================== 
+.SH "Prototypes"
+.PP
+====================== 
+.SH "Functions"
+.PP
+
+.SH "Variable Documentation"
+.PP 
+.SS "const int DEFAULT_DAY_RANGES[\fBNUMBER_OF_PRICE_RANGES\fP] = {0, \fBDEFAULT_INTERVAL_1_NIGHTS\fP, \fBDEFAULT_INTERVAL_2_NIGHTS\fP }"
+
+.SS "double const DEFAULT_DISCOUNT = 50"
+
+.PP
+the default base discount before range multiplyers 
+.SS "const int DEFAULT_DISCOUNTS[\fBNUMBER_OF_PRICE_RANGES\fP] = {0, \fBDEFAULT_DISCOUNT\fP, \fBDEFAULT_DISCOUNT\fP*2}"
+
+.SS "unsigned int const DEFAULT_INTERVAL_1_NIGHTS = 3"
+
+.PP
+the default interval that the first discount starts at 
+.SS "unsigned int const DEFAULT_INTERVAL_2_NIGHTS = 6"
+
+.PP
+the default interval that the second discount starts at 
+.SS "unsigned int const DEFAULT_MAX_RENTAL_NIGHTS = 14"
+
+.PP
+the default maximum nights 
+.SS "int unsigned const DEFAULT_MIN_RENTAL_NIGHTS = 1"
+
+.PP
+the default minimum nights 
+.SS "const char DEFAULT_NAME[\fBSTRING_SIZE\fP] = 'AIR UCCS'"
+
+.PP
+the default property name 
+.SS "double const DEFAULT_RENTAL_RATE = 400"
+
+.PP
+the default cost per night 
+.SS "const char DEFAULT_REVIEW_HEADERS[\fBNUMBER_OF_REVIEW_CATS\fP][\fBSTRING_SIZE\fP] = {'Happiness', 'Cleanliness', 'Saftey', 'Location', 'Amenities'}"
+
+.PP
+the default review headers 
+.SS "char* names[\fBNumTabs\fP] = {'Main', 'Analytics', 'Login'}"
+
+.SS "GtkWidget* windows[\fBNumTabs\fP] = {}"
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AirUCCS from the source code\&.

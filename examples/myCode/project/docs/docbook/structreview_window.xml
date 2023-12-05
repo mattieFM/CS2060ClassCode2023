@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structreview_window" xml:lang="en-US">
+<title>reviewWindow Struct Reference</title>
+<indexterm><primary>reviewWindow</primary></indexterm>
+<para>
+
+<para>the review Window of the app </para>
+ 
+</para>
+<simplesect>
+    <title>Data Fields    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link> GtkEntry * <link linkend="_structreview_window_1a9a3f2e5a8dd7d12f937d7f9842202957">inputs</link> [<link linkend="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249">NUMBER_OF_REVIEW_CATS</link>]</para>
+</listitem>
+            <listitem><para>GtkButton * <link linkend="_structreview_window_1ab7183ac989e82ad331573935544fa1ed">submitBtn</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>the review Window of the app </para>
+</section>
+<section>
+<title>Field Documentation</title>
+<anchor xml:id="_structreview_window_1a9a3f2e5a8dd7d12f937d7f9842202957"/><section>
+    <title>inputs</title>
+<indexterm><primary>inputs</primary><secondary>reviewWindow</secondary></indexterm>
+<indexterm><primary>reviewWindow</primary><secondary>inputs</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link> GtkEntry* inputs[<link linkend="_main_8c_1afe66cf1c04080a4cba6fc79833c5d249">NUMBER_OF_REVIEW_CATS</link>]</computeroutput></para></section>
+<anchor xml:id="_structreview_window_1ab7183ac989e82ad331573935544fa1ed"/><section>
+    <title>submitBtn</title>
+<indexterm><primary>submitBtn</primary><secondary>reviewWindow</secondary></indexterm>
+<indexterm><primary>reviewWindow</primary><secondary>submitBtn</secondary></indexterm>
+<para><computeroutput>GtkButton* submitBtn</computeroutput></para></section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+<link linkend="_main_8c">main.c</link></section>
+</section>

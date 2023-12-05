@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structlocation" kind="struct" language="C++" prot="public">
+    <compoundname>location</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structlocation_1a5d8c42e48a8672b45cf5e69b1cd58639" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char address[STRING_SIZE]</definition>
+        <argsstring>[STRING_SIZE]</argsstring>
+        <name>address</name>
+        <qualifiedname>location::address</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="125" column="6" bodyfile="main.c" bodystart="125" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlocation_1ad0c6d3a40d6093204d169a1928ec7fa5" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int lat</definition>
+        <argsstring></argsstring>
+        <name>lat</name>
+        <qualifiedname>location::lat</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="128" column="5" bodyfile="main.c" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structlocation_1ada0aef770ee20058d486028df44cf5d0" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int lon</definition>
+        <argsstring></argsstring>
+        <name>lon</name>
+        <qualifiedname>location::lon</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="131" column="5" bodyfile="main.c" bodystart="131" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>the location of the property @initalizer: initLocation </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="main.c" line="123" column="1" bodyfile="main.c" bodystart="123" bodyend="132"/>
+    <listofallmembers>
+      <member refid="structlocation_1a5d8c42e48a8672b45cf5e69b1cd58639" prot="public" virt="non-virtual"><scope>location</scope><name>address</name></member>
+      <member refid="structlocation_1ad0c6d3a40d6093204d169a1928ec7fa5" prot="public" virt="non-virtual"><scope>location</scope><name>lat</name></member>
+      <member refid="structlocation_1ada0aef770ee20058d486028df44cf5d0" prot="public" virt="non-virtual"><scope>location</scope><name>lon</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structproperty" kind="struct" language="C++" prot="public">
+    <compoundname>property</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structproperty_1a191b09831ce959fea615beb6f2b609d3" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char propertyName[STRING_SIZE]</definition>
+        <argsstring>[STRING_SIZE]</argsstring>
+        <name>propertyName</name>
+        <qualifiedname>property::propertyName</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="151" column="6" bodyfile="main.c" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproperty_1a260defa82d536dcea2aa22452b862110" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1a5f2225f46c54d4268143a3e9586f67a4" kindref="member">Location</ref></type>
+        <definition>Location location</definition>
+        <argsstring></argsstring>
+        <name>location</name>
+        <qualifiedname>property::location</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="153" column="10" bodyfile="main.c" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproperty_1ac25840037114824712a266b5827a4f37" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int dayRanges[NUMBER_OF_PRICE_RANGES]</definition>
+        <argsstring>[NUMBER_OF_PRICE_RANGES]</argsstring>
+        <name>dayRanges</name>
+        <qualifiedname>property::dayRanges</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="159" column="5" bodyfile="main.c" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproperty_1a78cfc4adb15fb15e26a8bee390778e7a" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double discounts[NUMBER_OF_PRICE_RANGES]</definition>
+        <argsstring>[NUMBER_OF_PRICE_RANGES]</argsstring>
+        <name>discounts</name>
+        <qualifiedname>property::discounts</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>@description the discounts for each range </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="162" column="10" bodyfile="main.c" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproperty_1a7b621736f2a57bb77067f9ef4d8798c2" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double baseDiscount</definition>
+        <argsstring></argsstring>
+        <name>baseDiscount</name>
+        <qualifiedname>property::baseDiscount</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="166" column="8" bodyfile="main.c" bodystart="166" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproperty_1a36c611bac2391f464098144cfdfd95d0" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double totalMoney</definition>
+        <argsstring></argsstring>
+        <name>totalMoney</name>
+        <qualifiedname>property::totalMoney</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>@description how much money has this property made durring this runtime </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="169" column="10" bodyfile="main.c" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproperty_1a85d4797ede393d7546c32bf2e3f18196" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double totalNights</definition>
+        <argsstring></argsstring>
+        <name>totalNights</name>
+        <qualifiedname>property::totalNights</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>@description how many nights has this property booked durring this runtime </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="171" column="10" bodyfile="main.c" bodystart="171" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproperty_1ac53d8f9542287aabb0ac5b5dc94db274" prot="public" static="no" mutable="no">
+        <type>ReviewNode *</type>
+        <definition>ReviewNode* reviewsHead</definition>
+        <argsstring></argsstring>
+        <name>reviewsHead</name>
+        <qualifiedname>property::reviewsHead</qualifiedname>
+        <briefdescription>
+<para>the head of the review&apos;s linked list </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="174" column="15" bodyfile="main.c" bodystart="174" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structproperty_1af08531d2b1e2a3c0dff557786a09341d" prot="public" static="no" mutable="no">
+        <type>char</type>
+        <definition>char headers[NUMBER_OF_REVIEW_CATS][STRING_SIZE]</definition>
+        <argsstring>[NUMBER_OF_REVIEW_CATS][STRING_SIZE]</argsstring>
+        <name>headers</name>
+        <qualifiedname>property::headers</qualifiedname>
+        <briefdescription>
+<para>an array of the headers of the review categories </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="177" column="8" bodyfile="main.c" bodystart="177" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A struct representing a property @initalizer: initProperty. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="2">
+        <label>location</label>
+        <link refid="structlocation"/>
+      </node>
+      <node id="1">
+        <label>property</label>
+        <link refid="structproperty"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>location</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="main.c" line="148" column="1" bodyfile="main.c" bodystart="148" bodyend="178"/>
+    <listofallmembers>
+      <member refid="structproperty_1a7b621736f2a57bb77067f9ef4d8798c2" prot="public" virt="non-virtual"><scope>property</scope><name>baseDiscount</name></member>
+      <member refid="structproperty_1ac25840037114824712a266b5827a4f37" prot="public" virt="non-virtual"><scope>property</scope><name>dayRanges</name></member>
+      <member refid="structproperty_1a78cfc4adb15fb15e26a8bee390778e7a" prot="public" virt="non-virtual"><scope>property</scope><name>discounts</name></member>
+      <member refid="structproperty_1af08531d2b1e2a3c0dff557786a09341d" prot="public" virt="non-virtual"><scope>property</scope><name>headers</name></member>
+      <member refid="structproperty_1a260defa82d536dcea2aa22452b862110" prot="public" virt="non-virtual"><scope>property</scope><name>location</name></member>
+      <member refid="structproperty_1a191b09831ce959fea615beb6f2b609d3" prot="public" virt="non-virtual"><scope>property</scope><name>propertyName</name></member>
+      <member refid="structproperty_1ac53d8f9542287aabb0ac5b5dc94db274" prot="public" virt="non-virtual"><scope>property</scope><name>reviewsHead</name></member>
+      <member refid="structproperty_1a36c611bac2391f464098144cfdfd95d0" prot="public" virt="non-virtual"><scope>property</scope><name>totalMoney</name></member>
+      <member refid="structproperty_1a85d4797ede393d7546c32bf2e3f18196" prot="public" virt="non-virtual"><scope>property</scope><name>totalNights</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

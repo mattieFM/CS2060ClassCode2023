@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<book xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_index" xml:lang="en-US">
+    <info>
+    <title>AirUCCS</title>
+    </info>
+    <xi:include href="md_readme.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+<chapter>
+    <title>Data Structure Documentation</title>
+    <xi:include href="structadmin_window.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structapp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structconfig_window.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structcustomer_window.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structlocation.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structlog_in_window.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structproperty.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="structreview_window.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</chapter>
+<chapter>
+    <title>File Documentation</title>
+    <xi:include href="key_gen_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="main_8c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="readme_8md.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+</chapter>
+<index/>
+</book>

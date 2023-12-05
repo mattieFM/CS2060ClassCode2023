@@ -1,0 +1,53 @@
+.TH "logInWindow" 3 "Version 1" "AirUCCS" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+logInWindow \- the login window of the app  
+
+.SH SYNOPSIS
+.br
+.PP
+.SS "Data Fields"
+
+.in +1c
+.ti -1c
+.RI "\fBINHERIT_BASE_WIN\fP GtkEntry * \fBpasswordField\fP"
+.br
+.ti -1c
+.RI "GtkEntry * \fBusernameField\fP"
+.br
+.ti -1c
+.RI "int \fBattempts\fP"
+.br
+.RI "how many times has the user attempted a login so fare "
+.ti -1c
+.RI "int \fBmaxLoginAttempts\fP"
+.br
+.RI "max times the user can try to login --needs refactor to config\&.json eventually "
+.ti -1c
+.RI "char * \fBpassword\fP"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+the login window of the app 
+.SH "Field Documentation"
+.PP 
+.SS "int attempts"
+
+.PP
+how many times has the user attempted a login so fare 
+.SS "int maxLoginAttempts"
+
+.PP
+max times the user can try to login --needs refactor to config\&.json eventually 
+.SS "char* password"
+TEMP a string password just for testing guis 
+.SS "\fBINHERIT_BASE_WIN\fP GtkEntry* passwordField"
+
+.SS "GtkEntry* usernameField"
+
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for AirUCCS from the source code\&.

@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structcustomer_window" kind="struct" language="C++" prot="public">
+    <compoundname>customerWindow</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structcustomer_window_1a794d03e6de4509b6d710079af21479fe" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1aa95cc25626aaea9a264528de81ad3c09" kindref="member">INHERIT_BASE_WIN</ref> GtkWidget *</type>
+        <definition>INHERIT_BASE_WIN GtkWidget* priceRendererWindow</definition>
+        <argsstring></argsstring>
+        <name>priceRendererWindow</name>
+        <qualifiedname>customerWindow::priceRendererWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>the label widget to store price within </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="281" column="14" bodyfile="main.c" bodystart="281" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcustomer_window_1a3e3af5fe6bee487683e343bb777b8293" prot="public" static="no" mutable="no">
+        <type>GtkWidget *</type>
+        <definition>GtkWidget* inputEntry</definition>
+        <argsstring></argsstring>
+        <name>inputEntry</name>
+        <qualifiedname>customerWindow::inputEntry</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>the entry widget for the input of number of night </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="283" column="14" bodyfile="main.c" bodystart="283" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcustomer_window_1a2e8db791568891a34d0bb2147e9218d2" prot="public" static="no" mutable="no">
+        <type>GtkWidget *</type>
+        <definition>GtkWidget* reviewTable</definition>
+        <argsstring></argsstring>
+        <name>reviewTable</name>
+        <qualifiedname>customerWindow::reviewTable</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>the review table </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="285" column="14" bodyfile="main.c" bodystart="285" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structcustomer_window_1a9e32cf5ab494c238e3a5a8de90872fb4" prot="public" static="no" mutable="no">
+        <type>GtkWidget *</type>
+        <definition>GtkWidget* grid</definition>
+        <argsstring></argsstring>
+        <name>grid</name>
+        <qualifiedname>customerWindow::grid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>the review table </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="287" column="14" bodyfile="main.c" bodystart="287" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>the customer window of the app </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="main.c" line="277" column="1" bodyfile="main.c" bodystart="277" bodyend="288"/>
+    <listofallmembers>
+      <member refid="structcustomer_window_1a9e32cf5ab494c238e3a5a8de90872fb4" prot="public" virt="non-virtual"><scope>customerWindow</scope><name>grid</name></member>
+      <member refid="structcustomer_window_1a3e3af5fe6bee487683e343bb777b8293" prot="public" virt="non-virtual"><scope>customerWindow</scope><name>inputEntry</name></member>
+      <member refid="structcustomer_window_1a794d03e6de4509b6d710079af21479fe" prot="public" virt="non-virtual"><scope>customerWindow</scope><name>priceRendererWindow</name></member>
+      <member refid="structcustomer_window_1a2e8db791568891a34d0bb2147e9218d2" prot="public" virt="non-virtual"><scope>customerWindow</scope><name>reviewTable</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

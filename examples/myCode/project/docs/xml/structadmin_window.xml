@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structadmin_window" kind="struct" language="C++" prot="public">
+    <compoundname>adminWindow</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structadmin_window_1a17bd992ca7285badbf62743c458fa6e3" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1aa95cc25626aaea9a264528de81ad3c09" kindref="member">INHERIT_BASE_WIN</ref> <ref refid="main_8c_1a8e1170805a53ee8c3845cb6e425aa233" kindref="member">LoginWindow</ref></type>
+        <definition>INHERIT_BASE_WIN LoginWindow loginWindow</definition>
+        <argsstring></argsstring>
+        <name>loginWindow</name>
+        <qualifiedname>adminWindow::loginWindow</qualifiedname>
+        <briefdescription>
+<para>the window to login to the admin menu </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="251" column="15" bodyfile="main.c" bodystart="251" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structadmin_window_1a79be35aa00a0bd518bc1af2a6a9dd0c2" prot="public" static="no" mutable="no">
+        <type>GtkEntry *</type>
+        <definition>GtkEntry* propertyNameInput</definition>
+        <argsstring></argsstring>
+        <name>propertyNameInput</name>
+        <qualifiedname>adminWindow::propertyNameInput</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="254" column="13" bodyfile="main.c" bodystart="254" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structadmin_window_1a78e87efdfeb1fff6dcb647ba9d23885a" prot="public" static="no" mutable="no">
+        <type>GtkEntry *</type>
+        <definition>GtkEntry* baseDiscountInput</definition>
+        <argsstring></argsstring>
+        <name>baseDiscountInput</name>
+        <qualifiedname>adminWindow::baseDiscountInput</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="255" column="13" bodyfile="main.c" bodystart="255" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structadmin_window_1a6d1e4cfe5c5be4049dc596c0ed576505" prot="public" static="no" mutable="no">
+        <type>GtkLabel *</type>
+        <definition>GtkLabel* totalMoneyLabel</definition>
+        <argsstring></argsstring>
+        <name>totalMoneyLabel</name>
+        <qualifiedname>adminWindow::totalMoneyLabel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="256" column="13" bodyfile="main.c" bodystart="256" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structadmin_window_1a77cd1e65da7acfdbee11df3504874034" prot="public" static="no" mutable="no">
+        <type>GtkLabel *</type>
+        <definition>GtkLabel* totalNightsLabel</definition>
+        <argsstring></argsstring>
+        <name>totalNightsLabel</name>
+        <qualifiedname>adminWindow::totalNightsLabel</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="257" column="13" bodyfile="main.c" bodystart="257" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>the admin window of the app </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>adminWindow</label>
+        <link refid="structadmin_window"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>loginWindow</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>logInWindow</label>
+        <link refid="structlog_in_window"/>
+      </node>
+    </collaborationgraph>
+    <location file="main.c" line="246" column="1" bodyfile="main.c" bodystart="246" bodyend="260"/>
+    <listofallmembers>
+      <member refid="structadmin_window_1a78e87efdfeb1fff6dcb647ba9d23885a" prot="public" virt="non-virtual"><scope>adminWindow</scope><name>baseDiscountInput</name></member>
+      <member refid="structadmin_window_1a17bd992ca7285badbf62743c458fa6e3" prot="public" virt="non-virtual"><scope>adminWindow</scope><name>loginWindow</name></member>
+      <member refid="structadmin_window_1a79be35aa00a0bd518bc1af2a6a9dd0c2" prot="public" virt="non-virtual"><scope>adminWindow</scope><name>propertyNameInput</name></member>
+      <member refid="structadmin_window_1a6d1e4cfe5c5be4049dc596c0ed576505" prot="public" virt="non-virtual"><scope>adminWindow</scope><name>totalMoneyLabel</name></member>
+      <member refid="structadmin_window_1a77cd1e65da7acfdbee11df3504874034" prot="public" virt="non-virtual"><scope>adminWindow</scope><name>totalNightsLabel</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structapp" kind="struct" language="C++" prot="public">
+    <compoundname>app</compoundname>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structapp_1a9dc2227404041523ad87d36ade941f70" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1aa95cc25626aaea9a264528de81ad3c09" kindref="member">INHERIT_BASE_WIN</ref> GtkApplication *</type>
+        <definition>INHERIT_BASE_WIN GtkApplication* app</definition>
+        <argsstring></argsstring>
+        <name>app</name>
+        <qualifiedname>app::app</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="296" column="18" bodyfile="main.c" bodystart="296" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structapp_1aec7fb0c3fce21190f990490e3f8f684f" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87" kindref="member">Property</ref></type>
+        <definition>Property property</definition>
+        <argsstring></argsstring>
+        <name>property</name>
+        <qualifiedname>app::property</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>the property </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="299" column="12" bodyfile="main.c" bodystart="299" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structapp_1acf4b482159a9b9d03391e4c2b205232e" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1a0667ea4347c9b9d6c5692361185eab3a" kindref="member">CustomerWindow</ref></type>
+        <definition>CustomerWindow customerWindow</definition>
+        <argsstring></argsstring>
+        <name>customerWindow</name>
+        <qualifiedname>app::customerWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>the main window </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="301" column="18" bodyfile="main.c" bodystart="301" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structapp_1aca5d38e13a701c2d1aafdb51e563d9d1" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1a5a63edfd294f78985feeb3fc83f194bd" kindref="member">AdminWindow</ref></type>
+        <definition>AdminWindow adminWindow</definition>
+        <argsstring></argsstring>
+        <name>adminWindow</name>
+        <qualifiedname>app::adminWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>the admin Window </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="303" column="15" bodyfile="main.c" bodystart="303" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structapp_1aa458ec780a071b6c509efc202e029bf4" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1aed36cff1d64d95e664ec581815c2814b" kindref="member">ConfigWindow</ref></type>
+        <definition>ConfigWindow configWindow</definition>
+        <argsstring></argsstring>
+        <name>configWindow</name>
+        <qualifiedname>app::configWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>the config window </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="305" column="16" bodyfile="main.c" bodystart="305" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structapp_1a718284dd7baf63f7c7f54bc705c9dacb" prot="public" static="no" mutable="no">
+        <type><ref refid="main_8c_1aedaaa3f425adc8ef27426e9ecbf63d29" kindref="member">ReviewWindow</ref></type>
+        <definition>ReviewWindow reviewWindow</definition>
+        <argsstring></argsstring>
+        <name>reviewWindow</name>
+        <qualifiedname>app::reviewWindow</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>the review window </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="main.c" line="307" column="16" bodyfile="main.c" bodystart="307" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>the main struct containing all app info that we need </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="5">
+        <label>adminWindow</label>
+        <link refid="structadmin_window"/>
+        <childnode refid="6" relation="usage">
+          <edgelabel>loginWindow</edgelabel>
+        </childnode>
+      </node>
+      <node id="1">
+        <label>app</label>
+        <link refid="structapp"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>property</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>customerWindow</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
+          <edgelabel>adminWindow</edgelabel>
+        </childnode>
+        <childnode refid="7" relation="usage">
+          <edgelabel>configWindow</edgelabel>
+        </childnode>
+        <childnode refid="8" relation="usage">
+          <edgelabel>reviewWindow</edgelabel>
+        </childnode>
+      </node>
+      <node id="7">
+        <label>configWindow</label>
+        <link refid="structconfig_window"/>
+      </node>
+      <node id="4">
+        <label>customerWindow</label>
+        <link refid="structcustomer_window"/>
+      </node>
+      <node id="3">
+        <label>location</label>
+        <link refid="structlocation"/>
+      </node>
+      <node id="6">
+        <label>logInWindow</label>
+        <link refid="structlog_in_window"/>
+      </node>
+      <node id="2">
+        <label>property</label>
+        <link refid="structproperty"/>
+        <childnode refid="3" relation="usage">
+          <edgelabel>location</edgelabel>
+        </childnode>
+      </node>
+      <node id="8">
+        <label>reviewWindow</label>
+        <link refid="structreview_window"/>
+      </node>
+    </collaborationgraph>
+    <location file="main.c" line="291" column="1" bodyfile="main.c" bodystart="291" bodyend="308"/>
+    <listofallmembers>
+      <member refid="structapp_1aca5d38e13a701c2d1aafdb51e563d9d1" prot="public" virt="non-virtual"><scope>app</scope><name>adminWindow</name></member>
+      <member refid="structapp_1a9dc2227404041523ad87d36ade941f70" prot="public" virt="non-virtual"><scope>app</scope><name>app</name></member>
+      <member refid="structapp_1aa458ec780a071b6c509efc202e029bf4" prot="public" virt="non-virtual"><scope>app</scope><name>configWindow</name></member>
+      <member refid="structapp_1acf4b482159a9b9d03391e4c2b205232e" prot="public" virt="non-virtual"><scope>app</scope><name>customerWindow</name></member>
+      <member refid="structapp_1aec7fb0c3fce21190f990490e3f8f684f" prot="public" virt="non-virtual"><scope>app</scope><name>property</name></member>
+      <member refid="structapp_1a718284dd7baf63f7c7f54bc705c9dacb" prot="public" virt="non-virtual"><scope>app</scope><name>reviewWindow</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

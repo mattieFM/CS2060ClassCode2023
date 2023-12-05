@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_annotated" xml:lang="en-US">
+<title>Data Structures</title>
+Here are the data structures with brief descriptions:<link linkend="_structadmin_window">adminWindow</link>
+<para>Admin window of the app </para>
+<link linkend="_structapp">app</link>
+<para>Main struct containing all app info that we need </para>
+<link linkend="_structconfig_window">configWindow</link>
+<para>Config window of the app </para>
+<link linkend="_structcustomer_window">customerWindow</link>
+<para>Customer window of the app </para>
+<link linkend="_structlocation">location</link>
+<para>Location of the property @initalizer: initLocation </para>
+<link linkend="_structlog_in_window">logInWindow</link>
+<para>Login window of the app </para>
+<link linkend="_structproperty">property</link>
+<para>A struct representing a property @initalizer: initProperty </para>
+<link linkend="_structreview_window">reviewWindow</link>
+<para>Review Window of the app </para>
+</section>

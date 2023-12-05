@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="readme_8md" kind="file" language="Markdown">
+    <compoundname>readme.md</compoundname>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline></codeline>
+<codeline><highlight class="normal">I<sp/>have<sp/>provided<sp/>all<sp/>dependancies<sp/>that<sp/>should<sp/>be<sp/>required<sp/>within<sp/>the<sp/>libs<sp/>and<sp/>gtk<sp/>folders.<sp/>So<sp/>it<sp/>should<sp/>be<sp/>easy<sp/>to<sp/>build<sp/>and<sp/>run.<sp/>If<sp/>for<sp/>some<sp/>reason<sp/>you<sp/>do<sp/>hit<sp/>a<sp/>dependancy<sp/>issue.<sp/>Unix<sp/>is<sp/>very<sp/>easy<sp/>to<sp/>get<sp/>gtk<sp/>set<sp/>up<sp/>on<sp/>so:</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>macOs<sp/>go<sp/>the<sp/>this<sp/>link<sp/>and<sp/>follow<sp/>the<sp/>getting<sp/>started<sp/>steps:<sp/>https://www.gtk.org/docs/installations/macos/<sp/>they<sp/>havea<sp/>fully<sp/>built<sp/>install<sp/>script<sp/>that<sp/>handles<sp/>everything<sp/>for<sp/>you</highlight></codeline>
+<codeline><highlight class="normal">for<sp/>linux<sp/>https://www.gtk.org/docs/installations/linux/<sp/>go<sp/>to<sp/>here<sp/>and<sp/>follow<sp/>install<sp/>guide<sp/>or<sp/>just<sp/>clone<sp/>the<sp/>repo<sp/>for<sp/>it.</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">You<sp/>can<sp/>compile<sp/>with<sp/>this<sp/>command<sp/>if<sp/>you<sp/>want<sp/>to.:</highlight></codeline>
+<codeline><highlight class="normal">gcc<sp/>$(<sp/>pkg-config<sp/>--cflags<sp/>gtk4<sp/>)<sp/>-o<sp/>example-0<sp/>main.c<sp/>$(<sp/>pkg-config<sp/>--libs<sp/>gtk4<sp/>)</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">!!WARNING<sp/>only<sp/>minimize<sp/>the<sp/>windows<sp/>of<sp/>the<sp/>app,<sp/>once<sp/>one<sp/>is<sp/>closed<sp/>it<sp/>will<sp/>crash<sp/>if<sp/>reopened<sp/>due<sp/>to<sp/>some<sp/>weirdness<sp/>with<sp/>gtk<sp/><sp/>that<sp/>I<sp/>didn&apos;t<sp/>have<sp/>time<sp/>to<sp/>look<sp/>into</highlight></codeline>
+<codeline></codeline>
+<codeline><highlight class="normal">The<sp/>RSA<sp/>key<sp/>gen<sp/>is<sp/>so<sp/>very<sp/>close<sp/>to<sp/>functional,<sp/>the<sp/>public<sp/>key<sp/>is<sp/>correct<sp/>and<sp/>works,<sp/>but<sp/>the<sp/>private<sp/>key&apos;s<sp/>exponent<sp/>is<sp/>consistantly<sp/>off<sp/>by<sp/>around<sp/>10<sp/>which<sp/>is<sp/>a<sp/>lot<sp/>since<sp/>its<sp/>an<sp/>exponent,<sp/>but<sp/></highlight></codeline>
+<codeline><highlight class="normal">I<sp/>cannot<sp/>figure<sp/>out<sp/>how<sp/>to<sp/>fix<sp/>my<sp/>math<sp/>to<sp/>get<sp/>it<sp/>working.<sp/>Its<sp/>something<sp/>with<sp/>the<sp/>mod<sp/>inverse<sp/>function<sp/>that<sp/>I<sp/>cannot<sp/>figure<sp/>out<sp/>how<sp/>to<sp/>fix.</highlight></codeline>
+<codeline></codeline>
+    </programlisting>
+    <location file="readme.md"/>
+  </compounddef>
+</doxygen>

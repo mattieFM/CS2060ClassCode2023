@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structapp" xml:lang="en-US">
+<title>app Struct Reference</title>
+<indexterm><primary>app</primary></indexterm>
+<para>
+
+<para>the main struct containing all app info that we need </para>
+ 
+</para>
+<simplesect>
+    <title>Data Fields    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link> GtkApplication * <link linkend="_structapp_1a9dc2227404041523ad87d36ade941f70">app</link></para>
+</listitem>
+            <listitem><para><link linkend="_main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87">Property</link> <link linkend="_structapp_1aec7fb0c3fce21190f990490e3f8f684f">property</link></para>
+</listitem>
+            <listitem><para><link linkend="_main_8c_1a0667ea4347c9b9d6c5692361185eab3a">CustomerWindow</link> <link linkend="_structapp_1acf4b482159a9b9d03391e4c2b205232e">customerWindow</link></para>
+</listitem>
+            <listitem><para><link linkend="_main_8c_1a5a63edfd294f78985feeb3fc83f194bd">AdminWindow</link> <link linkend="_structapp_1aca5d38e13a701c2d1aafdb51e563d9d1">adminWindow</link></para>
+</listitem>
+            <listitem><para><link linkend="_main_8c_1aed36cff1d64d95e664ec581815c2814b">ConfigWindow</link> <link linkend="_structapp_1aa458ec780a071b6c509efc202e029bf4">configWindow</link></para>
+</listitem>
+            <listitem><para><link linkend="_main_8c_1aedaaa3f425adc8ef27426e9ecbf63d29">ReviewWindow</link> <link linkend="_structapp_1a718284dd7baf63f7c7f54bc705c9dacb">reviewWindow</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>the main struct containing all app info that we need </para>
+</section>
+<section>
+<title>Field Documentation</title>
+<anchor xml:id="_structapp_1aca5d38e13a701c2d1aafdb51e563d9d1"/><section>
+    <title>adminWindow</title>
+<indexterm><primary>adminWindow</primary><secondary>app</secondary></indexterm>
+<indexterm><primary>app</primary><secondary>adminWindow</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1a5a63edfd294f78985feeb3fc83f194bd">AdminWindow</link> <link linkend="_structadmin_window">adminWindow</link></computeroutput></para>
+<para>the admin Window </para>
+</section>
+<anchor xml:id="_structapp_1a9dc2227404041523ad87d36ade941f70"/><section>
+    <title>app</title>
+<indexterm><primary>app</primary><secondary>app</secondary></indexterm>
+<indexterm><primary>app</primary><secondary>app</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link> GtkApplication* <link linkend="_structapp">app</link></computeroutput></para></section>
+<anchor xml:id="_structapp_1aa458ec780a071b6c509efc202e029bf4"/><section>
+    <title>configWindow</title>
+<indexterm><primary>configWindow</primary><secondary>app</secondary></indexterm>
+<indexterm><primary>app</primary><secondary>configWindow</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1aed36cff1d64d95e664ec581815c2814b">ConfigWindow</link> <link linkend="_structconfig_window">configWindow</link></computeroutput></para>
+<para>the config window </para>
+</section>
+<anchor xml:id="_structapp_1acf4b482159a9b9d03391e4c2b205232e"/><section>
+    <title>customerWindow</title>
+<indexterm><primary>customerWindow</primary><secondary>app</secondary></indexterm>
+<indexterm><primary>app</primary><secondary>customerWindow</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1a0667ea4347c9b9d6c5692361185eab3a">CustomerWindow</link> <link linkend="_structcustomer_window">customerWindow</link></computeroutput></para>
+<para>the main window </para>
+</section>
+<anchor xml:id="_structapp_1aec7fb0c3fce21190f990490e3f8f684f"/><section>
+    <title>property</title>
+<indexterm><primary>property</primary><secondary>app</secondary></indexterm>
+<indexterm><primary>app</primary><secondary>property</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1af6ffa2d6fd1c39d309a4465a1ce7af87">Property</link> <link linkend="_structproperty">property</link></computeroutput></para>
+<para>the property </para>
+</section>
+<anchor xml:id="_structapp_1a718284dd7baf63f7c7f54bc705c9dacb"/><section>
+    <title>reviewWindow</title>
+<indexterm><primary>reviewWindow</primary><secondary>app</secondary></indexterm>
+<indexterm><primary>app</primary><secondary>reviewWindow</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1aedaaa3f425adc8ef27426e9ecbf63d29">ReviewWindow</link> <link linkend="_structreview_window">reviewWindow</link></computeroutput></para>
+<para>the review window </para>
+</section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+<link linkend="_main_8c">main.c</link></section>
+</section>

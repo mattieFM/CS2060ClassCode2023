@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structlog_in_window" xml:lang="en-US">
+<title>logInWindow Struct Reference</title>
+<indexterm><primary>logInWindow</primary></indexterm>
+<para>
+
+<para>the login window of the app </para>
+ 
+</para>
+<simplesect>
+    <title>Data Fields    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link> GtkEntry * <link linkend="_structlog_in_window_1a7ffe728874b6e9722a628acbf978a224">passwordField</link></para>
+</listitem>
+            <listitem><para>GtkEntry * <link linkend="_structlog_in_window_1a43a4588fa53f66599d2e81f055dd7ef7">usernameField</link></para>
+</listitem>
+            <listitem><para>int <link linkend="_structlog_in_window_1a8e1de2175d8aeda26c2b0725b91632a8">attempts</link></para>
+
+<para>how many times has the user attempted a login so fare </para>
+</listitem>
+            <listitem><para>int <link linkend="_structlog_in_window_1a0bd9e40aa54582b6eaac4ee0c51f0f7f">maxLoginAttempts</link></para>
+
+<para>max times the user can try to login &#8211;needs refactor to config.json eventually </para>
+</listitem>
+            <listitem><para>char * <link linkend="_structlog_in_window_1a59460a3ff2c12443d1022e5cc0fba85c">password</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>the login window of the app </para>
+</section>
+<section>
+<title>Field Documentation</title>
+<anchor xml:id="_structlog_in_window_1a8e1de2175d8aeda26c2b0725b91632a8"/><section>
+    <title>attempts</title>
+<indexterm><primary>attempts</primary><secondary>logInWindow</secondary></indexterm>
+<indexterm><primary>logInWindow</primary><secondary>attempts</secondary></indexterm>
+<para><computeroutput>int attempts</computeroutput></para><para>
+
+<para>how many times has the user attempted a login so fare </para>
+</para>
+</section>
+<anchor xml:id="_structlog_in_window_1a0bd9e40aa54582b6eaac4ee0c51f0f7f"/><section>
+    <title>maxLoginAttempts</title>
+<indexterm><primary>maxLoginAttempts</primary><secondary>logInWindow</secondary></indexterm>
+<indexterm><primary>logInWindow</primary><secondary>maxLoginAttempts</secondary></indexterm>
+<para><computeroutput>int maxLoginAttempts</computeroutput></para><para>
+
+<para>max times the user can try to login &#8211;needs refactor to config.json eventually </para>
+</para>
+</section>
+<anchor xml:id="_structlog_in_window_1a59460a3ff2c12443d1022e5cc0fba85c"/><section>
+    <title>password</title>
+<indexterm><primary>password</primary><secondary>logInWindow</secondary></indexterm>
+<indexterm><primary>logInWindow</primary><secondary>password</secondary></indexterm>
+<para><computeroutput>char* password</computeroutput></para>
+<para>TEMP a string password just for testing guis </para>
+</section>
+<anchor xml:id="_structlog_in_window_1a7ffe728874b6e9722a628acbf978a224"/><section>
+    <title>passwordField</title>
+<indexterm><primary>passwordField</primary><secondary>logInWindow</secondary></indexterm>
+<indexterm><primary>logInWindow</primary><secondary>passwordField</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link> GtkEntry* passwordField</computeroutput></para></section>
+<anchor xml:id="_structlog_in_window_1a43a4588fa53f66599d2e81f055dd7ef7"/><section>
+    <title>usernameField</title>
+<indexterm><primary>usernameField</primary><secondary>logInWindow</secondary></indexterm>
+<indexterm><primary>logInWindow</primary><secondary>usernameField</secondary></indexterm>
+<para><computeroutput>GtkEntry* usernameField</computeroutput></para></section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+<link linkend="_main_8c">main.c</link></section>
+</section>

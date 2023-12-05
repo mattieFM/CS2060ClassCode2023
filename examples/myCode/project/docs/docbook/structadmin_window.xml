@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_structadmin_window" xml:lang="en-US">
+<title>adminWindow Struct Reference</title>
+<indexterm><primary>adminWindow</primary></indexterm>
+<para>
+
+<para>the admin window of the app </para>
+ 
+</para>
+<simplesect>
+    <title>Data Fields    </title>
+        <itemizedlist>
+            <listitem><para><link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link> <link linkend="_main_8c_1a8e1170805a53ee8c3845cb6e425aa233">LoginWindow</link> <link linkend="_structadmin_window_1a17bd992ca7285badbf62743c458fa6e3">loginWindow</link></para>
+
+<para>the window to login to the admin menu </para>
+</listitem>
+            <listitem><para>GtkEntry * <link linkend="_structadmin_window_1a79be35aa00a0bd518bc1af2a6a9dd0c2">propertyNameInput</link></para>
+</listitem>
+            <listitem><para>GtkEntry * <link linkend="_structadmin_window_1a78e87efdfeb1fff6dcb647ba9d23885a">baseDiscountInput</link></para>
+</listitem>
+            <listitem><para>GtkLabel * <link linkend="_structadmin_window_1a6d1e4cfe5c5be4049dc596c0ed576505">totalMoneyLabel</link></para>
+</listitem>
+            <listitem><para>GtkLabel * <link linkend="_structadmin_window_1a77cd1e65da7acfdbee11df3504874034">totalNightsLabel</link></para>
+</listitem>
+        </itemizedlist>
+</simplesect>
+<section>
+<title>Detailed Description</title>
+
+<para>the admin window of the app </para>
+</section>
+<section>
+<title>Field Documentation</title>
+<anchor xml:id="_structadmin_window_1a78e87efdfeb1fff6dcb647ba9d23885a"/><section>
+    <title>baseDiscountInput</title>
+<indexterm><primary>baseDiscountInput</primary><secondary>adminWindow</secondary></indexterm>
+<indexterm><primary>adminWindow</primary><secondary>baseDiscountInput</secondary></indexterm>
+<para><computeroutput>GtkEntry* baseDiscountInput</computeroutput></para></section>
+<anchor xml:id="_structadmin_window_1a17bd992ca7285badbf62743c458fa6e3"/><section>
+    <title>loginWindow</title>
+<indexterm><primary>loginWindow</primary><secondary>adminWindow</secondary></indexterm>
+<indexterm><primary>adminWindow</primary><secondary>loginWindow</secondary></indexterm>
+<para><computeroutput><link linkend="_main_8c_1aa95cc25626aaea9a264528de81ad3c09">INHERIT_BASE_WIN</link> <link linkend="_main_8c_1a8e1170805a53ee8c3845cb6e425aa233">LoginWindow</link> loginWindow</computeroutput></para><para>
+
+<para>the window to login to the admin menu </para>
+</para>
+</section>
+<anchor xml:id="_structadmin_window_1a79be35aa00a0bd518bc1af2a6a9dd0c2"/><section>
+    <title>propertyNameInput</title>
+<indexterm><primary>propertyNameInput</primary><secondary>adminWindow</secondary></indexterm>
+<indexterm><primary>adminWindow</primary><secondary>propertyNameInput</secondary></indexterm>
+<para><computeroutput>GtkEntry* propertyNameInput</computeroutput></para></section>
+<anchor xml:id="_structadmin_window_1a6d1e4cfe5c5be4049dc596c0ed576505"/><section>
+    <title>totalMoneyLabel</title>
+<indexterm><primary>totalMoneyLabel</primary><secondary>adminWindow</secondary></indexterm>
+<indexterm><primary>adminWindow</primary><secondary>totalMoneyLabel</secondary></indexterm>
+<para><computeroutput>GtkLabel* totalMoneyLabel</computeroutput></para></section>
+<anchor xml:id="_structadmin_window_1a77cd1e65da7acfdbee11df3504874034"/><section>
+    <title>totalNightsLabel</title>
+<indexterm><primary>totalNightsLabel</primary><secondary>adminWindow</secondary></indexterm>
+<indexterm><primary>adminWindow</primary><secondary>totalNightsLabel</secondary></indexterm>
+<para><computeroutput>GtkLabel* totalNightsLabel</computeroutput></para></section>
+<para>
+The documentation for this struct was generated from the following file:</para>
+<link linkend="_main_8c">main.c</link></section>
+</section>
