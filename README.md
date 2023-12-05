@@ -8,10 +8,10 @@
 
 ## API DOCS
 Air UCCS docs:
-https://mattiefm.github.io/CS2060ClassCode2023/main_8c.html
+https://mattiefm.github.io/CS2060ClassCode2023/main_8c.html  
 
-## Air UCCS
-A project ment to model a airbnb eqsque server genericly and extendabily in a gui form in pure c using gtk4. This project contains almost all functionality of RSA encryption although some of the encryption methods are not perfect
+## Air UCCS  
+A project ment to model a airbnb eqsque server genericly and extendabily in a gui form in pure c using gtk4. This project contains almost all functionality of RSA encryption although some of the encryption methods are not perfect  
 ![gui4](https://github.com/mattieFM/CS2060ClassCode2023/assets/66142165/a1f7e8bd-eaf5-4826-89cf-6002873a29d5)
 ![gui3](https://github.com/mattieFM/CS2060ClassCode2023/assets/66142165/739e355a-963a-4f09-a142-b8a8f23f51cb)
 ![gui2](https://github.com/mattieFM/CS2060ClassCode2023/assets/66142165/fea07a2b-01d8-42b4-97bf-2054a0133751)
