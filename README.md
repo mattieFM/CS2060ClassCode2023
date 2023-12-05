@@ -21,6 +21,9 @@ A project ment to model a airbnb eqsque server genericly and extendabily in a gu
 
 ![gui1](https://github.com/mattieFM/CS2060ClassCode2023/assets/66142165/d6e1ff0c-5417-4fce-b0a5-86b6cc3c1f9e)  
 
+NOTE: RSA not fully functional, n and d are correct, e is calculated incorrectly  
+![image](https://github.com/mattieFM/CS2060ClassCode2023/assets/66142165/b6a366c1-4436-4da7-8eb6-bedf43ff433e)  
+
 
 ### presentation
 find the video presentation linked here:  
