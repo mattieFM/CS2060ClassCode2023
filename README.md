@@ -27,5 +27,6 @@ NOTE: RSA not fully functional, n and d are correct, e is calculated incorrectly
 
 ### presentation
 find the video presentation linked here:  
+https://youtu.be/9jVyzOm3Pig
 link here once I make it
 find the presentations with speakers notes in the examples/MyCode/Project/pres folder for a decent introduction to the project [here](./examples/myCode/project/pres/)
